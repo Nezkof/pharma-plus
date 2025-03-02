@@ -1,0 +1,21 @@
+@use "helpers" as *;
+
+body {
+   font-family: var(--font-family-base);
+}
+
+main {
+   flex-grow: 1;
+}
+
+a {
+   color: inherit;
+
+   @include hover {
+      color: var(--color-accent);
+   }
+
+   &[class] {
+      text-decoration: none;
+   }
+}
