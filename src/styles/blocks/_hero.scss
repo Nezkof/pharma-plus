@@ -1,0 +1,68 @@
+@use "../helpers" as *;
+
+.hero {
+   display: flex;
+   flex-direction: column;
+   position: relative;
+   height: 100vh;
+   justify-content: center;
+   row-gap: rem(20);
+
+   @include laptop {
+      row-gap: rem(5);
+   }
+
+   &__title {
+      @include fluid-text(200, 70);
+      font-family: var(--font-family-accent);
+      font-weight: 500;
+      line-height: 1.2;
+   }
+
+   &__description {
+      @include fluid-text(22, 14);
+      font-family: var(--font-family-accent);
+      font-weight: 300;
+      width: 29vw;
+
+      @include laptop {
+         width: 35vw;
+      }
+
+      @include tablet {
+         width: 50vw;
+      }
+
+      @include mobile-s {
+         width: 70vw;
+      }
+   }
+
+   &__check-catalog-button {
+      --icon-size: #{rem(28)};
+
+      @include fluid-text(22, 14);
+      margin-top: rem(30);
+      padding: rem(17) rem(30);
+      padding-right: calc(rem(40) + var(--icon-size));
+      border-radius: rem(15);
+      width: max-content;
+
+      display: flex;
+
+      @include hover {
+         span::after {
+            margin-left: rem(15);
+         }
+      }
+
+      @include laptop {
+         --icon-size: #{rem(20)};
+      }
+
+      @include mobile {
+         padding-block: rem(15);
+         margin-top: rem(25);
+      }
+   }
+}

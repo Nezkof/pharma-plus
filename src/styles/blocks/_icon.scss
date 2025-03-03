@@ -1,0 +1,26 @@
+@use "../helpers" as *;
+
+.icon {
+   position: relative;
+
+   &::after {
+      --size: #{rem(28)};
+
+      @include square(var(--size));
+      @include abs-y;
+
+      content: "";
+      margin-left: rem(10);
+      transition-duration: var(--transition-duration);
+   }
+
+   &-arrow--black {
+      &::after {
+         background: url("/icons/icon-arrow--black.svg") center/cover no-repeat;
+
+         @include laptop {
+            --size: #{rem(20)};
+         }
+      }
+   }
+}

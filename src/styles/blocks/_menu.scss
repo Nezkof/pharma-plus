@@ -1,0 +1,20 @@
+@use "../helpers" as *;
+
+.menu {
+   &__list {
+      display: flex;
+      gap: rem(50);
+
+      &-item {
+         @include fluid-text(22, 14);
+
+         display: flex;
+         align-items: center;
+         gap: rem(5);
+
+         @include laptop {
+            @include visually-hidden;
+         }
+      }
+   }
+}

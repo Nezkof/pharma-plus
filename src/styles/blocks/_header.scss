@@ -1,0 +1,32 @@
+@use "../helpers" as *;
+
+.header {
+   @include abs-x;
+
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding-top: rem(60);
+   width: 100%;
+
+   &__logo-container {
+      display: flex;
+      align-items: center;
+      column-gap: rem(10);
+   }
+
+   .logo-description {
+      @include fluid-text(40, 24);
+      font-family: var(--font-family-accent);
+   }
+
+   .logo {
+      --size: #{rem(40)};
+
+      @include square(var(--size));
+   }
+
+   @include laptop {
+      padding-top: rem(40);
+   }
+}

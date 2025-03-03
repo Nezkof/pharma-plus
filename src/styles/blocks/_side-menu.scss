@@ -1,0 +1,63 @@
+@use "../helpers" as *;
+
+.side-menu {
+   &__list {
+      @include abs-y;
+
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      row-gap: rem(30);
+      right: 0;
+
+      @include mobile {
+         row-gap: rem(20);
+      }
+   }
+
+   &__item {
+      display: flex;
+      align-items: center;
+      @include fluid-text(22, 14);
+      color: var(--color-dark);
+      background-color: var(--color-light);
+      border-radius: rem(15) rem(0) rem(0) rem(15);
+      padding: rem(20) rem(100) rem(20) rem(30);
+      column-gap: rem(5);
+      transition-duration: var(--transition-duration);
+
+      @include hover {
+         cursor: pointer;
+         padding-right: rem(120);
+      }
+
+      @include laptop {
+         padding-block: rem(15);
+         padding-right: rem(70);
+         padding-left: rem(20);
+      }
+
+      @include mobile-s {
+         padding-left: rem(15);
+         padding-right: rem(15);
+
+         span {
+            @include visually-hidden;
+         }
+      }
+   }
+
+   &__icon {
+      --size: #{rem(40)};
+
+      @include square(var(--size));
+
+      @include laptop {
+         --size: #{rem(36)};
+      }
+
+      @include mobile-s {
+         --size: #{rem(28)};
+      }
+   }
+}

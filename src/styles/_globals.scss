@@ -1,19 +1,36 @@
 @use "helpers" as *;
 
 body {
+   display: flex;
+   flex-direction: column;
+
    font-family: var(--font-family-base);
+   background: var(--color-accent-10) url("/images/background.png") center/cover
+      no-repeat;
+   color: var(--color-light);
 }
 
 main {
    flex-grow: 1;
 }
 
+a,
+button,
+label,
+input,
+textarea,
+select,
+svg * {
+   transition-duration: var(--transition-duration);
+}
+
+button {
+   border: none;
+}
+
 a {
    color: inherit;
-
-   @include hover {
-      color: var(--color-accent);
-   }
+   text-decoration: none;
 
    &[class] {
       text-decoration: none;
