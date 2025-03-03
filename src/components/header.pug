@@ -6,10 +6,15 @@ header.header.container
    nav.menu
       ul.menu__list
          li.menu__list-item
-            button Kremenchuk
+            button.menu__item-inner
+               span Kremenchuk
+               img(src="/icons/icon-map-pin.svg", alt="").menu__list-icon--pin
+               img(src="/icons/icon-arrow-down.svg" alt="").menu__list-icon.menu__list-icon--arrow-down
          li.menu__list-item
-            img(src="/icons/icon-cart.svg").menu__list-icon
-            a(href="#") Cart
+            a(href="/").menu__item-inner
+               img(src="/icons/icon-cart.svg" alt="").menu__list-icon
+               span Cart
          li.menu__list-item
-            img(src="/icons/icon-user.svg").menu__list-icon
-            a(href="#") Login
+            a(href="/").menu__item-inner
+               img(src="/icons/icon-user.svg" alt="").menu__list-icon
+               span Login

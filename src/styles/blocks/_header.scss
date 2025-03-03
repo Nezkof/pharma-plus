@@ -2,6 +2,7 @@
 
 .header {
    @include abs-x;
+   z-index: 1;
 
    display: flex;
    justify-content: space-between;

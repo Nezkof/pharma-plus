@@ -1,0 +1,70 @@
+@use "../helpers" as *;
+
+.menu {
+   &__list {
+      display: flex;
+      gap: rem(50);
+
+      &-item {
+         @include fluid-text(22, 14);
+
+         @include mobile {
+            &:first-child {
+               .menu__item-inner {
+                  gap: rem(10);
+               }
+            }
+         }
+      }
+
+      &-icon {
+         transition-duration: var(--transition-duration);
+
+         &--pin {
+            @include mobile-above {
+               display: none;
+            }
+         }
+
+         &--arrow-down {
+            @include mobile {
+               display: none;
+            }
+         }
+      }
+
+      @include mobile {
+         gap: rem(30);
+      }
+
+      @include mobile-s {
+         gap: rem(25);
+      }
+   }
+
+   &__item-inner {
+      position: relative;
+      color: var(--color-light);
+      display: flex;
+      align-items: center;
+      gap: rem(5);
+      background: none;
+      padding: 0;
+
+      @include mobile-above {
+         @include hover {
+            cursor: pointer;
+
+            .menu__list-icon {
+               transform: scale(1.05);
+            }
+         }
+      }
+
+      @include mobile {
+         span {
+            @include visually-hidden;
+         }
+      }
+   }
+}

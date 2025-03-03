@@ -40,6 +40,7 @@
       @include mobile-s {
          padding-left: rem(15);
          padding-right: rem(15);
+         border-radius: rem(10) rem(0) rem(0) rem(10);
 
          span {
             @include visually-hidden;

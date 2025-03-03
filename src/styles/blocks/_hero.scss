@@ -13,7 +13,7 @@
    }
 
    &__title {
-      @include fluid-text(200, 70);
+      @include fluid-text(200, 60);
       font-family: var(--font-family-accent);
       font-weight: 500;
       line-height: 1.2;
@@ -34,7 +34,7 @@
       }
 
       @include mobile-s {
-         width: 70vw;
+         width: 60vw;
       }
    }
 
@@ -61,8 +61,11 @@
       }
 
       @include mobile {
-         padding-block: rem(15);
-         margin-top: rem(25);
+         padding-block: rem(10);
+         padding-left: rem(20);
+         padding-right: calc(rem(30) + var(--icon-size));
+         margin-top: rem(20);
+         border-radius: rem(10);
       }
    }
 }

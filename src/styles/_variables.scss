@@ -17,11 +17,5 @@
    --transition-duration: 0.2s;
 
    --container-width: 89.583vw;
-
-   //--container-width: #{rem(1500)};
    --container-padding-x: #{rem(16)};
-
-   @include laptop {
-      --container-width: #{rem(1280)};
-   }
 }
