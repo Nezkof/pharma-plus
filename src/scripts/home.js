@@ -1,3 +1,3 @@
-import Header from "./Header.ts";
+import LocationMenuCollection from "./LocationMenu.ts";
 
-new Header();
+new LocationMenuCollection();

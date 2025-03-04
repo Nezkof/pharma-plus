@@ -5,12 +5,23 @@ class Header {
 
    selectors = {
       root: "[data-js-header]",
-      locationMenuButton: "[data-js-header-location-menu-button]",
+
       locationMenuElement: "[data-js-location-search]",
    };
 
    stateClasses = {
       isExpanded: "is-expanded",
+      isCurrent: "is-current",
+   };
+
+   stateAttributes = {
+      ariaExpanded: "aria-expanded",
+      ariaSelected: "aria-selected",
+   };
+
+   state = {
+      isExpanded: false,
+      currentOptionIndex: 0,
    };
 
    constructor() {
@@ -26,8 +37,13 @@ class Header {
    }
 
    onLocationMenuButtonClick = () => {
+      this.state.isExpanded = !this.state.isExpanded;
       this.locationMenuButton?.classList.toggle(this.stateClasses.isExpanded);
       this.locationMenuElement.classList.toggle(this.stateClasses.isExpanded);
+      this.locationMenuElement.setAttribute(
+         this.stateAttributes.ariaExpanded,
+         this.state.isExpanded
+      );
    };
 
    bindEvents() {

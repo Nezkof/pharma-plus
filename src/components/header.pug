@@ -6,8 +6,8 @@ header.header.container(data-js-header)
    nav.menu(aria-label="Navigation menu")
       ul.menu__list
          li.menu__list-item
-            button.menu__item-inner(type="button" aria-expanded="false" data-js-header-location-menu-button)
-               span Kremenchuk
+            button.menu__item-inner(type="button" aria-expanded="false" aria-controls="location-dropdown" data-js-header-location-menu-button)
+               span(data-js-location-name) Kremenchuk
                img(src="/icons/icon-map-pin.svg", alt="Select location").menu__list-icon--pin
             include ../components/locationMenu.pug
          li.menu__list-item
