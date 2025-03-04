@@ -47,6 +47,8 @@
       padding-right: calc(rem(40) + var(--icon-size));
       border-radius: rem(15);
       width: max-content;
+      color: var(--color-dark);
+      background-color: var(--color-light);
 
       display: flex;
 

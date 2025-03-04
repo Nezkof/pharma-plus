@@ -1,0 +1,41 @@
+@use "../helpers" as *;
+
+.location-menu {
+   display: none;
+   position: absolute;
+   background-color: var(--color-light);
+   border-radius: rem(15);
+   padding: rem(10);
+   right: 0;
+   top: rem(40);
+   width: rem(280);
+   transition-duration: var(--transition-duration);
+
+   &__search {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--color-dark-05);
+      border-radius: rem(5);
+      padding: rem(5) rem(10);
+   }
+
+   &__search-icon {
+      @include square(rem(18));
+   }
+
+   &__input {
+      @include fluid-text(20, 14);
+      background-color: inherit;
+      color: var(--color-dark);
+      border: none;
+
+      &::placeholder {
+         color: var(--color-dark-20);
+      }
+   }
+}
+
+.location-menu.is-expanded {
+   display: grid;
+}

@@ -7,11 +7,38 @@
 
       &-item {
          @include fluid-text(22, 14);
+         position: relative;
 
          @include mobile {
             &:first-child {
                .menu__item-inner {
                   gap: rem(10);
+               }
+            }
+         }
+
+         &:first-child {
+            .menu__item-inner {
+               @include mobile-above {
+                  @include hover {
+                     &::after {
+                        margin-top: rem(2);
+                     }
+                  }
+
+                  &::after {
+                     content: "";
+                     @include square(rem(20));
+                     background: url("/public/icons/icon-arrow-down.svg")
+                        center/cover no-repeat;
+                     transition-duration: var(--transition-duration);
+                  }
+               }
+            }
+
+            .menu__item-inner.is-expanded {
+               &::after {
+                  transform: rotate(180deg);
                }
             }
          }
@@ -22,12 +49,6 @@
 
          &--pin {
             @include mobile-above {
-               display: none;
-            }
-         }
-
-         &--arrow-down {
-            @include mobile {
                display: none;
             }
          }
@@ -42,28 +63,30 @@
       }
    }
 
-   &__item-inner {
-      position: relative;
-      color: var(--color-light);
-      display: flex;
-      align-items: center;
-      gap: rem(5);
-      background: none;
-      padding: 0;
+   &__item {
+      &-inner {
+         position: relative;
+         color: var(--color-light);
+         display: flex;
+         align-items: center;
+         gap: rem(5);
+         background: none;
+         padding: 0;
 
-      @include mobile-above {
-         @include hover {
-            cursor: pointer;
+         @include mobile-above {
+            @include hover {
+               cursor: pointer;
 
-            .menu__list-icon {
-               transform: scale(1.05);
+               .menu__list-icon {
+                  transform: scale(1.05);
+               }
             }
          }
-      }
 
-      @include mobile {
-         span {
-            @include visually-hidden;
+         @include mobile {
+            span {
+               @include visually-hidden;
+            }
          }
       }
    }

@@ -1,20 +1,20 @@
-header.header.container
+header.header.container(data-js-header)
    div.header__logo-container 
-      img.logo(src="/images/logo.svg")
+      img.logo(src="/images/logo.svg" alt="Pharma+ logo")
       span.logo__description Pharma+
    
-   nav.menu
+   nav.menu(aria-label="Navigation menu")
       ul.menu__list
          li.menu__list-item
-            button.menu__item-inner
+            button.menu__item-inner(type="button" aria-expanded="false" data-js-header-location-menu-button)
                span Kremenchuk
-               img(src="/icons/icon-map-pin.svg", alt="").menu__list-icon--pin
-               img(src="/icons/icon-arrow-down.svg" alt="").menu__list-icon.menu__list-icon--arrow-down
+               img(src="/icons/icon-map-pin.svg", alt="Select location").menu__list-icon--pin
+            include ../components/locationMenu.pug
          li.menu__list-item
             a(href="/").menu__item-inner
-               img(src="/icons/icon-cart.svg" alt="").menu__list-icon
+               img(src="/icons/icon-cart.svg" alt="Cart").menu__list-icon
                span Cart
          li.menu__list-item
             a(href="/").menu__item-inner
-               img(src="/icons/icon-user.svg" alt="").menu__list-icon
+               img(src="/icons/icon-user.svg" alt="Login").menu__list-icon
                span Login

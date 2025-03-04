@@ -6,4 +6,9 @@ const locals = { name: "My Pug" };
 
 export default defineConfig({
    plugins: [pugPlugin(undefined, { pagesUrl: "./pages/" })],
+   resolve: {
+      alias: {
+         "@": "/src",
+      },
+   },
 });

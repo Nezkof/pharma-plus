@@ -3,13 +3,14 @@ html(lang='ua')
    head 
       meta(charset='utf-8')
       title='Vite+pug'
+      script(src='src/scripts/home.js', type='module') 
    body 
       include ../components/header
       main
-         div.hero.container
-            h1.hero__title Pharma+
+         section(aria-labelledby="hero-title").hero.container
+            h1(id="hero-title").hero__title Pharma+
             p.hero__description Our mission is to enhance the well-being of our customers by providing high-quality medicines and exceptional service, committed to improving the quality of life for everyone we serve.
-            button(type="button").hero__check-catalog-button 
-               span.icon.icon-arrow--black Check catalog 
+            a.hero__check-catalog-button(href="/catalog")
+               span.icon.icon-arrow--black Check catalog   
          include ../components/sideMenu      
          
