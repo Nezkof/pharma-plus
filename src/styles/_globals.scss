@@ -36,3 +36,8 @@ a {
       text-decoration: none;
    }
 }
+
+:focus-visible {
+   outline: rem(1) dashed var(--color-light);
+   outline-offset: rem(2);
+}

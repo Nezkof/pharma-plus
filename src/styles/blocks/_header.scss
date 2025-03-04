@@ -6,9 +6,9 @@
 
    display: flex;
    justify-content: space-between;
+   width: 100%;
    align-items: center;
    padding-top: rem(60);
-   width: 100%;
 
    &__logo-container {
       display: flex;
@@ -16,7 +16,7 @@
       column-gap: rem(10);
    }
 
-   .logo-description {
+   .logo__description {
       @include fluid-text(40, 24);
       font-family: var(--font-family-accent);
    }

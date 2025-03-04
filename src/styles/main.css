@@ -269,6 +269,11 @@ a[class] {
   text-decoration: none;
 }
 
+:focus-visible {
+  outline: 0.0625rem dashed var(--color-light);
+  outline-offset: 0.125rem;
+}
+
 .icon {
   position: relative;
 }
@@ -299,16 +304,16 @@ a[class] {
   z-index: 1;
   display: flex;
   justify-content: space-between;
+  width: 100%;
   align-items: center;
   padding-top: 3.75rem;
-  width: 100%;
 }
 .header__logo-container {
   display: flex;
   align-items: center;
   column-gap: 0.625rem;
 }
-.header .logo-description {
+.header .logo__description {
   font-size: clamp(1.5rem, 1.2450980392rem + 1.045751634vw, 2.5rem);
   font-family: var(--font-family-accent);
 }
