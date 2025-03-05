@@ -198,6 +198,7 @@ svg * {
   --color-light: #ffffff;
   --color-accent-10: #174e4f;
   --color-accent-20: #264945;
+  --box-shadow: 0 0 rem(50) 0 rgba(0, 0, 0, 0.2);
   --font-family-base: "Poppins", sans-serif;
   --font-family-accent: "Kanit", sans-serif;
   --transition-duration: 0.2s;
@@ -590,6 +591,15 @@ a[class] {
   top: 2.5rem;
   width: 17.5rem;
   transition-duration: var(--transition-duration);
+  z-index: 2;
+}
+@media (width <= 47.99875rem) {
+  .location-menu {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 20%);
+    box-shadow: var(--box-shadow);
+  }
 }
 .location-menu__search {
   display: flex;
@@ -613,9 +623,11 @@ a[class] {
 .location-menu__input::placeholder {
   color: var(--color-dark-20);
 }
+.location-menu__input:focus {
+  outline: none;
+}
 .location-menu__list {
   display: grid;
-  gap: 0.3125rem;
   padding-inline: 0.625rem;
   max-height: 26.25rem;
   overflow-y: auto;
@@ -633,6 +645,12 @@ a[class] {
 .location-menu__list::-webkit-scrollbar-track {
   background-color: var(--color-dark-05);
   border-radius: 0.25rem;
+}
+.location-menu__list li:not(:first-child) {
+  margin-top: 0.3125rem;
+}
+.location-menu__list li.is-hidden {
+  display: none;
 }
 .location-menu__item {
   background: none;

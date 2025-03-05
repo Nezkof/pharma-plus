@@ -9,11 +9,11 @@ interface State {
 
 class LocationMenu {
    private rootElement: HTMLElement;
-   private buttonElement: HTMLButtonElement | null;
-   private locationTitleElement: HTMLSpanElement | null;
-   private dropdownElement: HTMLElement | null;
-   private optionElements: NodeListOf<HTMLButtonElement> | null;
-   private searchElement: HTMLElement | null;
+   private buttonElement: HTMLButtonElement;
+   private locationTitleElement: HTMLSpanElement;
+   private dropdownElement: HTMLElement;
+   private optionElements: NodeListOf<HTMLButtonElement>;
+   private searchElement: HTMLInputElement;
 
    selectors = {
       root: rootSelector,
@@ -27,6 +27,7 @@ class LocationMenu {
    stateClasses = {
       isExpanded: "is-expanded",
       isSelected: "is-selected",
+      isHidden: "is-hidden",
    };
 
    stateAttributes = {
@@ -44,43 +45,48 @@ class LocationMenu {
    constructor(rootElement: HTMLElement) {
       this.rootElement = rootElement;
 
-      this.buttonElement = this.rootElement.querySelector(
+      this.buttonElement = this.safeFieldInit<HTMLButtonElement>(
          this.selectors.button
       );
 
-      this.locationTitleElement =
-         this.buttonElement?.querySelector(this.selectors.locationTitle) ||
-         null;
+      this.locationTitleElement = this.safeFieldInit<HTMLSpanElement>(
+         this.selectors.locationTitle
+      );
 
-      this.dropdownElement = this.rootElement.querySelector(
+      this.dropdownElement = this.safeFieldInit<HTMLElement>(
          this.selectors.dropdown
       );
 
       this.optionElements =
-         this.dropdownElement?.querySelectorAll(this.selectors.option) || null;
+         this.dropdownElement.querySelectorAll(this.selectors.option) || null;
 
-      this.searchElement =
-         this.dropdownElement?.querySelector(this.selectors.search) || null;
+      this.searchElement = this.safeFieldInit<HTMLInputElement>(
+         this.selectors.search
+      );
 
       this.bindEvents();
    }
 
-   get isNeedToExpand() {
-      const isButtonFocused = document.activeElement === this.buttonElement;
+   safeFieldInit<T extends HTMLElement>(selector: string): T {
+      const fieldToCheck = this.rootElement.querySelector<T>(selector);
 
-      return !this.state.isExpanded && isButtonFocused;
+      if (fieldToCheck) {
+         return fieldToCheck;
+      } else {
+         throw new TypeError(`Element not found for selector: ${selector}`);
+      }
    }
 
    updateUI() {
       const { isExpanded, currentOptionIndex } = this.state;
 
       const updateButton = () => {
-         this.buttonElement?.classList.toggle(
+         this.buttonElement.classList.toggle(
             this.stateClasses.isExpanded,
             isExpanded
          );
 
-         this.buttonElement?.setAttribute(
+         this.buttonElement.setAttribute(
             this.stateAttributes.ariaExpanded,
             String(isExpanded)
          );
@@ -91,8 +97,13 @@ class LocationMenu {
          }
       };
 
+      const updateInput = () => {
+         this.searchElement.placeholder =
+            this.state.selectedOptionElement?.textContent || "Enter city name";
+      };
+
       const updateDropdown = () => {
-         this.dropdownElement?.classList.toggle(
+         this.dropdownElement.classList.toggle(
             this.stateClasses.isExpanded,
             isExpanded
          );
@@ -107,18 +118,18 @@ class LocationMenu {
             });
          }
 
-         if (selectedElement?.tagName === "INPUT") {
-            this.searchElement?.focus();
+         if (selectedElement.tagName === "INPUT") {
+            this.searchElement.focus();
             this.state.isSearchFocused = true;
          } else if (this.state.isSearchFocused) {
             this.state.isSearchFocused = false;
-            this.searchElement?.blur();
-            selectedElement?.focus();
+            this.searchElement.blur();
+            selectedElement.focus();
          }
       };
 
       const updateOptions = () => {
-         this.optionElements?.forEach((optionElement, index) => {
+         this.optionElements.forEach((optionElement, index) => {
             const isCurrent = currentOptionIndex === index;
 
             optionElement.classList.toggle(
@@ -131,16 +142,8 @@ class LocationMenu {
       updateButton();
       updateDropdown();
       updateOptions();
+      updateInput();
    }
-
-   toggleExpandedState = () => {
-      this.state.isExpanded = !this.state.isExpanded;
-   };
-
-   onButtonClick = () => {
-      this.toggleExpandedState();
-      this.updateUI();
-   };
 
    expand() {
       this.state.isExpanded = true;
@@ -152,15 +155,32 @@ class LocationMenu {
       this.updateUI();
    }
 
+   searchCity() {
+      //TODO
+      // const searchValue = this.searchElement.value.toLowerCase().trim();
+      // 1. Кидати гет запит з фільтром до сервера кожен раз при фільтрації
+      // 2. Фільтрувати дані на клієнті, проте початкові значення зберігати теж на ньому
+   }
+
+   toggleExpandedState = () => {
+      this.state.isExpanded = !this.state.isExpanded;
+   };
+
    selectCurrentOption() {
       if (
-         this.optionElements?.[this.state.currentOptionIndex].tagName == "INPUT"
+         this.optionElements?.[this.state.currentOptionIndex] instanceof
+         HTMLInputElement
       )
          return;
 
       this.state.selectedOptionElement =
          this.optionElements?.[this.state.currentOptionIndex] ?? null;
    }
+
+   onButtonClick = () => {
+      this.toggleExpandedState();
+      this.updateUI();
+   };
 
    onClick = (event: { target: any }) => {
       const { target } = event;
@@ -169,7 +189,6 @@ class LocationMenu {
       const isOutsideDropdownClick =
          target.closest(this.selectors.dropdown) !== this.dropdownElement;
 
-      console.log(target);
       if (!isButtonClick && isOutsideDropdownClick) {
          this.collapse();
          return;
@@ -252,9 +271,16 @@ class LocationMenu {
       }
    };
 
+   get isNeedToExpand() {
+      const isButtonFocused = document.activeElement === this.buttonElement;
+
+      return !this.state.isExpanded && isButtonFocused;
+   }
+
    bindEvents() {
-      this.buttonElement?.addEventListener("click", this.onButtonClick);
+      this.buttonElement.addEventListener("click", this.onButtonClick);
       this.rootElement.addEventListener("keydown", this.onKeyDown);
+      this.searchElement.addEventListener("input", this.searchCity);
       document.addEventListener("click", this.onClick);
    }
 }

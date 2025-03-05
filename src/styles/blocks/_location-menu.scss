@@ -11,6 +11,14 @@
    top: rem(40);
    width: rem(280);
    transition-duration: var(--transition-duration);
+   z-index: 2;
+
+   @include mobile {
+      position: fixed;
+      left: 50%;
+      transform: translate(-50%, 20%);
+      box-shadow: var(--box-shadow);
+   }
 
    &__search {
       display: flex;
@@ -35,11 +43,14 @@
       &::placeholder {
          color: var(--color-dark-20);
       }
+
+      &:focus {
+         outline: none;
+      }
    }
 
    &__list {
       display: grid;
-      gap: rem(5);
       padding-inline: rem(10);
       max-height: rem(420);
       overflow-y: auto;
@@ -60,6 +71,16 @@
       &::-webkit-scrollbar-track {
          background-color: var(--color-dark-05);
          border-radius: rem(4);
+      }
+
+      li {
+         &:not(:first-child) {
+            margin-top: rem(5);
+         }
+
+         &.is-hidden {
+            display: none;
+         }
       }
    }
 
