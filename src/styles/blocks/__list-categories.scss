@@ -1,0 +1,47 @@
+@use "../helpers" as *;
+
+.list {
+   &-categories {
+      display: flex;
+      flex-direction: column;
+      row-gap: rem(5);
+      border-radius: rem(8);
+      padding: rem(8);
+
+      background-color: var(--color-light);
+      color: var(--color-dark);
+
+      &__item {
+         display: flex;
+         width: 100%;
+         border-radius: rem(8);
+         column-gap: rem(12);
+         padding: rem(12) rem(16);
+         background-color: inherit;
+         transition-duration: var(--transition-duration);
+
+         @include hover {
+            background-color: var(--color-dark-05);
+         }
+
+         &-icon {
+            @include square(rem(28));
+            filter: invert(0%) brightness(0);
+         }
+
+         &-title {
+            @include fluid-text(18, 14);
+         }
+      }
+
+      &__item.is-active {
+         color: var(--color-light);
+         background-color: var(--color-accent-20);
+
+         .list-categories__item-icon {
+            filter: brightness(0) saturate(100%) invert(100%) sepia(0%)
+               saturate(2%) hue-rotate(250deg) brightness(105%) contrast(101%);
+         }
+      }
+   }
+}

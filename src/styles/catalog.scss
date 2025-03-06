@@ -1,0 +1,13 @@
+@use "normalize";
+@use "fonts";
+@use "variables";
+@use "utils";
+@use "globals";
+
+@use "blocks/icon";
+@use "blocks/header";
+@use "blocks/header-menu";
+@use "blocks/location-menu";
+
+@use "blocks/catalog-search";
+@use "blocks/_list-categories";

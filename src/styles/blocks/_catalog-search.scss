@@ -1,0 +1,45 @@
+@use "../helpers" as *;
+
+.catalog {
+   display: flex;
+   padding-top: rem(160);
+   padding-bottom: rem(44);
+   height: 100vh;
+
+   &__search-categories {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      width: max-content;
+      height: 100%;
+      row-gap: rem(10);
+   }
+}
+
+.search {
+   &__input-wrapper {
+      display: flex;
+      align-items: center;
+      background-color: var(--color-light);
+      border-radius: rem(8);
+      padding: rem(6) rem(8);
+   }
+
+   &__input {
+      @include fluid-text(18, 14);
+      background-color: inherit;
+      color: var(--color-dark);
+      padding: rem(8);
+      border: none;
+
+      &::placeholder {
+         @include fluid-text(18, 14);
+         color: var(--color-dark-10);
+      }
+   }
+
+   &__button {
+      @include square(rem(28));
+      background: url("/icons/icon-arrow-circle--right.svg") center/cover
+         no-repeat;
+   }
+}

@@ -5,7 +5,7 @@ class Header {
 
    selectors = {
       root: "[data-js-header]",
-
+      locationMenuButton: "[data-js-header-location-menu-button]",
       locationMenuElement: "[data-js-location-search]",
    };
 
