@@ -155,12 +155,33 @@ class LocationMenu {
       this.updateUI();
    }
 
-   searchCity() {
-      //TODO
-      // const searchValue = this.searchElement.value.toLowerCase().trim();
-      // 1. Кидати гет запит з фільтром до сервера кожен раз при фільтрації
-      // 2. Фільтрувати дані на клієнті, проте початкові значення зберігати теж на ньому
+   debounce<T extends (...args: any[]) => void>(
+      func: T,
+      timeout: number = 300
+   ): (...args: Parameters<T>) => void {
+      let timer: ReturnType<typeof setTimeout>;
+      return (...args: Parameters<T>) => {
+         clearTimeout(timer);
+         timer = setTimeout(() => {
+            func.apply(this, args);
+         }, timeout);
+      };
    }
+
+   getFilteredOptions = async (url: string, options: RequestInit = {}) => {
+      //TODO CONNECT DB
+      console.log("fetching");
+      try {
+         const response = await fetch(`http://localhost:8000${url}`, options);
+         if (!response.ok)
+            throw new Error(`Fetching error: ${response.statusText}`);
+         return await response.json();
+      } catch (error: any) {
+         console.error(error.message);
+      }
+   };
+
+   searchCity = this.debounce(() => this.getFilteredOptions("url"));
 
    toggleExpandedState = () => {
       this.state.isExpanded = !this.state.isExpanded;

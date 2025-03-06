@@ -27,10 +27,10 @@
       background-color: var(--color-dark-05);
       border-radius: rem(5);
       padding: rem(5) rem(10);
-   }
 
-   &__search-icon {
-      @include square(rem(18));
+      &-icon {
+         @include square(rem(18));
+      }
    }
 
    &__input {
