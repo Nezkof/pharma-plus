@@ -1,0 +1,68 @@
+@use "../helpers" as *;
+
+.filter {
+   display: flex;
+   column-gap: rem(10);
+
+   &__checkbox {
+      display: inline-flex;
+      align-items: center;
+      column-gap: rem(10);
+      color: var(--color-dark);
+
+      @include laptop {
+         column-gap: rem(6);
+      }
+
+      @include hover {
+         cursor: pointer;
+      }
+   }
+
+   &__input {
+      --size: #{rem(19)};
+
+      @include square(var(--size));
+      @include flex-center();
+
+      padding: 0;
+      margin: 0;
+      background-color: var(--color-dark-10);
+      border-radius: rem(5);
+      appearance: none;
+
+      @include laptop {
+         --size: #{rem(16)};
+      }
+
+      &:not(:checked) {
+         &::after {
+            @include hide;
+         }
+      }
+
+      &::after {
+         @include flex-center();
+         content: "";
+         @include square(var(--size));
+         border-radius: rem(5);
+         color: var(--color-light);
+         background: var(--color-accent-20) center/cover no-repeat
+            url("/icons/icon-checkmark.svg");
+         transition-duration: var(--transition-duration);
+      }
+
+      @include hover {
+         cursor: pointer;
+      }
+   }
+
+   &__label {
+      @include fluid-text(17, 14);
+   }
+
+   &__additional {
+      margin-left: auto;
+      color: var(--color-dark-20);
+   }
+}

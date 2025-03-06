@@ -1,0 +1,23 @@
+@use "../helpers" as *;
+
+@use "../helpers" as *;
+
+.accordion-group {
+   display: flex;
+   flex-direction: column;
+   row-gap: rem(15);
+   border-radius: rem(8);
+   padding: rem(10) rem(8);
+
+   background-color: var(--color-light);
+   color: var(--color-dark);
+
+   height: 70.1%;
+
+   &__inner {
+      overflow-y: auto;
+      height: 100%;
+
+      @include custom-scrollbar();
+   }
+}

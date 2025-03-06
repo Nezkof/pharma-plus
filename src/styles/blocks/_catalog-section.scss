@@ -2,15 +2,15 @@
 
 .catalog-section {
    display: flex;
-   padding-top: rem(160);
-   padding-bottom: rem(44);
+   padding-top: var(--section-padding-top);
+   padding-bottom: var(--section-padding-bottom);
    height: 100vh;
 
    &__search-categories {
       display: grid;
       grid-template-rows: auto 1fr;
       width: max-content;
-      height: 100%;
+      max-height: var(--section-content-height);
       row-gap: rem(10);
    }
 }

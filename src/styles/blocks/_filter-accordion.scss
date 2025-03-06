@@ -1,0 +1,110 @@
+@use "../helpers" as *;
+
+.accordion {
+   border-radius: rem(8);
+   padding: rem(10) rem(16);
+   background-color: inherit;
+
+   &__title {
+      @include fluid-text(18, 14);
+      font-weight: 400;
+      position: relative;
+      padding-right: rem(50);
+      color: inherit;
+      transition-duration: var(--transition-duration);
+
+      &::after {
+         @include abs-y;
+         content: "";
+         right: 0;
+         width: rem(20);
+         height: rem(20);
+         background: url("/icons/icon-caret-up.svg") center/cover no-repeat;
+         transition-duration: var(--transition-duration);
+      }
+
+      &::after {
+         rotate: 180deg;
+      }
+   }
+
+   &__details {
+      &[open] {
+         .accordion__title {
+            &::after {
+               rotate: 0deg;
+            }
+         }
+
+         & + .accordion__content {
+            height: auto;
+            grid-template-rows: 1fr;
+         }
+      }
+   }
+
+   &__summary {
+      color: var(--color-dark);
+      list-style: none;
+
+      @include hover {
+         cursor: pointer;
+      }
+
+      &::-webkit-details-marker {
+         display: none;
+      }
+   }
+
+   &__content {
+      display: grid;
+      height: 0;
+      grid-template-rows: 0fr;
+      transition-duration: 0.3s;
+
+      &-search {
+         display: flex;
+         gap: rem(8);
+         align-items: center;
+
+         @include laptop {
+            gap: rem(5);
+         }
+      }
+
+      &-img {
+         --size: #{rem(18)};
+         @include square(var(--size));
+
+         @include laptop {
+            --size: #{rem(16)};
+         }
+      }
+
+      &-input {
+         border: none;
+         font-size: rem(14);
+         width: 100%;
+
+         &::placeholder {
+            font-size: rem(14);
+            color: var(--color-dark-10);
+         }
+      }
+
+      &-inner {
+         --offsetTop: #{fluid(10, 8)};
+         display: grid;
+         row-gap: rem(10);
+         margin-top: var(--offsetTop);
+         padding-top: var(--offsetTop);
+
+         overflow: hidden;
+      }
+
+      &-body {
+         display: grid;
+         row-gap: rem(2);
+      }
+   }
+}
