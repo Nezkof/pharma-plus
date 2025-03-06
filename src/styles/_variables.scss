@@ -12,7 +12,9 @@
    --color-accent-10: #174e4f;
    --color-accent-20: #264945;
 
-   --box-shadow: 0 0 rem(50) 0 rgba(0, 0, 0, 0.2);
+   --transparent-10: rgba(0, 0, 0, 0.01);
+
+   --box-shadow: 0 0 #{rem(50)} 0 rgb(0, 0, 0, 0.05);
 
    --font-family-base: "Poppins", sans-serif;
    --font-family-accent: "Kanit", sans-serif;

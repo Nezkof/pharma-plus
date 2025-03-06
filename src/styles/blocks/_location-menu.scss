@@ -1,7 +1,11 @@
 @use "../helpers" as *;
 
 .location-menu {
-   display: none;
+   visibility: hidden;
+   opacity: 0;
+   transform: scale(0);
+   transform-origin: top right;
+   display: grid;
    position: absolute;
    row-gap: rem(15);
    background-color: var(--color-light);
@@ -12,12 +16,12 @@
    width: rem(280);
    transition-duration: var(--transition-duration);
    z-index: 2;
+   box-shadow: var(--box-shadow);
 
    @include mobile {
       position: fixed;
       left: 50%;
       transform: translate(-50%, 20%);
-      box-shadow: var(--box-shadow);
    }
 
    &__search {
@@ -55,23 +59,7 @@
       max-height: rem(420);
       overflow-y: auto;
 
-      &::-webkit-scrollbar {
-         width: rem(4);
-      }
-
-      &::-webkit-scrollbar-thumb {
-         background-color: var(--color-accent-20);
-         border-radius: rem(4);
-      }
-
-      &::-webkit-scrollbar-thumb:hover {
-         background-color: var(--color-accent-10);
-      }
-
-      &::-webkit-scrollbar-track {
-         background-color: var(--color-dark-05);
-         border-radius: rem(4);
-      }
+      @include custom-scrollbar();
 
       li {
          &:not(:first-child) {
@@ -104,5 +92,7 @@
 }
 
 .location-menu.is-expanded {
-   display: grid;
+   visibility: visible;
+   opacity: 1;
+   transform: scale(1);
 }

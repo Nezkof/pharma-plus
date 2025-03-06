@@ -62,3 +62,29 @@
    clip: rect(0 0 0 0) !important;
    overflow: hidden !important;
 }
+
+@mixin custom-scrollbar(
+   $width: 4px,
+   $thumb-color: var(--color-accent-20),
+   $thumb-hover: var(--color-accent-10),
+   $track-color: var(--color-dark-05),
+   $border-radius: 4px
+) {
+   &::-webkit-scrollbar {
+      width: $width;
+   }
+
+   &::-webkit-scrollbar-thumb {
+      background-color: $thumb-color;
+      border-radius: $border-radius;
+   }
+
+   &::-webkit-scrollbar-thumb:hover {
+      background-color: $thumb-hover;
+   }
+
+   &::-webkit-scrollbar-track {
+      background-color: $track-color;
+      border-radius: $border-radius;
+   }
+}

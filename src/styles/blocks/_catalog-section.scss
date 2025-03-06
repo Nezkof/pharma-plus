@@ -1,0 +1,16 @@
+@use "../helpers" as *;
+
+.catalog-section {
+   display: flex;
+   padding-top: rem(160);
+   padding-bottom: rem(44);
+   height: 100vh;
+
+   &__search-categories {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      width: max-content;
+      height: 100%;
+      row-gap: rem(10);
+   }
+}

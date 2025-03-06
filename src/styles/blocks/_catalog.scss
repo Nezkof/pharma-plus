@@ -1,0 +1,17 @@
+@use "../helpers" as *;
+
+.catalog {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, rem(240));
+   gap: rem(20);
+   padding-inline: rem(70);
+   justify-content: center;
+   flex-grow: 1;
+   overflow-y: auto;
+
+   @include custom-scrollbar(
+      $track-color: var(--transparent-10),
+      $thumb-color: var(--color-light),
+      $thumb-hover: var(--color-dark-10)
+   );
+}

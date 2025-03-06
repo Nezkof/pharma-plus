@@ -1,0 +1,41 @@
+@use "../helpers" as *;
+
+.category-card {
+   display: grid;
+   justify-content: center;
+   align-items: center;
+   gap: rem(8) rem(4);
+   padding: rem(10);
+   border-radius: rem(15);
+   background-color: var(--color-light);
+   grid-template-columns: calc(50% - rem(2)) calc(50% - rem(4));
+   grid-template-areas:
+      "image image"
+      "title button";
+
+   &__image {
+      grid-area: image;
+      justify-self: center;
+   }
+
+   &__title {
+      @include fluid-text(16, 14);
+      grid-area: title;
+      color: var(--color-dark);
+      text-align: center;
+      padding: rem(8) rem(22);
+   }
+
+   &__button {
+      @include fluid-text(16, 14);
+      grid-area: button;
+      background-color: var(--color-accent-20);
+      color: var(--color-light);
+      padding: rem(8) rem(22);
+      border-radius: rem(5);
+
+      @include hover {
+         background-color: var(--color-accent-10);
+      }
+   }
+}
