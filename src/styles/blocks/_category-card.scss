@@ -14,8 +14,24 @@
       "title button";
 
    &__image {
+      --size: #{rem(200)};
+
+      @include square(var(--size));
       grid-area: image;
       justify-self: center;
+
+      @include laptop {
+         --size: #{rem(150)};
+      }
+   }
+
+   &__title,
+   &__button {
+      padding: rem(8) rem(22);
+
+      @include laptop {
+         padding-inline: rem(10);
+      }
    }
 
    &__title {
@@ -23,15 +39,23 @@
       grid-area: title;
       color: var(--color-dark);
       text-align: center;
-      padding: rem(8) rem(22);
+
+      @include mobile-s {
+         font-size: rem(16);
+      }
+
+      @include mobile-s {
+         padding: 0;
+      }
    }
 
    &__button {
       @include fluid-text(16, 14);
       grid-area: button;
+      display: inline-block;
+      text-align: center;
       background-color: var(--color-accent-20);
       color: var(--color-light);
-      padding: rem(8) rem(22);
       border-radius: rem(5);
 
       @include hover {

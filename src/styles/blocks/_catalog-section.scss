@@ -1,16 +1,58 @@
 @use "../helpers" as *;
 
 .catalog-section {
-   display: flex;
+   display: grid;
    padding-top: var(--section-padding-top);
    padding-bottom: var(--section-padding-bottom);
    height: 100vh;
+   column-gap: rem(50);
+   row-gap: rem(10);
+
+   grid-template-columns: auto 1fr;
+
+   @include tablet {
+      padding-top: var(--section-padding-top-tablet);
+   }
+
+   &--products {
+      grid-template-areas:
+         "filters filters-bar"
+         "filters products";
+
+      grid-template-rows: auto 1fr;
+      align-items: start;
+
+      @include tablet {
+         grid-template-areas: "filters" "filters-bar" "products";
+         grid-template-columns: 1fr;
+      }
+   }
+
+   &--categories {
+      grid-template-areas: "filters categories";
+
+      @include tablet {
+         grid-template-areas: "filters" "categories";
+         grid-template-columns: 1fr;
+      }
+   }
 
    &__search-categories {
+      grid-area: filters;
       display: grid;
       grid-template-rows: auto 1fr;
-      width: max-content;
+      width: rem(270);
       max-height: var(--section-content-height);
       row-gap: rem(10);
+
+      @include tablet {
+         grid-template-areas:
+            "input button"
+            "list list";
+         padding-inline: rem(10);
+         grid-template-columns: auto 1fr;
+         column-gap: rem(10);
+         width: auto;
+      }
    }
 }

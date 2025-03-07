@@ -11,11 +11,22 @@
       background-color: var(--color-light);
       color: var(--color-dark);
 
+      @include tablet {
+         grid-template-columns: repeat(auto-fill, minmax(rem(140), 1fr));
+         grid-template-rows: auto;
+         padding: rem(4);
+         grid-area: list;
+         display: none;
+         gap: rem(5);
+         align-items: start;
+      }
+
       &__item {
          display: flex;
          width: 100%;
          border-radius: rem(8);
          column-gap: rem(12);
+         align-items: center;
          padding: rem(12) rem(16);
          background-color: inherit;
          transition-duration: var(--transition-duration);
@@ -42,6 +53,12 @@
             filter: brightness(0) saturate(100%) invert(100%) sepia(0%)
                saturate(2%) hue-rotate(250deg) brightness(105%) contrast(101%);
          }
+      }
+   }
+
+   &-categories.is-expanded {
+      @include tablet {
+         display: grid;
       }
    }
 }

@@ -19,9 +19,12 @@
    box-shadow: var(--box-shadow);
 
    @include mobile {
+      @include abs-x;
+   }
+
+   @include mobile-s {
       position: fixed;
-      left: 50%;
-      transform: translate(-50%, 20%);
+      top: rem(100);
    }
 
    &__search {

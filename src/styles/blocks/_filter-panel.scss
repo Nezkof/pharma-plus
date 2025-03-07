@@ -7,12 +7,18 @@
    flex-direction: column;
    row-gap: rem(15);
    border-radius: rem(8);
-   padding: rem(10) rem(8);
+   padding: rem(8);
+   width: inherit;
 
    background-color: var(--color-light);
    color: var(--color-dark);
 
-   height: 70.1%;
+   max-height: rem(701);
+
+   @include tablet {
+      display: flex;
+      grid-area: list;
+   }
 
    &__inner {
       overflow-y: auto;
@@ -20,4 +26,8 @@
 
       @include custom-scrollbar();
    }
+}
+
+.accordion-group.is-expanded {
+   display: none;
 }

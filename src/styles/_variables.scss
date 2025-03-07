@@ -25,8 +25,16 @@
    --container-padding-x: #{rem(16)};
 
    --section-padding-top: #{rem(160)};
+   --section-padding-top-tablet: #{rem(120)};
    --section-padding-bottom: #{rem(44)};
    --section-content-height: calc(
       100vh - var(--section-padding-top) - var(--section-padding-bottom)
    );
+
+   @include tablet {
+      --section-content-height: calc(
+         100vh - var(--section-padding-top-tablet) -
+            var(--section-padding-bottom)
+      );
+   }
 }

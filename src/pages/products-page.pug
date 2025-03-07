@@ -1,0 +1,18 @@
+doctype html 
+html(lang='ua')
+   head 
+      meta(charset='utf-8')
+      title='Vite+pug'
+      script(src='src/scripts/pages/products.js', type='module') 
+   body 
+      include ../components/header
+      main
+         section(data-js-products-page).catalog-section.catalog-section--products.container 
+            div().catalog-section__search-categories   
+               div.search__input-wrapper
+                  input(type="text" placeholder="Product name").search__input 
+                  button().search__button
+               button(type="button" data-js-filter-list-button).search__list-button
+               include ../components/filter-panel 
+            ul.filters-bar(data-js-filters-bar) 
+            include ../components/product-catalog

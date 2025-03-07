@@ -1,8 +1,7 @@
 @use "../helpers" as *;
 
 .accordion {
-   border-radius: rem(8);
-   padding: rem(10) rem(16);
+   padding: rem(15) rem(16);
    background-color: inherit;
 
    &__title {
@@ -38,6 +37,7 @@
 
          & + .accordion__content {
             height: auto;
+            max-height: 21vh;
             grid-template-rows: 1fr;
          }
       }
@@ -87,7 +87,7 @@
          width: 100%;
 
          &::placeholder {
-            font-size: rem(14);
+            @include fluid-text(16, 14);
             color: var(--color-dark-10);
          }
       }
@@ -105,6 +105,11 @@
       &-body {
          display: grid;
          row-gap: rem(2);
+
+         overflow-y: auto;
+         padding-right: rem(10);
+
+         @include custom-scrollbar();
       }
    }
 }

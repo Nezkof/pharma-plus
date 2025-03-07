@@ -2,12 +2,46 @@
 
 .catalog {
    display: grid;
-   grid-template-columns: repeat(auto-fit, rem(240));
-   gap: rem(20);
-   padding-inline: rem(70);
-   justify-content: center;
-   flex-grow: 1;
+   grid-template-columns: repeat(auto-fill, var(--column-width));
+   gap: var(--gap);
    overflow-y: auto;
+
+   padding-inline: rem(10);
+
+   height: var(--section-content-height);
+
+   @include mobile-s {
+      grid-template-columns: repeat(auto-fill, 100%);
+   }
+
+   &--categories {
+      --column-width: #{rem(240)};
+      --gap: #{rem(20)};
+      grid-area: categories;
+
+      justify-content: space-between;
+
+      @include laptop {
+         --column-width: #{rem(200)};
+      }
+   }
+
+   &--products {
+      --columns-number: 6;
+      --column-width: #{rem(220)};
+      --gap: #{rem(11)};
+
+      grid-area: products;
+
+      @include tablet {
+         justify-content: space-between;
+         grid-template-columns: repeat(auto-fit, minmax(rem(240), 1fr));
+      }
+
+      @include mobile {
+         grid-template-columns: repeat(auto-fit, minmax(rem(150), 1fr));
+      }
+   }
 
    @include custom-scrollbar(
       $track-color: var(--transparent-10),
