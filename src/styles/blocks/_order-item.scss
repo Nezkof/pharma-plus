@@ -1,0 +1,130 @@
+@use "../helpers" as *;
+
+.order-item {
+   display: grid;
+   grid-template-areas:
+      "pharmacy-name pharmacy-name delete-button"
+      "pharmacy-address pharmacy-address delete-button"
+      "product-info product-info product-info"
+      "packages-counter blisters-counter price";
+   column-gap: rem(20);
+   row-gap: rem(5);
+   padding-bottom: rem(10);
+
+   @include tablet {
+      grid-template-areas:
+         "pharmacy-name pharmacy-name delete-button"
+         "pharmacy-address pharmacy-address delete-button"
+         "product-info product-info product-info"
+         "packages-counter blisters-counter blisters-counter"
+         "price price price";
+   }
+
+   @include mobile {
+      grid-template-areas:
+         "pharmacy-name pharmacy-name delete-button"
+         "pharmacy-address pharmacy-address delete-button"
+         "product-info product-info product-info"
+         "packages-counter packages-counter packages-counter"
+         "blisters-counter blisters-counter blisters-counter"
+         "price price price";
+   }
+
+   &:not(:last-child) {
+      border-bottom: rem(1) solid var(--color-dark-10);
+   }
+
+   &__delete-button {
+      grid-area: delete-button;
+
+      --size: #{rem(28)};
+      @include square(var(--size));
+      border-radius: rem(5);
+
+      background: url("/icons/icon-delete.svg") center/cover no-repeat;
+      align-self: center;
+      justify-self: end;
+
+      @include mobile {
+         --size: #{rem(24)};
+      }
+
+      @include hover {
+         transform: scale(1.05);
+      }
+   }
+
+   &__pharmacy-title {
+      grid-area: pharmacy-name;
+      @include fluid-text(22, 16);
+      font-weight: 500;
+   }
+
+   &__address-wrapper {
+      grid-area: pharmacy-address;
+      @include fluid-text(20, 14);
+      font-weight: 400;
+   }
+
+   &__product-info {
+      grid-area: product-info;
+      margin-top: rem(5);
+
+      display: grid;
+      grid-template-areas:
+         "image title"
+         "image attributes";
+      grid-template-columns: auto 1fr;
+      grid-template-rows: 50% 50%;
+      row-gap: rem(5);
+      column-gap: rem(10);
+
+      @include mobile-s {
+         grid-template-areas:
+            "image"
+            "title"
+            "attributes";
+
+         grid-template-rows: 1fr auto auto;
+         margin-bottom: rem(10);
+      }
+   }
+
+   &__image {
+      grid-area: image;
+      --size: #{rem(100)};
+      @include square(var(--size));
+
+      @include mobile-s {
+         --size: 100%;
+         justify-self: center;
+      }
+   }
+
+   &__title {
+      grid-area: title;
+      color: var(--color-dark-20);
+      font-size: rem(14);
+      font-weight: 400;
+      align-self: flex-end;
+   }
+
+   &__attributes {
+      grid-area: attributes;
+      color: var(--color-dark-20);
+      font-size: rem(14);
+      font-weight: 400;
+      align-self: start;
+   }
+
+   &__price-wrapper {
+      grid-area: price;
+      justify-self: end;
+      @include fluid-text(20, 16);
+      align-self: center;
+
+      @include tablet {
+         margin-top: rem(20);
+      }
+   }
+}

@@ -1,0 +1,46 @@
+@use "../helpers" as *;
+
+.address-selector {
+   grid-area: address-selector;
+   display: none;
+   grid-template-areas:
+      "street street street"
+      "empty house apartment";
+   column-gap: rem(10);
+   row-gap: rem(10);
+
+   grid-template-columns: auto rem(120) rem(161);
+   align-items: end;
+
+   &__street,
+   &__house,
+   &__apartment {
+      background-color: var(--color-dark-10);
+      color: var(--color-dark-20);
+      border: none;
+      padding: rem(8) rem(20);
+      border-radius: rem(8);
+      color: var(--color-dark);
+   }
+
+   &__street {
+      grid-area: street;
+   }
+
+   &__house {
+      grid-area: house;
+   }
+
+   &__apartment {
+      grid-area: apartment;
+   }
+
+   @include mobile {
+      grid-template-areas:
+         "street"
+         "house"
+         "apartment";
+
+      grid-template-columns: 1fr;
+   }
+}

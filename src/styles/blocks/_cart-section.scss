@@ -1,0 +1,154 @@
+@use "../helpers" as *;
+
+.cart-section {
+   display: flex;
+   column-gap: rem(20);
+   padding-top: var(--section-padding-top);
+   padding-bottom: var(--section-padding-bottom);
+   color: var(--color-dark);
+   min-height: 100vh;
+
+   @include laptop {
+      display: grid;
+      grid-template-columns: 1fr;
+      row-gap: rem(50);
+   }
+
+   @include tablet {
+      row-gap: rem(30);
+   }
+
+   .cart-subsection {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: rem(30) rem(40);
+      row-gap: rem(25);
+      border-radius: rem(15);
+      background-color: white;
+      width: 50%;
+      height: 100%;
+
+      @include laptop {
+         width: 100%;
+      }
+
+      @include mobile {
+         padding: rem(25);
+      }
+
+      &__title {
+         --size: #{rem(36)};
+         --margin-right: #{rem(10)};
+
+         @include fluid-text(28, 22);
+         padding-left: calc(var(--size) + var(--margin-right));
+         height: min-content;
+
+         font-weight: 400;
+         position: relative;
+
+         @include mobile {
+            --size: #{rem(28)};
+         }
+
+         &::before {
+            @include abs-y;
+            @include square(var(--size));
+
+            content: "";
+            left: 0;
+         }
+      }
+
+      &__orders-list {
+         display: grid;
+         row-gap: rem(10);
+         align-self: flex-start;
+      }
+
+      &__buttons {
+         display: flex;
+         column-gap: rem(20);
+         align-self: end;
+         justify-self: end;
+         margin-top: rem(30);
+
+         @include mobile {
+            flex-direction: column;
+            row-gap: rem(10);
+         }
+      }
+
+      &__price-wrapper {
+         @include fluid-text(20, 14);
+
+         border-radius: rem(8);
+         border: rem(1) solid var(--color-dark);
+         padding: rem(15) rem(50);
+         align-items: center;
+         justify-content: center;
+         text-align: center;
+
+         @include mobile {
+            padding: rem(10) rem(20);
+         }
+      }
+
+      &__delivery-button {
+         @include fluid-text(20, 14);
+
+         background-color: var(--color-accent-20);
+         border-radius: rem(8);
+         color: var(--color-light);
+         padding: rem(15) rem(50);
+
+         @include mobile {
+            padding: rem(10) rem(20);
+         }
+
+         @include hover {
+            background-color: var(--color-accent-10);
+         }
+      }
+   }
+
+   .confirm-subsection {
+      display: grid;
+      padding: rem(30) rem(40);
+      row-gap: rem(25);
+      border-radius: rem(15);
+      background-color: white;
+      width: 50%;
+      align-self: start;
+
+      @include laptop {
+         width: 100%;
+      }
+
+      &__orders-to-confirm-list {
+         display: grid;
+         row-gap: rem(15);
+         align-self: flex-start;
+         grid-template-rows: 1fr auto;
+      }
+
+      &__confirm-button {
+         @include fluid-text(20, 14);
+
+         margin-top: rem(30);
+         background-color: var(--color-accent-20);
+         border-radius: rem(8);
+         color: var(--color-light);
+         padding: rem(15) rem(50);
+         align-self: end;
+
+         @include mobile {
+            padding: rem(10) rem(20);
+         }
+
+         @include hover {
+            background-color: var(--color-accent-10);
+         }
+      }
+   }
+}

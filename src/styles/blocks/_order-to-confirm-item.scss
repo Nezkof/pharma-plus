@@ -1,0 +1,133 @@
+@use "../helpers" as *;
+
+.order-to-confirm-item {
+   display: grid;
+   grid-template-areas:
+      "product-info self-delivery"
+      "product-info courier-delivery";
+   grid-template-columns: 1fr auto;
+   row-gap: rem(5);
+   column-gap: rem(10);
+   padding-bottom: rem(15);
+
+   @include tablet {
+      grid-template-areas:
+         "product-info product-info"
+         "self-delivery courier-delivery";
+      grid-template-rows: 1fr auto;
+   }
+
+   &:not(:last-child) {
+      border-bottom: rem(1) solid var(--color-dark-10);
+   }
+
+   &__product-info {
+      grid-area: product-info;
+      display: grid;
+      grid-template-areas:
+         "image title"
+         "image attributes"
+         "image message";
+      grid-template-columns: auto 1fr;
+      row-gap: rem(5);
+      column-gap: rem(10);
+
+      @include mobile-s {
+         grid-template-areas:
+            "image"
+            "title"
+            "attributes"
+            "message";
+         grid-template-columns: 1fr;
+      }
+   }
+
+   &__image {
+      --size: #{rem(110)};
+      grid-area: image;
+
+      @include square(var(--size));
+
+      @include mobile-s {
+         --size: 100%;
+      }
+   }
+
+   &__title {
+      grid-area: title;
+      color: var(--color-dark-20);
+      align-self: end;
+   }
+
+   &__attributes {
+      grid-area: attributes;
+      color: var(--color-dark-20);
+   }
+
+   &__availability-message {
+      grid-area: message;
+      color: var(--color-dark);
+   }
+
+   &__self-delivery-button,
+   &__courier-delivery-button {
+      @include fluid-text(18, 14);
+      border: rem(1) solid var(--color-dark);
+      border-radius: rem(8);
+      padding: rem(10) rem(30);
+      background-color: var(--color-light);
+      width: max-content;
+      height: max-content;
+      justify-self: end;
+      transition-duration: var(--transition-duration);
+   }
+
+   &__self-delivery-button.is-active,
+   &__courier-delivery-button.is-active {
+      background-color: var(--color-accent-20);
+      color: var(--color-light);
+   }
+
+   &__self-delivery-button {
+      grid-area: self-delivery;
+   }
+
+   &__courier-delivery-button {
+      grid-area: courier-delivery;
+   }
+}
+
+.order-to-confirm-item.courier-delivery {
+   grid-template-areas:
+      "product-info self-delivery"
+      "product-info courier-delivery"
+      "date-selector address-selector";
+
+   .date-selector,
+   .address-selector {
+      display: grid;
+   }
+
+   @include tablet {
+      grid-template-areas:
+         "product-info product-info"
+         "self-delivery courier-delivery"
+         "date-selector address-selector";
+
+      grid-template-rows: 1fr auto auto;
+
+      .date-selector,
+      .address-selector {
+         margin-top: rem(10);
+      }
+   }
+
+   @include mobile {
+      grid-template-areas:
+         "product-info product-info"
+         "self-delivery self-delivery"
+         "courier-delivery courier-delivery"
+         "address-selector address-selector"
+         "date-selector date-selector";
+   }
+}

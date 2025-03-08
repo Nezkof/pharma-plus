@@ -29,3 +29,10 @@
 @use "blocks/product-description";
 @use "blocks/pharmacy-prices";
 @use "blocks/pharmacy-card";
+
+@use "blocks/cart-section";
+@use "blocks/counter";
+@use "blocks/order-item";
+@use "blocks/order-to-confirm-item";
+@use "blocks/date-selector";
+@use "blocks/address-selector";

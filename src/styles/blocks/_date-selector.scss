@@ -1,0 +1,64 @@
+@use "../helpers" as *;
+
+.date-selector {
+   grid-area: date-selector;
+   display: none;
+   grid-template-areas:
+      "title title title title title"
+      "first second third fourth fifth";
+   gap: rem(10);
+   align-items: start;
+   justify-content: start;
+
+   @include mobile {
+      justify-content: space-between;
+   }
+
+   &__title {
+      grid-area: title;
+      @include fluid-text(18, 14);
+      font-weight: 400;
+   }
+
+   &__date {
+      --size: #{rem(37)};
+      @include square(var(--size));
+
+      border: rem(1) solid var(--color-dark);
+      background-color: var(--colo-light);
+      border-radius: rem(5);
+      padding: rem(4) rem(7);
+      text-align: center;
+      transition-duration: var(--transition-duration);
+
+      @include hover {
+         background-color: var(--color-dark-10);
+      }
+
+      &:nth-of-type(1) {
+         grid-area: first;
+      }
+
+      &:nth-of-type(2) {
+         grid-area: second;
+      }
+
+      &:nth-of-type(3) {
+         grid-area: third;
+      }
+
+      &:nth-of-type(4) {
+         grid-area: fourth;
+      }
+
+      &:nth-of-type(5) {
+         grid-area: fifth;
+      }
+   }
+
+   &__date.is-selected {
+      background-color: var(--color-accent-20);
+      color: var(--color-light);
+      border: none;
+   }
+}
