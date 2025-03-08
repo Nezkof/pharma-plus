@@ -1,0 +1,10 @@
+@use "../helpers" as *;
+
+.product {
+   &__details {
+      grid-area: details;
+      display: grid;
+      row-gap: rem(10);
+      align-self: flex-start;
+   }
+}

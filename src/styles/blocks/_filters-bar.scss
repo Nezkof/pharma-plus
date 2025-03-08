@@ -2,7 +2,6 @@
 
 .filters-bar {
    grid-area: filters-bar;
-   padding-inline: rem(10);
 
    display: flex;
    column-gap: rem(5);
@@ -19,5 +18,9 @@
    &__title {
       font-size: rem(14);
       color: var(--color-dark);
+   }
+
+   &--padded {
+      padding-inline: rem(10);
    }
 }

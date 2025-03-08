@@ -1,0 +1,56 @@
+@use "../helpers" as *;
+
+.pharmacy-prices {
+   &__search {
+      display: flex;
+      column-gap: fluid(12, 10);
+      padding: rem(6) rem(16);
+      background-color: var(--color-dark-10);
+      width: max-content;
+      border-radius: rem(8);
+      align-items: center;
+   }
+
+   &__search-icon {
+      --size: #{rem(18)};
+      @include square(var(--size));
+   }
+
+   &__input {
+      @include fluid-text(20, 18);
+
+      border: none;
+      background-color: inherit;
+      color: var(--color-dark);
+
+      &::placeholder {
+         @include fluid-text(20, 18);
+         color: var(--color-dark-20);
+      }
+
+      &:focus {
+         outline: none;
+      }
+   }
+
+   &__pharmacies-list {
+      justify-self: center;
+      margin-top: rem(30);
+      --columns-number: 4;
+
+      display: grid;
+      grid-template-columns: repeat(var(--columns-number), max-content);
+
+      @include computer {
+         --columns-number: 3;
+      }
+
+      @include laptop {
+         --columns-number: 2;
+      }
+
+      @include mobile {
+         --columns-number: 1;
+      }
+   }
+}

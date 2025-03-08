@@ -1,0 +1,36 @@
+@use "../helpers" as *;
+
+.pharmacy-item {
+   display: grid;
+   row-gap: rem(5);
+   max-width: max-content;
+   border-right: rem(1) solid var(--color-dark-20);
+   padding: rem(10) rem(28);
+
+   &__title {
+      @include fluid-text(20, 18);
+      font-weight: 400;
+   }
+
+   &__address-wrapper,
+   &__price-wrapper {
+      @include fluid-text(20, 18);
+      color: var(--color-dark-20);
+   }
+
+   &__address,
+   &__price {
+      color: var(--color-dark);
+      margin-left: rem(5);
+   }
+
+   &__add-to-cart {
+      @include fluid-text(20, 18);
+      background-color: var(--color-accent-20);
+      border-radius: rem(5);
+      color: var(--color-light);
+      font-weight: 300;
+      padding: rem(7) rem(67);
+      margin-top: rem(5);
+   }
+}

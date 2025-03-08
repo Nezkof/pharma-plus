@@ -1,0 +1,63 @@
+@use "../helpers" as *;
+
+.product-accordion {
+   &__category,
+   &__brand {
+      @include fluid-text(20, 14);
+      text-decoration: underline;
+      color: var(--color-dark);
+
+      &-label {
+         @include fluid-text(20, 14);
+         color: var(--color-dark-20);
+      }
+   }
+
+   &__description {
+      @include fluid-text(20, 14);
+
+      margin-top: fluid(15, 10);
+
+      > :not(:last-child) {
+         margin-bottom: rem(10);
+      }
+   }
+
+   &__composition {
+      @include fluid-text(20, 14);
+
+      &-header,
+      &-body {
+         table {
+            width: 100%;
+         }
+
+         th,
+         td {
+            @include fluid-text(18, 14);
+            padding: rem(5) rem(20);
+            width: 50%;
+            text-align: center;
+         }
+      }
+
+      &-header {
+         th {
+            font-weight: 500;
+            border-bottom: rem(1) solid var(--color-dark-10);
+         }
+      }
+
+      &-body {
+         overflow-y: auto;
+         max-height: 30vh;
+
+         @include custom-scrollbar();
+      }
+
+      &-addition {
+         @include fluid-text(20, 14);
+         margin-top: rem(50);
+      }
+   }
+}

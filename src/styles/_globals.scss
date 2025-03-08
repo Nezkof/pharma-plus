@@ -3,15 +3,14 @@
 body {
    display: flex;
    flex-direction: column;
-
    font-family: var(--font-family-base);
-   background: var(--color-accent-10) url("/images/background.png") center/cover
-      no-repeat;
    color: var(--color-light);
 }
 
 main {
-   flex-grow: 1;
+   background: url("/images/background-2.png") center top;
+   background-size: 100% auto;
+   min-height: 100vh;
 }
 
 a,

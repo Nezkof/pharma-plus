@@ -23,4 +23,22 @@
          }
       }
    }
+
+   &-book {
+      &::before {
+         background: url("/icons/icon-book.svg") center/cover no-repeat;
+      }
+   }
+
+   &-pill {
+      &::before {
+         background: url("/icons/icon-pill.svg") center/cover no-repeat;
+      }
+   }
+
+   &-chart-bar {
+      &::before {
+         background: url("/icons/icon-chart-bar.svg") center/cover no-repeat;
+      }
+   }
 }

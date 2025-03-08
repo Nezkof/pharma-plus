@@ -1,0 +1,108 @@
+doctype html 
+html(lang='ua')
+   head 
+      meta(charset='utf-8')
+      title='Vite+pug'
+      script(src='src/scripts/pages/products.js', type='module') 
+   body 
+      include ../components/header
+      main
+         section.product-section.container 
+            ul.filters-bar(data-js-filters-bar) 
+               li.filters-bar__item
+                  span.filters-bar__title Filter 2
+            div.product-card  
+               div.product__gallery
+                  img(src="/images/product-image.png", alt="")
+                  img(src="/images/product-image.png", alt="")
+                  img(src="/images/product-image.png", alt="")
+                  img(src="/images/product-image.png", alt="")
+                  img(src="/images/product-image.png", alt="")
+               h1.product__label 100% Whey Gold Standard - Optimum Nutrition
+               button.product__check-price Сheck pharmacy prices
+            div.product__details
+               div.product-accordion
+                  details.product-accordion__details(name="details", open)
+                     summary.product-accordion__summary
+                        h2.product-accordion__title.icon-book 
+                           span(role="term", aria-details="description") Description
+                  div.product-accordion__content(id="description", role="definition")
+                     div.product-accordion__content-inner
+                        div.product-accordion__content-body
+                           span.product-accordion__category-label Category: 
+                              span.product-accordion__category Protein
+                           span.product-accordion__brand-label Brand: 
+                              span.product-accordion__brand Optium Nutrition
+                           div.product-accordion__description
+                              p Whey protein isolates (WPI) are the purest form of whey protein that currently exists. Using WPI is expensive, but is among the best proteins that money can buy. By using WPI as the main ingredient along with premium ultra-filtered whey protein concentrate (WPC), we are able to pack 24 grams of muscle-building protein into each serving. 
+                              p Optimum Nutrition's attention to detail extends to mixability. This premium powder has been prepared for easy mixing using a shaker or a glass and spoon. There is no doubt that this is the standard by which all other whey proteins are measured. Each serving of Optimum Nutrition 100% Whey Gold Standard Protein, Chocolate Malt will give you the purest whey protein, minimum fat, minimum cholesterol and lactose.
+               div.product-accordion
+                  details.product-accordion__details(name="details", )
+                     summary.product-accordion__summary
+                        h2.product-accordion__title.icon-pill
+                           span(role="term", aria-details="composition") Сomposition
+                  div.product-accordion__content(id="composition", role="definition")
+                     div.product-accordion__content-inner
+                        div.product-accordion__content-body
+                           table.product-accordion__composition-header
+                              thead
+                                 tr
+                                    th Ingredient
+                                    th Quantity (mg/ml)
+                           div.product-accordion__composition-body
+                              table
+                                 - for (let i = 0; i < 18; i++)
+                                    tr
+                                       td Tryptophan:
+                                       td 240 mg
+                        div.product-accordion__composition-addition
+                           p Other ingredients: protein blend (whey protein isolate, whey protein concentrate, milk whey), cocoa (treated with alkali), soy lecithin, natural and artificial flavors, salt, cream (sunflower oil, maltodextrin, modified food starch, dicalcium phosphate, tricalcium phosphate, tocopherols ), acesulfame potassium, sucralose, lactase.
+               div.product-accordion.pharmacy-prices
+                  details.product-accordion__details(name="details", )
+                     summary.product-accordion__summary
+                        h2.product-accordion__title.icon-chart-bar 
+                           span(role="term", aria-details="prices") Pharmacy prices
+                  div.product-accordion__content(id="prices", role="definition")
+                     div.product-accordion__content-inner
+                        div.product-accordion__content-body
+                           div.pharmacy-prices__search
+                              img(src="/icons/icon-search.svg", alt="Pharmacy search").pharmacy-prices__search-icon
+                              input(type="text" id="pharmacy-search" aria-label="pharmacy address" placeholder="Address").pharmacy-prices__input
+                           ul.pharmacy-prices__pharmacies-list
+                              li.pharmacy-item
+                                 h3.pharmacy-item__title Pharmacy #1
+                                 span.pharmacy-item__address-wrapper Address:
+                                    span.pharmacy-item__address address
+                                 span.pharmacy-item__price-wrapper Price:
+                                    span.pharmacy-item__price $100
+                                 button.pharmacy-item__add-to-cart Add to cart
+                              li.pharmacy-item
+                                 h3.pharmacy-item__title Pharmacy #1
+                                 span.pharmacy-item__address-wrapper Address:
+                                    span.pharmacy-item__address address
+                                 span.pharmacy-item__price-wrapper Price:
+                                    span.pharmacy-item__price $100
+                                 button.pharmacy-item__add-to-cart Add to cart
+                              li.pharmacy-item
+                                 h3.pharmacy-item__title Pharmacy #1
+                                 span.pharmacy-item__address-wrapper Address:
+                                    span.pharmacy-item__address address
+                                 span.pharmacy-item__price-wrapper Price:
+                                    span.pharmacy-item__price $100
+                                 button.pharmacy-item__add-to-cart Add to cart
+                              li.pharmacy-item
+                                 h3.pharmacy-item__title Pharmacy #1
+                                 span.pharmacy-item__address-wrapper Address:
+                                    span.pharmacy-item__address address
+                                 span.pharmacy-item__price-wrapper Price:
+                                    span.pharmacy-item__price $100
+                                 button.pharmacy-item__add-to-cart Add to cart
+                              li.pharmacy-item
+                                 h3.pharmacy-item__title Pharmacy #1
+                                 span.pharmacy-item__address-wrapper Address:
+                                    span.pharmacy-item__address address
+                                 span.pharmacy-item__price-wrapper Price:
+                                    span.pharmacy-item__price $100
+                                 button.pharmacy-item__add-to-cart Add to cart
+                              
+
