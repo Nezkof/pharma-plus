@@ -4,22 +4,16 @@
    display: grid;
    grid-template-columns: repeat(auto-fill, var(--column-width));
    gap: var(--gap);
-   overflow-y: auto;
-
-   padding-inline: rem(10);
-
-   height: var(--section-content-height);
+   justify-content: space-around;
 
    @include mobile-s {
       grid-template-columns: repeat(auto-fill, 100%);
    }
 
    &--categories {
-      --column-width: #{rem(240)};
+      --column-width: #{rem(285)};
       --gap: #{rem(20)};
       grid-area: categories;
-
-      justify-content: space-between;
 
       @include laptop {
          --column-width: #{rem(200)};
@@ -41,11 +35,9 @@
       @include mobile {
          grid-template-columns: repeat(auto-fit, minmax(rem(150), 1fr));
       }
-   }
 
-   @include custom-scrollbar(
-      $track-color: var(--transparent-10),
-      $thumb-color: var(--color-light),
-      $thumb-hover: var(--color-dark-10)
-   );
+      @include mobile-s {
+         grid-template-columns: 1fr;
+      }
+   }
 }

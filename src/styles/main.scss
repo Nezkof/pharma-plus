@@ -12,7 +12,7 @@
 @use "blocks/location-menu";
 
 @use "blocks/catalog-section";
-@use "blocks/catalog-search";
+@use "blocks/searcher";
 @use "blocks/list-categories";
 @use "blocks/catalog";
 @use "blocks/category-card";
@@ -24,10 +24,8 @@
 @use "blocks/product-card";
 
 @use "blocks/product-section";
-@use "blocks/product";
 @use "blocks/product-details";
 @use "blocks/product-accordion";
 @use "blocks/product-description";
-
 @use "blocks/pharmacy-prices";
-@use "blocks/pharmacy-item";
+@use "blocks/pharmacy-card";

@@ -28,6 +28,7 @@
    &__title,
    &__button {
       padding: rem(8) rem(22);
+      font-weight: 400;
 
       @include laptop {
          padding-inline: rem(10);

@@ -1,0 +1,7 @@
+div(data-js-categories-search role="search").searcher.searcher
+   div.searcher__inner
+      label(for="categories-search" class="visually-hidden") Enter category name
+      input(id="categories-search" type="text" placeholder="Category name" data-js-categories-input).searcher__input 
+      button(type="button" data-js-categories-search-button aria-label="Search categories").searcher__button
+   button(type="button" data-js-open-list-button aria-label="Open categories list").searcher__list-button
+   include ../components/categories-list   

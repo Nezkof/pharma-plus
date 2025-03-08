@@ -8,9 +8,19 @@ body {
 }
 
 main {
+   --horizontalCoef: 100%;
+
    background: url("/images/background-2.png") center top;
-   background-size: 100% auto;
+   background-size: var(--horizontalCoef) auto;
    min-height: 100vh;
+
+   @include laptop {
+      --horizontalCoef: 130%;
+   }
+
+   @include mobile {
+      --horizontalCoef: 200%;
+   }
 }
 
 a,

@@ -6,6 +6,10 @@
    border-radius: rem(15);
    color: var(--color-dark);
 
+   @include mobile {
+      padding: rem(15) rem(20);
+   }
+
    &__details {
       &[open] {
          .product-accordion__title {
@@ -40,7 +44,7 @@
       color: inherit;
       transition-duration: var(--transition-duration);
       font-weight: 400;
-      @include fluid-text(24, 18);
+      @include fluid-text(24, 16);
       margin-left: rem(47);
 
       &::after {
@@ -54,6 +58,14 @@
          background: url("/icons/icon-caret-up.svg") center/cover no-repeat;
          transform: rotate(180deg);
          transition-duration: var(--transition-duration);
+
+         @include laptop {
+            --size: #{rem(28)};
+         }
+
+         @include mobile {
+            --size: #{rem(24)};
+         }
       }
 
       &::before {
@@ -78,7 +90,7 @@
       &-body {
          display: grid;
          row-gap: rem(5);
-         --offsetTop: #{fluid(10, 5)};
+         --offsetTop: #{rem(10)};
 
          margin-top: var(--offsetTop);
          padding-top: var(--offsetTop);

@@ -7,9 +7,7 @@
    display: grid;
    grid-template-columns: auto 1fr;
    grid-template-rows: auto 1fr;
-   column-gap: rem(50);
-   row-gap: rem(15);
-   min-height: 100vh;
+   gap: rem(15) rem(50);
    align-items: start;
 
    grid-template-areas:

@@ -1,0 +1,83 @@
+@use "../helpers" as *;
+
+.searcher {
+   grid-area: filters;
+   display: grid;
+   grid-template-rows: auto 1fr;
+   width: rem(270);
+   row-gap: rem(10);
+
+   @include tablet {
+      grid-template-areas:
+         "input button"
+         "list list";
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto 1fr;
+      column-gap: rem(10);
+      width: auto;
+   }
+
+   &__inner {
+      display: flex;
+      align-items: center;
+      background-color: var(--color-light);
+      border-radius: rem(8);
+      padding: rem(6) rem(8);
+      width: inherit;
+      justify-content: space-between;
+
+      @include tablet {
+         width: rem(270);
+      }
+   }
+
+   &__input {
+      @include fluid-text(18, 14);
+      background-color: inherit;
+      color: var(--color-dark);
+      padding: rem(8);
+      border: none;
+      width: 80%;
+
+      &::placeholder {
+         @include fluid-text(18, 14);
+         color: var(--color-dark-10);
+      }
+   }
+
+   &__button {
+      @include square(rem(28));
+      background: url("/icons/icon-arrow-circle--right.svg") center/cover
+         no-repeat;
+   }
+
+   &__list-button {
+      position: relative;
+      display: none;
+
+      @include tablet {
+         display: block;
+         padding: 0;
+         background-color: var(--color-light);
+         aspect-ratio: 1/1;
+         border-radius: rem(8);
+         width: max-content;
+         grid-area: button;
+
+         &::after {
+            @include square(rem(24));
+            content: "";
+            @include abs-center;
+            background: url("/icons/icon-caret-up.svg") center/cover no-repeat;
+            transform: rotate(180deg);
+            transition-duration: var(--transition-duration);
+         }
+      }
+   }
+
+   &__list-button.is-expanded {
+      &::after {
+         transform: rotate(0deg);
+      }
+   }
+}

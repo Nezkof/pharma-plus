@@ -9,6 +9,10 @@
       width: max-content;
       border-radius: rem(8);
       align-items: center;
+
+      @include mobile {
+         padding: rem(8) rem(10);
+      }
    }
 
    &__search-icon {
@@ -17,14 +21,14 @@
    }
 
    &__input {
-      @include fluid-text(20, 18);
+      @include fluid-text(20, 14);
 
       border: none;
       background-color: inherit;
       color: var(--color-dark);
 
       &::placeholder {
-         @include fluid-text(20, 18);
+         @include fluid-text(20, 14);
          color: var(--color-dark-20);
       }
 
@@ -37,9 +41,10 @@
       justify-self: center;
       margin-top: rem(30);
       --columns-number: 4;
+      width: 100%;
 
       display: grid;
-      grid-template-columns: repeat(var(--columns-number), max-content);
+      grid-template-columns: repeat(auto-fit, minmax(rem(302), 1fr));
 
       @include computer {
          --columns-number: 3;

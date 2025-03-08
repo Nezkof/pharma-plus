@@ -6,15 +6,18 @@ class FilteringMenu {
    private rootElement: HTMLElement;
    private filterListElement: HTMLElement;
    private filterListButtonElement: HTMLButtonElement;
+   // private productsCatalogElement: HTMLElement;
 
    selectors = {
       root: rootSelector,
       filterList: "[data-js-filter-list]",
       filterListButton: "[data-js-filter-list-button]",
+      // productsCatalog: "[data-js-product-catalog]",
    };
 
    stateClasses = {
       isExpanded: "is-expanded",
+      isClosed: "is-closed",
    };
 
    constructor(rootElement: HTMLElement) {
@@ -27,6 +30,11 @@ class FilteringMenu {
          this.rootElement,
          this.selectors.filterListButton
       );
+
+      // this.productsCatalogElement = safeFieldInit(
+      //    this.rootElement,
+      //    this.selectors.productsCatalog
+      // );
 
       this.bindEvents();
    }

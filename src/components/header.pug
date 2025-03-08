@@ -7,14 +7,15 @@ header.header.container(data-js-header)
       ul.menu__list
          li.menu__list-item
             button.menu__item-inner(type="button" aria-expanded="false" aria-controls="location-dropdown" data-js-header-location-menu-button)
-               span(data-js-location-name) Kremenchuk
+               span(data-js-location-name aria-label="Selected location") Kremenchuk
                img(src="/icons/icon-map-pin.svg", alt="Select location").menu__list-icon--pin
             include ../components/locationMenu.pug
          li.menu__list-item
             a(href="/").menu__item-inner
-               img(src="/icons/icon-cart.svg" alt="Cart").menu__list-icon
-               span Cart
+               img(src="/icons/icon-cart.svg" aria-label="shoping cart" alt="Shopping cart icon").menu__list-icon
+               span(aria-label="Shopping cart") Cart
          li.menu__list-item
             a(href="/").menu__item-inner
-               img(src="/icons/icon-user.svg" alt="Login").menu__list-icon
-               span Login
+               img(src="/icons/icon-user.svg" aria-label="account" alt="User login icon").menu__list-icon
+               span(aria-label="User login") Login
+

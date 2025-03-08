@@ -16,7 +16,7 @@
    max-height: rem(701);
 
    @include tablet {
-      display: flex;
+      display: none;
       grid-area: list;
    }
 
@@ -29,5 +29,5 @@
 }
 
 .accordion-group.is-expanded {
-   display: none;
+   display: flex;
 }

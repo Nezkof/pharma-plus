@@ -1,6 +1,8 @@
 div.product-card 
-   img.product__image(src="/images/product-image.png", alt="product-image")
-   h2.product__title Cabometyx 
-   p.product__description Cabometyx is a kinase inhibitor, a type of enzyme Cabometyx is a kinase inhibitor, a type of enzyme...
-   button.product__add-to-cart Add to cart
-   span.product__price $6110
+   img.product-card__image(src="/images/product-image.png", alt="product-image")
+   h2.product-card__title Cabometyx 
+   p.product-card__description Cabometyx is a kinase inhibitor, a type of enzyme Cabometyx is a kinase inhibitor, a type of enzyme...
+   a(aria-label="Add Cabometyx to cart" href="/product.html").product-card__add-to-cart View
+   span.product-card__price 
+      span(aria-hidden="true") $6110
+      span.visually-hidden Price: 6110 dollars
