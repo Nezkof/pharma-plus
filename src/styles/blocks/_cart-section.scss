@@ -113,6 +113,7 @@
    }
 
    .confirm-subsection {
+      position: relative;
       display: grid;
       padding: rem(30) rem(40);
       row-gap: rem(25);
@@ -120,6 +121,12 @@
       background-color: white;
       width: 50%;
       align-self: start;
+      transition-duration: var(--transition-duration);
+
+      & > * {
+         filter: opacity(50%);
+         pointer-events: none;
+      }
 
       @include laptop {
          width: 100%;
@@ -149,6 +156,13 @@
          @include hover {
             background-color: var(--color-accent-10);
          }
+      }
+   }
+
+   .confirm-subsection.is-active {
+      & > * {
+         filter: none;
+         pointer-events: all;
       }
    }
 }

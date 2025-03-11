@@ -1,7 +1,7 @@
-div.date-selector
-   h5.date-selector__title Select a date 
-   button(type="button").date-selector__date 25
-   button(type="button").date-selector__date 26
-   button(type="button").date-selector__date.is-selected 27
-   button(type="button").date-selector__date 28
-   button(type="button").date-selector__date 1
+fieldset.date-selector(role="group" aria-label="Select a date" aria-live="polite" aria-describedby="date-selector-instructions" data-js-date-selector)
+   legend.date-selector__title Select a date
+   button(type="button" class="date-selector__date" aria-pressed="false" data-js-date-selector-option) 25
+   button(type="button" class="date-selector__date" aria-pressed="false" data-js-date-selector-option) 26
+   button(type="button" class="date-selector__date is-selected" aria-pressed="true" data-js-date-selector-option) 27
+   button(type="button" class="date-selector__date" aria-pressed="false" data-js-date-selector-option) 28
+   button(type="button" class="date-selector__date" aria-pressed="false" data-js-date-selector-option) 1

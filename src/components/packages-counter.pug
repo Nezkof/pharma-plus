@@ -1,5 +1,6 @@
-div.counter.counter--packages
+div(data-js-packages-counter).counter.counter--packages
    span.counter__title Package 
-   button(type="button").counter__button - 
-   span.counter__value 4
-   button(type="button").counter__button +
+   button(type="button" data-js-packages-counter-decrease-button).counter__button - 
+   span(data-js-packages-counter-counter).counter__value 0
+   button(type="button" data-js-packages-counter-increase-button).counter__button +
+

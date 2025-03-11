@@ -1824,6 +1824,7 @@ a[class] {
   }
 }
 .cart-section .confirm-subsection {
+  position: relative;
   display: grid;
   padding: 1.875rem 2.5rem;
   row-gap: 1.5625rem;
@@ -1831,6 +1832,11 @@ a[class] {
   background-color: white;
   width: 50%;
   align-self: start;
+  transition-duration: var(--transition-duration);
+}
+.cart-section .confirm-subsection > * {
+  filter: opacity(50%);
+  pointer-events: none;
 }
 @media (width <= 90.06125rem) {
   .cart-section .confirm-subsection {
@@ -1866,6 +1872,10 @@ a[class] {
   .cart-section .confirm-subsection__confirm-button:active {
     background-color: var(--color-accent-10);
   }
+}
+.cart-section .confirm-subsection.is-active > * {
+  filter: none;
+  pointer-events: all;
 }
 
 .counter {

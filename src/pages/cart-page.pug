@@ -3,11 +3,11 @@ html(lang='ua')
    head 
       meta(charset='utf-8')
       title='Vite+pug'
-      script(src='src/scripts/pages/categories.js', type='module') 
+      script(src='src/scripts/pages/cart.js', type='module') 
    body 
       include ../components/header
       main
-         section.cart-section.container
+         section(data-js-cart).cart-section.container
             div.cart-subsection
                h1.cart-subsection__title.icon-cart Cart
                ul.cart-subsection__orders-list 
@@ -17,8 +17,8 @@ html(lang='ua')
                div.cart-subsection__buttons
                   span.cart-subsection__price-wrapper Total: 
                      span.cart-subsection__price $1 362
-                  button(type="button").cart-subsection__delivery-button Select delivery method 
-            div.confirm-subsection
+                  button(type="button" data-js-card-select-delivery-button).cart-subsection__delivery-button Select delivery method 
+            div(data-js-cart-delivery-section).confirm-subsection
                ul.confirm-subsection__orders-to-confirm-list
                   include ../components/order-to-confirm-item
                   include ../components/order-to-confirm-item

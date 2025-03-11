@@ -1,14 +1,14 @@
-li.order-item
-   h2.order-item__pharmacy-title Pharmacy
+li(data-js-order-item).order-item
+   h2(data-js-order-item-pharmacy-name).order-item__pharmacy-title Pharmacy
    h3.order-item__address-wrapper Address: 
-      span.order-item__address address
-   button(type="button").order-item__delete-button 
+      span(data-js-order-item-pharmacy-address).order-item__address address
+   button(type="button" data-js-order-item-delete-button).order-item__delete-button 
    div.order-item__product-info 
-      img.order-item__image(src="/images/product-image.png", alt="")
-      h4.order-item__title 100% Whey Gold Standard - Optimum Nutrition
-      span.order-item__attributes Vanilla, 2279gr
+      img(data-js-order-item-image).order-item__image(src="/images/product-image.png", alt="")
+      h4(data-js-order-item-name).order-item__title 100% Whey Gold Standard - Optimum Nutrition
+      span(data-js-order-item-attirbutes).order-item__attributes Vanilla, 2279gr
    include ../components/packages-counter
    include ../components/blisters-counter
    span.order-item__price-wrapper Price: 
-      span.order-item__price $454
+      span(data-js-order-item-price).order-item__price $0
       
