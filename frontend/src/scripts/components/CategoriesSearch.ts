@@ -1,9 +1,11 @@
 import { safeFieldInit, getFilteredOptions } from "../helpers";
+import CategoriesService from "../../services/CategoriesService";
 
 const rootSelector = "[data-js-categories-search]";
 
 interface State {
    activeCategory: string | null;
+   categories: string[];
 }
 
 class CategoriesSearch {
@@ -32,6 +34,7 @@ class CategoriesSearch {
 
    state: State = {
       activeCategory: null,
+      categories: [],
    };
 
    constructor(rootElement: HTMLElement) {
@@ -51,7 +54,15 @@ class CategoriesSearch {
       this.listElement = safeFieldInit(rootElement, this.selectors.list);
 
       this.bindEvents();
+      this.loadCategories();
    }
+
+   async loadCategories() {
+      this.state.categories = await CategoriesService.getCategories();
+      this.renderCategories();
+   }
+
+   renderCategories() {}
 
    debounce<T extends (...args: any[]) => void>(
       func: T,

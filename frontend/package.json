@@ -17,6 +17,7 @@
       "vite-plugin-pug": "^0.4.1"
    },
    "dependencies": {
+      "dotenv": "^16.4.7",
       "pug": "^3.0.3"
    }
 }
