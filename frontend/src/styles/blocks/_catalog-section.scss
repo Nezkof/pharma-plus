@@ -9,12 +9,9 @@
    row-gap: rem(10);
 
    &--categories {
-      grid-template-areas: "filters categories";
-
-      @include tablet {
-         grid-template-areas: "filters" "categories";
-         grid-template-columns: 1fr;
-      }
+      grid-template-areas: "filters" "categories";
+      grid-template-columns: 1fr;
+      row-gap: rem(20);
    }
 
    &--products {

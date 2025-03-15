@@ -7,12 +7,35 @@ const pool = new Pool({
    port: process.env.PORT,
 });
 
-const getAllCategories = async (req, res) => {
+// const getAllCategories = async (req, res) => {
+//    try {
+//       const query = `
+//          SELECT categories.category_label
+//          FROM categories
+//          WHERE categories.category_label
+//       `;
+
+//       const { rows } = await pool.query(query);
+
+//       res.render("categories-list", { categories: rows });
+//    } catch (error) {
+//       console.error(error);
+//       res.status(500).send("Database error");
+//    }
+// };
+
+const getFilteredCategories = async (req, res) => {
    try {
-      const { rows } = await pool.query(
-         "SELECT categories.category_label FROM categories"
-      );
-      return res.json(rows);
+      const filter = req.query.filter || "";
+      const query = `
+         SELECT categories.category_label 
+         FROM categories
+         WHERE categories.category_label ILIKE $1
+      `;
+
+      const { rows } = await pool.query(query, [`%${filter}%`]);
+
+      res.render("categories-catalog", { categories: rows });
    } catch (error) {
       console.error(error);
       res.status(500).send("Database error");
@@ -20,5 +43,6 @@ const getAllCategories = async (req, res) => {
 };
 
 module.exports = {
-   getAllCategories,
+   // getAllCategories,
+   getFilteredCategories,
 };

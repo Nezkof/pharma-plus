@@ -1,0 +1,9 @@
+ul(data-js-categories-list).list-categories
+  if categories && categories.length > 0
+    each category in categories
+      li.list-categories__inner
+        button(type="button", data-js-categories-option).list-categories__item
+          img.list-categories__item-icon(src="/icons/icon-category.svg", alt="Category Title")
+          span(data-js-categories-title).list-categories__item-title= category.category_label
+  else
+    p No categories available.

@@ -12,6 +12,7 @@
    grid-template-areas:
       "image image"
       "title button";
+   height: 100%;
 
    &__image {
       --size: #{rem(200)};
@@ -29,6 +30,7 @@
    &__button {
       padding: rem(8) rem(22);
       font-weight: 400;
+      box-sizing: border-box;
 
       @include laptop {
          padding-inline: rem(10);

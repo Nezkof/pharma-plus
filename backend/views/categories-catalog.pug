@@ -1,0 +1,10 @@
+ul.catalog.catalog--categories 
+   if categories && categories.length > 0
+      each category in categories 
+         li.catalog__item
+            div.category-card
+               img.category-card__image(src="/images/product-image.png", alt="Protein category image")
+               h2.category-card__title= category.category_label 
+               a(href="/catalog.html" aria-label="View all Protein products").category-card__button View all 
+
+   
