@@ -4,19 +4,19 @@
    display: grid;
    grid-template-columns: repeat(auto-fill, var(--column-width));
    gap: var(--gap);
-   justify-content: space-around;
+   justify-content: space-between;
 
    @include mobile-s {
       grid-template-columns: repeat(auto-fill, 100%);
    }
 
    &--categories {
-      --column-width: #{rem(285)};
+      --column-width: #{rem(350)};
       --gap: #{rem(20)};
       grid-area: categories;
 
       @include laptop {
-         --column-width: #{rem(200)};
+         --column-width: #{rem(300)};
       }
    }
 

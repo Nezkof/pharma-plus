@@ -7,6 +7,6 @@ html(lang='ua')
    body 
       include ../components/header
       main
-         section.catalog-section.catalog-section--categories.container 
+         section(data-js-categories-section).catalog-section.catalog-section--categories.container 
             include ../components/searcher-categories
-            include ../components/categories-catalog            
+            div(data-js-categories-list)        

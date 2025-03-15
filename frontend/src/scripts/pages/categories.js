@@ -1,5 +1,5 @@
 import LocationMenuCollection from "../components/LocationMenu.ts";
-import CategoriesSearchCollection from "../components/CategoriesSearch.ts";
+import CategoriesListCollection from "../components/CategoriesList.ts";
 
 new LocationMenuCollection();
-new CategoriesSearchCollection();
+new CategoriesListCollection();
