@@ -1,5 +1,5 @@
 import { safeFieldInit } from "../helpers";
-import CategoriesService from "../../services/CategoriesService";
+import FetchingService from "../../services/FetchingService";
 
 const rootSelector = "[data-js-categories-section]";
 
@@ -13,14 +13,13 @@ class CategoriesList {
    private inputElement!: HTMLInputElement;
    private searchButtonElement!: HTMLButtonElement;
    private categoriesListElement: HTMLElement;
-   private categoryCarts!: NodeListOf<HTMLElement>;
 
    selectors = {
       root: rootSelector,
       input: "[data-js-categories-input]",
       searchButton: "[data-js-categories-search-button]",
       categoriesList: "[data-js-categories-list]",
-      option: "[data-js-categories-category-cart]",
+      categoryCardButton: "[data-js-category-card-button]",
    };
 
    stateClasses = {
@@ -39,7 +38,7 @@ class CategoriesList {
          this.selectors.categoriesList
       );
 
-      CategoriesService.loadCategories("categories").then((data) => {
+      FetchingService.fetchData("categories").then((data) => {
          this.categoriesListElement.innerHTML += data;
          this.init();
          this.bindEvents();
@@ -51,9 +50,6 @@ class CategoriesList {
       this.searchButtonElement = safeFieldInit(
          this.rootElement,
          this.selectors.searchButton
-      );
-      this.categoryCarts = this.rootElement.querySelectorAll(
-         this.selectors.option
       );
    }
 
@@ -72,16 +68,26 @@ class CategoriesList {
 
    searchCategory = this.debounce(async () => {
       let filterValue = this.inputElement.value.trim();
-      CategoriesService.loadFilteredCategories("categories", filterValue).then(
+      FetchingService.fetchFilteredData("categories", filterValue).then(
          (data) => {
             if (data) this.categoriesListElement.innerHTML = data;
          }
       );
    }, 500);
 
+   onMouseClick = (event: any) => {
+      const { target } = event;
+
+      if (target.closest(this.selectors.categoryCardButton)) {
+         const categoryId = target.getAttribute("id");
+         localStorage.setItem("selectedCategoryId", categoryId);
+      }
+   };
+
    bindEvents() {
       this.inputElement.addEventListener("input", this.searchCategory);
       this.searchButtonElement.addEventListener("click", this.searchCategory);
+      document.addEventListener("click", this.onMouseClick);
    }
 }
 

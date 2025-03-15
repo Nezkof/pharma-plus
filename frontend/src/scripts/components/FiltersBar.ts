@@ -9,7 +9,6 @@ interface State {
 class FiltersBar {
    private rootElement: HTMLElement;
    private filtersBarElement: HTMLElement;
-   // private filterElements: NodeListOf<HTMLElement>;
 
    selectors = {
       root: rootSelector,
@@ -38,10 +37,6 @@ class FiltersBar {
          rootElement,
          this.selectors.filtersBar
       );
-
-      // this.filterElements = this.rootElement.querySelectorAll(
-      //    this.selectors.filter
-      // );
 
       this.bindEvents();
    }
