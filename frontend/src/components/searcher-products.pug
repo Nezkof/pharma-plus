@@ -1,7 +1,7 @@
-div(role="search").searcher.searcher
-   div.searcher__inner
+div(role="search" data-js-products-searcher).product-searcher
+   div.product-searcher__inner
       label(for="products-search" class="visually-hidden") Enter product name
-      input(id="products-search" type="text" placeholder="Product name").searcher__input 
-      button(type="button" aria-label="Search products").searcher__button
-   button(type="button" data-js-filter-list-button).searcher__list-button
-   include ../components/filter-panel 
+      button(type="button" aria-label="Search products").product-searcher__button
+      input(id="products-search" type="text" placeholder="Product name" data-js-searcher-input).product-searcher__input 
+   button(type="button" data-js-filter-list-button).product-searcher__list-button
+   

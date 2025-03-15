@@ -5,6 +5,6 @@ ul.catalog.catalog--categories
             div.category-card
                img.category-card__image(src="/images/product-image.png", alt="Protein category image")
                h2.category-card__title= category.category_label 
-               a(href="/catalog.html" aria-label="View all Protein products").category-card__button View all 
+               a(href=`/catalog` id=`${category.category_id}` aria-label=`View all ${category.category_label} products` data-js-category-card-button).category-card__button View all
 
    

@@ -28,7 +28,7 @@ const getFilteredCategories = async (req, res) => {
    try {
       const filter = req.query.filter || "";
       const query = `
-         SELECT categories.category_label 
+         SELECT *
          FROM categories
          WHERE categories.category_label ILIKE $1
       `;
