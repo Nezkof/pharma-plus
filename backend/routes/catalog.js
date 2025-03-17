@@ -14,6 +14,8 @@ router.get("/:categoryId", async (req, res) => {
          parseInt(categoryId, 10),
          filters
       );
+      console.log(products);
+
       res.render("product-catalog", { products });
    } catch (error) {
       console.error("Помилка:", error);

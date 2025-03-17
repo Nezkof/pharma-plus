@@ -22,6 +22,7 @@ class Filtering {
       filterListButton: "[data-js-filter-list-button]",
       filterCheckbox: "[data-js-filter-checkbox]",
       productList: "[data-js-product-catalog]",
+      productButton: "[data-js-product-button]",
    };
 
    stateClasses = {
@@ -172,6 +173,13 @@ class Filtering {
       });
    }, 500);
 
+   handleProductButtonClick(button: HTMLElement) {
+      localStorage.setItem(
+         "selectedProductId",
+         button.getAttribute("id") || ""
+      );
+   }
+
    onMouseClick = (event: any) => {
       const target = event.target;
 
@@ -182,6 +190,12 @@ class Filtering {
          debounce(async () => {
             this.handleCheckboxClick();
          }, 1000)();
+      }
+
+      if (target.closest(this.selectors.productButton)) {
+         this.handleProductButtonClick(
+            target.closest(this.selectors.productButton)
+         );
       }
    };
 

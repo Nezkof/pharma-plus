@@ -5,7 +5,7 @@ ul(data-js-product-catalog).catalog.catalog--products
             img.product-card__image(src="/images/product-image.png", alt="product-image")
             h2.product-card__title= product.title
             p.product-card__description= product.description
-            a(aria-label="Add Cabometyx to cart" href="/product.html").product-card__add-to-cart View
+            a(aria-label="Add Cabometyx to cart" href=`/product` id=`${product.product_id}` data-js-product-button).product-card__add-to-cart View
             span.product-card__price 
                span(aria-hidden="true")= `$${product.min_price}`
                span.visually-hidden= `Price: ${product.min_price} dollars`

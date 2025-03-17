@@ -137,4 +137,3 @@ class OrderItemCollection {
 }
 
 export default OrderItemCollection;
-// export default OrderItem;

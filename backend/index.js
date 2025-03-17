@@ -6,6 +6,7 @@ require("dotenv").config({
 });
 const categoriesRoutes = require("./routes/categories");
 const catalogRoutes = require("./routes/catalog");
+const productRoutes = require("./routes/product");
 const cors = require("cors");
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(cors({ origin: "http://localhost:5173" }));
 
 app.use("/categories", categoriesRoutes);
 app.use("/catalog", catalogRoutes);
+app.use("/product", productRoutes);
 
 app.listen(port, () => {
    console.log(`Server running at http://localhost:${port}`);

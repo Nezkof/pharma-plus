@@ -1,0 +1,37 @@
+div(data-js-product-details).product__details
+   div.product-accordion
+      details(data-js-details-accordion).product-accordion__details(name="details", open)
+         summary.product-accordion__summary
+            h2.product-accordion__title.icon-book 
+               span(role="term", aria-details="description") Description
+      div.product-accordion__content(id="description", role="definition")
+         div.product-accordion__content-inner
+            div.product-accordion__content-body
+               span.product-accordion__category-label Category: 
+                  span.product-accordion__category= product.category_label
+               span.product-accordion__brand-label Brand: 
+                  span.product-accordion__brand= product.brand
+               div.product-accordion__description
+                  p= product.description
+   div.product-accordion.pharmacy-prices
+      details(data-js-details-accordion).product-accordion__details(name="details")
+         summary.product-accordion__summary
+            h2.product-accordion__title.icon-chart-bar 
+               span(role="term", aria-details="prices") Pharmacy prices
+      div.product-accordion__content(id="prices", role="definition")
+         div.product-accordion__content-inner
+            div(data-js-pharmacies-accordion-body).product-accordion__content-body
+               div.pharmacy-prices__search
+                  img(src="/icons/icon-search.svg", alt="Pharmacy search").pharmacy-prices__search-icon
+                  input(type="text" id="pharmacy-search" aria-label="pharmacy address" placeholder="Address" data-js-pharmacy-address-input).pharmacy-prices__input
+               ul(data-js-pharmacies-list).pharmacy-prices__pharmacies-list
+                  each pharmacy in pharmacies
+                     li.pharmacy-card
+                        h3.pharmacy-card__title= pharmacy.pharmacy_name
+                        span.pharmacy-card__address-wrapper Address:
+                           span.pharmacy-card__address= pharmacy.address
+                        span.pharmacy-card__price-wrapper Price:
+                           span.pharmacy-card__price= `$${pharmacy.price}`
+                        button.pharmacy-card__add-to-cart(aria-label="Add Pharmacy #1 to cart") Add to cart
+
+

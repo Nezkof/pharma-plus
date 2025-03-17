@@ -5,7 +5,7 @@ function getCategoryProductsQuery({
    input,
 }) {
    let query = `
-      SELECT products.title, products.description,
+      SELECT products.product_id, products.title, products.description,
              application_methods.application_methods_label,
              forms.form_label,
              MIN(pharmacies_products.price) AS min_price
@@ -40,7 +40,7 @@ function getCategoryProductsQuery({
    }
 
    query += `
-      GROUP BY products.title, products.description,
+      GROUP BY products.product_id, products.title, products.description,
                application_methods.application_methods_label,
                forms.form_label;
    `;
