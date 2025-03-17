@@ -6,6 +6,7 @@ router.get("/", catalogController.getFilters);
 
 router.get("/:categoryId", async (req, res) => {
    const { categoryId } = req.params;
+
    const filters = req.query.filters || "";
 
    try {

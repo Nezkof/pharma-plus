@@ -94,11 +94,11 @@ class Filtering {
 
    formQueryString() {
       const filterValues = this.getSelectedFilters();
-      let inputValue = "";
-      if (this.searcherInputElement.value.trim() !== "") {
-         inputValue = `input=${encodeURIComponent(
-            this.searcherInputElement.value.trim()
-         )}`;
+      const queryStringParts = [];
+
+      const inputValue = this.searcherInputElement.value.trim();
+      if (inputValue) {
+         queryStringParts.push(`input=${encodeURIComponent(inputValue)}`);
       }
 
       const filterParams = Object.entries(filterValues).map(
@@ -108,12 +108,13 @@ class Filtering {
                .join(",")}`
       );
 
-      const queryStringParts = [
-         ...(filterParams.length ? [`filters=${filterParams.join("/")}`] : []),
-         inputValue,
-      ];
+      if (filterParams.length) {
+         queryStringParts.unshift(filterParams.join("/"));
+      }
 
-      return queryStringParts.length ? `?${queryStringParts.join("/")}` : "";
+      return queryStringParts.length
+         ? `?filters=${queryStringParts.join("/")}`
+         : "";
    }
 
    handleListButtonClick = () => {
@@ -151,8 +152,6 @@ class Filtering {
 
    onInputChange = debounce(async () => {
       const queryString = this.formQueryString();
-
-      console.log(queryString);
 
       FetchingService.fetchData(
          `catalog/${this.categoryId}${queryString}`
