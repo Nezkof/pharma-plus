@@ -85,6 +85,7 @@ WHERE products.product_id = $1`;
 
 const pharmacyQuery = `
          SELECT 
+            pharmacies.pharmacy_id,
             pharmacies.title AS pharmacy_name, 
             pharmacies.address, 
             pharmacies_products.price
@@ -92,6 +93,14 @@ const pharmacyQuery = `
          INNER JOIN pharmacies ON pharmacies.pharmacy_id = pharmacies_products.pharmacy_id
          WHERE pharmacies_products.product_id = $1
          AND (pharmacies.title ILIKE $2 OR pharmacies.address ILIKE $2)
+`;
+
+const pharmacyProductQuery = `
+   select pharmacies_products.pharmacy_product_id, pharmacies.title as pharmacy_name, pharmacies.address, products.image, products.title, products.description, products.category_id, pharmacies_products.price
+   from products
+   inner join pharmacies_products on pharmacies_products.product_id = products.product_id
+   inner join pharmacies on pharmacies_products.pharmacy_id = pharmacies.pharmacy_id  
+   where products.product_id = $1 and pharmacies.pharmacy_id = $2
 `;
 
 module.exports = {
@@ -102,4 +111,5 @@ module.exports = {
    productCardDataQuery,
    productQuery,
    pharmacyQuery,
+   pharmacyProductQuery,
 };

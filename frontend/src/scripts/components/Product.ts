@@ -1,6 +1,7 @@
 import { safeFieldInit, debounce } from "./../helpers.ts";
-import FetchingService from "../../services/FetchingService.ts";
-import DOMParserService from "../../services/DOMParserService.ts";
+import FetchingService from "../../services/fetchingManager.service.ts";
+import DOMParserService from "../../services/DOMParser.service.ts";
+import PharmacyCardCollection from "./PharmacyCard.ts";
 
 const rootSelector = "[data-js-product-page]";
 
@@ -58,7 +59,7 @@ class Product {
    }
 
    async fetchData() {
-      const productCardPromise = FetchingService.fetchData(
+      const productCardPromise = FetchingService.fetchTextData(
          `product/${this.productId}`
       ).then((data) => {
          const productCard = DOMParserService.toDOM(
@@ -68,7 +69,7 @@ class Product {
          if (productCard) this.rootElement.appendChild(productCard);
       });
 
-      const productDetailsPromise = FetchingService.fetchData(
+      const productDetailsPromise = FetchingService.fetchTextData(
          `product/product-details/${this.productId}`
       ).then((data) => {
          const productDetails = DOMParserService.toDOM(
@@ -76,6 +77,7 @@ class Product {
             this.selectors.productDetails
          );
          if (productDetails) this.rootElement.appendChild(productDetails);
+         new PharmacyCardCollection();
       });
 
       await Promise.all([productCardPromise, productDetailsPromise]);
@@ -102,7 +104,7 @@ class Product {
       }
 
       if (this.pharmacyAddressInputElement)
-         FetchingService.fetchData(
+         FetchingService.fetchTextData(
             `product/product-details/${this.productId}${queryString}`
          ).then((data) => {
             const pharmaciesList = DOMParserService.toDOM(

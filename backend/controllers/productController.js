@@ -2,6 +2,7 @@ const {
    productCardDataQuery,
    productQuery,
    pharmacyQuery,
+   pharmacyProductQuery,
 } = require("../queries/queries.js");
 
 const { Pool } = require("pg");
@@ -45,8 +46,6 @@ const getProductDetails = async (req, res) => {
       const product = productResult.rows[0];
       const pharmacies = pharmacyResult.rows;
 
-      console.log({ product, pharmacies });
-
       res.render("product-details", { product, pharmacies });
    } catch (error) {
       console.error("Product getting data error:", error);
@@ -54,7 +53,32 @@ const getProductDetails = async (req, res) => {
    }
 };
 
+const getPharmacyProductData = async (req, res) => {
+   const { productId, pharmacyId } = req.params;
+
+   try {
+      console.log(pharmacyProductQuery);
+
+      const { rows } = await pool.query(pharmacyProductQuery, [
+         productId,
+         pharmacyId,
+      ]);
+
+      if (rows.length === 0) {
+         return res
+            .status(404)
+            .json({ error: "Product not found in pharmacy" });
+      }
+
+      res.json(rows[0]);
+   } catch (error) {
+      console.error("Pharamacy product getting error:", error);
+      res.status(500).json({ error: "Fetch error" });
+   }
+};
+
 module.exports = {
    getProductCardData,
    getProductDetails,
+   getPharmacyProductData,
 };

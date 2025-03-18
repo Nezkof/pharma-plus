@@ -1,5 +1,5 @@
-import FetchingService from "../../services/FetchingService.ts";
-import DOMParserService from "../../services/DOMParserService.ts";
+import FetchingService from "../../services/fetchingManager.service.ts";
+import DOMParserService from "../../services/DOMParser.service.ts";
 import { safeFieldInit } from "../helpers.ts";
 import { debounce } from "../helpers.ts";
 
@@ -47,7 +47,7 @@ class Filtering {
          this.selectors.filterListButton
       );
 
-      FetchingService.fetchData(`catalog`).then((data) => {
+      FetchingService.fetchTextData(`catalog`).then((data) => {
          const listElement = DOMParserService.toDOM(
             data,
             this.selectors.filterList
@@ -61,14 +61,16 @@ class Filtering {
          this.bindEvents();
       });
 
-      FetchingService.fetchData(`catalog/${this.categoryId}`).then((data) => {
-         const catalogElement = DOMParserService.toDOM(
-            data,
-            this.selectors.productList
-         );
-         if (catalogElement) this.rootElement.appendChild(catalogElement);
-         this.productsListInit();
-      });
+      FetchingService.fetchTextData(`catalog/${this.categoryId}`).then(
+         (data) => {
+            const catalogElement = DOMParserService.toDOM(
+               data,
+               this.selectors.productList
+            );
+            if (catalogElement) this.rootElement.appendChild(catalogElement);
+            this.productsListInit();
+         }
+      );
    }
 
    productsListInit() {
@@ -129,7 +131,7 @@ class Filtering {
       const queryString = this.formQueryString();
 
       try {
-         FetchingService.fetchData(
+         FetchingService.fetchTextData(
             `catalog/${this.categoryId}${queryString}`
          ).then((data) => {
             const catalogElement = DOMParserService.toDOM(
@@ -154,7 +156,7 @@ class Filtering {
    onInputChange = debounce(async () => {
       const queryString = this.formQueryString();
 
-      FetchingService.fetchData(
+      FetchingService.fetchTextData(
          `catalog/${this.categoryId}${queryString}`
       ).then((data) => {
          const catalogElement = DOMParserService.toDOM(

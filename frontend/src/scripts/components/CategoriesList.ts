@@ -1,5 +1,5 @@
 import { safeFieldInit } from "../helpers";
-import FetchingService from "../../services/FetchingService";
+import FetchingService from "../../services/fetchingManager.service";
 
 const rootSelector = "[data-js-categories-section]";
 
@@ -38,7 +38,7 @@ class CategoriesList {
          this.selectors.categoriesList
       );
 
-      FetchingService.fetchData("categories").then((data) => {
+      FetchingService.fetchTextData("categories").then((data) => {
          this.categoriesListElement.innerHTML += data;
          this.init();
          this.bindEvents();

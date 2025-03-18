@@ -1,0 +1,19 @@
+ul(data-js-cart-orders-list).cart-subsection__orders-list 
+   each orderItem in data
+      li(data-js-order-item id=orderItem.pharmacy_product_id).order-item
+         h2().order-item__pharmacy-title= orderItem.pharmacy_name
+         h3.order-item__address-wrapper Address: 
+            span(data-js-order-item-pharmacy-address).order-item__address= orderItem.address
+         button(type="button" data-js-order-item-delete-button).order-item__delete-button 
+         div.order-item__product-info 
+            img().order-item__image(src="/images/product-image.png", alt="")
+            h4().order-item__title= orderItem.title
+            span().order-item__attributes= orderItem.description
+         div(data-js-packages-counter).counter.counter--packages
+            span.counter__title Package 
+            button(type="button" data-js-packages-counter-decrease-button).counter__button - 
+            span(data-js-packages-counter-counter).counter__value 1
+            button(type="button" data-js-packages-counter-increase-button).counter__button +   
+         span.order-item__price-wrapper Price: 
+            span(data-js-order-item-price).order-item__price= `$${orderItem.price}`
+      

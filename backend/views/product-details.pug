@@ -26,12 +26,12 @@ div(data-js-product-details).product__details
                   input(type="text" id="pharmacy-search" aria-label="pharmacy address" placeholder="Address" data-js-pharmacy-address-input).pharmacy-prices__input
                ul(data-js-pharmacies-list).pharmacy-prices__pharmacies-list
                   each pharmacy in pharmacies
-                     li.pharmacy-card
+                     li(data-js-pharmacy-card id=pharmacy.pharmacy_id).pharmacy-card
                         h3.pharmacy-card__title= pharmacy.pharmacy_name
                         span.pharmacy-card__address-wrapper Address:
                            span.pharmacy-card__address= pharmacy.address
                         span.pharmacy-card__price-wrapper Price:
                            span.pharmacy-card__price= `$${pharmacy.price}`
-                        button.pharmacy-card__add-to-cart(aria-label="Add Pharmacy #1 to cart") Add to cart
+                        button(data-js-pharmacy-card-button).pharmacy-card__add-to-cart(aria-label="Add Pharmacy #1 to cart") Add to cart
 
 

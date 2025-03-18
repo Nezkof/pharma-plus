@@ -8,15 +8,12 @@ html(lang='ua')
       include ../components/header
       main
          section(data-js-cart).cart-section.container
-            div.cart-subsection
+            div(data-js-cart-order-list-container).cart-subsection
                h1.cart-subsection__title.icon-cart Cart
-               ul.cart-subsection__orders-list 
-                  include ../components/order-item
-                  include ../components/order-item
-                  include ../components/order-item
+               ul(data-js-cart-orders-list).cart-subsection__orders-list 
                div.cart-subsection__buttons
                   span.cart-subsection__price-wrapper Total: 
-                     span.cart-subsection__price $1 362
+                     span(data-js-cart-total-price).cart-subsection__price $0
                   button(type="button" data-js-card-select-delivery-button).cart-subsection__delivery-button Select delivery method 
             div(data-js-cart-delivery-section).confirm-subsection
                ul.confirm-subsection__orders-to-confirm-list

@@ -12,7 +12,7 @@ class PackagesCounter {
    };
 
    state = {
-      counterValue: 0,
+      counterValue: 1,
    };
 
    constructor(root: HTMLElement) {
@@ -33,7 +33,7 @@ class PackagesCounter {
    }
 
    handleDecreaseButtonClick() {
-      if (this.state.counterValue > 0) {
+      if (this.state.counterValue > 1) {
          this.state.counterValue--;
          this.updateUI();
       }
