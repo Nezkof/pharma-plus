@@ -1,3 +1,4 @@
+//catalogController
 function getCategoryProductsQuery({
    categoryId,
    applicationMethods,
@@ -48,4 +49,57 @@ function getCategoryProductsQuery({
    return { query, queryParams };
 }
 
-module.exports = { getCategoryProductsQuery };
+const applicationMethodLabelQuery = `
+   SELECT application_methods_label
+   FROM public.application_methods;
+`;
+
+const formLabelQuery = `
+   SELECT form_label
+   FROM public.forms;
+`;
+
+//categoriesController
+const filteredCategoriesQuery = `
+   SELECT *
+   FROM categories
+   WHERE categories.category_label ILIKE $1
+`;
+
+//productController
+const productCardDataQuery = `
+   select products.title, products.description, products.image 
+   from products
+   where products.product_id = $1
+`;
+
+const productQuery = `        
+SELECT 
+   products.title, 
+   products.brand, 
+   products.description, 
+   categories.category_label
+FROM products
+INNER JOIN categories ON products.category_id = categories.category_id
+WHERE products.product_id = $1`;
+
+const pharmacyQuery = `
+         SELECT 
+            pharmacies.title AS pharmacy_name, 
+            pharmacies.address, 
+            pharmacies_products.price
+         FROM pharmacies_products
+         INNER JOIN pharmacies ON pharmacies.pharmacy_id = pharmacies_products.pharmacy_id
+         WHERE pharmacies_products.product_id = $1
+         AND (pharmacies.title ILIKE $2 OR pharmacies.address ILIKE $2)
+`;
+
+module.exports = {
+   getCategoryProductsQuery,
+   applicationMethodLabelQuery,
+   formLabelQuery,
+   filteredCategoriesQuery,
+   productCardDataQuery,
+   productQuery,
+   pharmacyQuery,
+};

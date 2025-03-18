@@ -1,4 +1,8 @@
-const { getCategoryProductsQuery } = require("../queries/queries");
+const {
+   applicationMethodLabelQuery,
+   formLabelQuery,
+   getCategoryProductsQuery,
+} = require("../queries/queries");
 
 const { Pool } = require("pg");
 const pool = new Pool({
@@ -13,16 +17,7 @@ const getFilters = async (req, res) => {
    try {
       const filterTypes = {};
       const filterTypesLables = ["Application methods", "Forms"];
-      const queries = [
-         `
-            SELECT application_methods_label
-            FROM public.application_methods;
-         `,
-         `
-            SELECT form_label
-            FROM public.forms;
-         `,
-      ];
+      const queries = [applicationMethodLabelQuery, formLabelQuery];
 
       const reqResult = await Promise.all(
          queries.map((query) =>
