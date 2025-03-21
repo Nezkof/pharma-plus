@@ -1,3 +1,12 @@
+//usuerAuth
+const addUser = `
+     INSERT INTO clients (name, surname, email)
+      VALUES ($1, $2, $3)
+      ON CONFLICT (email) DO UPDATE 
+      SET name = EXCLUDED.name, surname = EXCLUDED.surname
+      RETURNING client_id;
+`;
+
 //citiesListController
 const citiesListQuery = `
    select * from cities where cities.name ilike $1;
@@ -120,4 +129,5 @@ module.exports = {
    pharmacyQuery,
    pharmacyProductQuery,
    citiesListQuery,
+   addUser,
 };

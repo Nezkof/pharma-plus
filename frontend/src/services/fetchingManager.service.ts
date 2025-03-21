@@ -1,6 +1,26 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default class FetchingService {
+   static async fetchCookies(url: string) {
+      try {
+         const response = await fetch(`${API_URL}/${url}`, {
+            method: "GET",
+            credentials: "include",
+         });
+
+         if (!response.ok) {
+            throw new Error("Failed to fetch client_id");
+         }
+
+         const data = await response.json();
+
+         return data.client_id;
+      } catch (error) {
+         console.error("Error fetching client_id:", error);
+         return null;
+      }
+   }
+
    static async fetchTextData(url: string) {
       try {
          const response = await fetch(`${API_URL}/${url}`);
