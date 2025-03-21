@@ -17,6 +17,8 @@ const getFilteredCategories = async (req, res) => {
          `%${filter}%`,
       ]);
 
+      console.log(rows);
+
       res.render("categories-catalog", { categories: rows });
    } catch (error) {
       console.error(error);

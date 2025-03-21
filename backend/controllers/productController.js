@@ -30,13 +30,15 @@ const getProductCardData = async (req, res) => {
 };
 
 const getProductDetails = async (req, res) => {
-   const { id } = req.params;
+   const { id, cityId } = req.params;
    const filter = req.query.filter || "";
+
+   const values = [id, `%${filter}%`, `%${cityId}%`];
 
    try {
       const [productResult, pharmacyResult] = await Promise.all([
          pool.query(productQuery, [id]),
-         pool.query(pharmacyQuery, [id, `%${filter}%`]),
+         pool.query(pharmacyQuery, values),
       ]);
 
       if (productResult.rows.length === 0) {

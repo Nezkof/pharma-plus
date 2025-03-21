@@ -1,11 +1,16 @@
+import { Subscription } from "rxjs";
 import { safeFieldInit, debounce } from "./../helpers.ts";
 import FetchingService from "../../services/fetchingManager.service.ts";
 import DOMParserService from "../../services/DOMParser.service.ts";
 import PharmacyCardCollection from "./PharmacyCard.ts";
+import setLocationService from "../../services/setLocation.service.ts";
 
 const rootSelector = "[data-js-product-page]";
 
 class Product {
+   private citySubscription!: Subscription;
+   private city!: string;
+
    private productId: string;
    private rootElement: HTMLElement;
    private productCardButtonElement!: HTMLElement;
@@ -28,6 +33,14 @@ class Product {
    constructor(rootElement: HTMLElement) {
       this.rootElement = rootElement;
       this.productId = localStorage.getItem("selectedProductId") || "";
+
+      this.citySubscription = setLocationService.getCity$.subscribe(
+         (city: any) => {
+            this.city = city;
+            this.fetchPharmaciesData();
+            console.log("Нове місто:", city);
+         }
+      );
 
       this.fetchData().then(() => {
          this.init();
@@ -70,7 +83,7 @@ class Product {
       });
 
       const productDetailsPromise = FetchingService.fetchTextData(
-         `product/product-details/${this.productId}`
+         `product/product-details/${this.productId}/city/${this.city}`
       ).then((data) => {
          const productDetails = DOMParserService.toDOM(
             data,
@@ -95,17 +108,20 @@ class Product {
       lastElement.setAttribute("open", "true");
    };
 
-   handleInputChange = debounce(async () => {
+   async fetchPharmaciesData() {
       let queryString = "?filter=";
-      const inputValue = this.pharmacyAddressInputElement.value.trim();
 
-      if (this.pharmacyAddressInputElement.value.trim()) {
+      const inputValue = this.pharmacyAddressInputElement
+         ? this.pharmacyAddressInputElement.value.trim()
+         : "";
+
+      if (inputValue) {
          queryString += inputValue;
       }
 
-      if (this.pharmacyAddressInputElement)
+      if (this.pharmacyAddressInputElement) {
          FetchingService.fetchTextData(
-            `product/product-details/${this.productId}${queryString}`
+            `product/product-details/${this.productId}/city/${this.city}${queryString}`
          ).then((data) => {
             const pharmaciesList = DOMParserService.toDOM(
                data,
@@ -133,6 +149,11 @@ class Product {
                this.selectors.pharmaciesList
             );
          });
+      }
+   }
+
+   handleInputChange = debounce(async () => {
+      this.fetchPharmaciesData();
    }, 500);
 
    bindEvents() {

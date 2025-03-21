@@ -15,6 +15,8 @@ router.get("/:categoryId", async (req, res) => {
          filters
       );
 
+      console.log(products);
+
       res.render("product-catalog", { products });
    } catch (error) {
       console.error("Помилка:", error);

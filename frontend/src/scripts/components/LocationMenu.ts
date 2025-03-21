@@ -1,5 +1,6 @@
 import DOMParserService from "../../services/DOMParser.service";
 import FetchingService from "../../services/fetchingManager.service";
+import setLocationService from "../../services/setLocation.service";
 import { debounce, safeFieldInit } from "../helpers";
 
 const rootSelector = "[data-js-header]";
@@ -133,11 +134,6 @@ class LocationMenu {
             this.stateAttributes.ariaExpanded,
             String(isExpanded)
          );
-
-         if (this.locationTitleElement && this.state.selectedOptionElement) {
-            this.locationTitleElement.textContent =
-               this.state.selectedOptionElement.textContent || "";
-         }
       };
 
       const updateInput = () => {
@@ -215,6 +211,9 @@ class LocationMenu {
 
       this.state.selectedOptionElement =
          this.optionElements?.[this.state.currentOptionIndex] ?? null;
+
+      if (this.state.selectedOptionElement?.textContent)
+         this.setCity(this.state.selectedOptionElement.textContent);
    }
 
    onButtonClick = () => {
@@ -239,6 +238,8 @@ class LocationMenu {
          this.state.selectedOptionElement = target.closest(
             this.selectors.option
          );
+         if (this.state.selectedOptionElement?.textContent)
+            this.setCity(this.state.selectedOptionElement.textContent);
          this.collapse();
       }
       this.updateUI();
@@ -306,6 +307,13 @@ class LocationMenu {
          action();
       }
    };
+
+   setCity(newCity: string) {
+      if (this.locationTitleElement && this.state.selectedOptionElement)
+         this.locationTitleElement.textContent = newCity || "";
+
+      setLocationService.setLocation(newCity);
+   }
 
    get isNeedToExpand() {
       const isButtonFocused = document.activeElement === this.buttonElement;

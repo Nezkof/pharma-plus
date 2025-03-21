@@ -11,7 +11,7 @@ function getCategoryProductsQuery({
    input,
 }) {
    let query = `
-      SELECT products.product_id, products.title, products.description,
+      SELECT products.product_id, products.title, products.description, products.image,
              application_methods.application_methods_label,
              forms.form_label,
              MIN(pharmacies_products.price) AS min_price
@@ -48,7 +48,7 @@ function getCategoryProductsQuery({
    query += `
       GROUP BY products.product_id, products.title, products.description,
                application_methods.application_methods_label,
-               forms.form_label;
+               forms.form_label, products.image;
    `;
 
    return { query, queryParams };
@@ -81,6 +81,7 @@ const productCardDataQuery = `
 const productQuery = `        
 SELECT 
    products.title, 
+   products.image,
    products.brand, 
    products.description, 
    categories.category_label
@@ -89,15 +90,16 @@ INNER JOIN categories ON products.category_id = categories.category_id
 WHERE products.product_id = $1`;
 
 const pharmacyQuery = `
-         SELECT 
-            pharmacies.pharmacy_id,
-            pharmacies.title AS pharmacy_name, 
-            pharmacies.address, 
-            pharmacies_products.price
-         FROM pharmacies_products
-         INNER JOIN pharmacies ON pharmacies.pharmacy_id = pharmacies_products.pharmacy_id
-         WHERE pharmacies_products.product_id = $1
-         AND (pharmacies.title ILIKE $2 OR pharmacies.address ILIKE $2)
+      SELECT 
+    pharmacies.pharmacy_id,
+    pharmacies.title AS pharmacy_name, 
+    pharmacies.address, 
+    pharmacies_products.price
+   FROM pharmacies_products
+   INNER JOIN pharmacies ON pharmacies.pharmacy_id = pharmacies_products.pharmacy_id
+   WHERE pharmacies_products.product_id = $1
+   AND (pharmacies.title ILIKE $2 OR pharmacies.address ILIKE $2) 
+   AND pharmacies.address ILIKE $3;
 `;
 
 const pharmacyProductQuery = `

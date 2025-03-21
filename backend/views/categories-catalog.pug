@@ -3,7 +3,7 @@ ul.catalog.catalog--categories
       each category in categories 
          li.catalog__item
             div.category-card
-               img.category-card__image(src="/images/product-image.png", alt="Protein category image")
+               img.category-card__image(src=category.category_image, alt="Protein category image")
                h2.category-card__title= category.category_label 
                a(href=`/catalog` id=`${category.category_id}` aria-label=`View all ${category.category_label} products` data-js-category-card-button).category-card__button View all
 
