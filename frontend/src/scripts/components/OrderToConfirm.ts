@@ -111,8 +111,12 @@ class OrderItem {
    }
 
    public isOrdersValid(): boolean {
-      if (!this.addressSelector.validateFields()) return false;
-      return true;
+      if (
+         this.state.deliveryType !== 0 &&
+         this.addressSelector.validateFields()
+      )
+         return false;
+      else return true;
    }
 
    public getData() {

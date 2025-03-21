@@ -206,6 +206,7 @@ class Cart {
       });
 
       if (isOrderValid) console.log("Order confirmed:", orderData);
+      else console.log("Order invalid");
    };
 
    onMouseClick = (event: any) => {

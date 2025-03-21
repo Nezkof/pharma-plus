@@ -80,7 +80,6 @@ class AddressSelector {
 
    public validateFields(): boolean {
       let result = true;
-
       [
          this.streetInputElement,
          this.houseInputElement,

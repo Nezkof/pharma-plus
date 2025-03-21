@@ -6,7 +6,7 @@ ul(data-js-cart-orders-list).cart-subsection__orders-list
             span(data-js-order-item-pharmacy-address).order-item__address= orderItem.address
          button(type="button" data-js-order-item-delete-button).order-item__delete-button 
          div.order-item__product-info 
-            img().order-item__image(src="/images/product-image.png", alt="")
+            img().order-item__image(src=orderItem.image, alt="")
             h4().order-item__title= orderItem.title
             span().order-item__attributes= orderItem.description
          div(data-js-packages-counter).counter.counter--packages

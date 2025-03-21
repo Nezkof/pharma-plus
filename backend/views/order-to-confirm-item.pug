@@ -2,7 +2,7 @@ ul(data-js-cart-orders-to-confirm-list).confirm-subsection__orders-to-confirm-li
    each orderItem in data
       li(data-js-order-to-confirm-item id=orderItem.pharmacy_product_id).order-to-confirm-item
          div.order-to-confirm-item__product-info
-            img.order-to-confirm-item__image(src="/images/product-image.png", alt="")
+            img.order-to-confirm-item__image(src=orderItem.image, alt="")
             h4.order-to-confirm-item__title= orderItem.title
             span.order-to-confirm-item__attributes= orderItem.description
             span.order-to-confirm-item__availability-message Will be available from: 25 February  
