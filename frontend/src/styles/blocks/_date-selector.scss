@@ -2,17 +2,14 @@
 
 .date-selector {
    grid-area: date-selector;
-   display: none;
+   display: grid;
    grid-template-areas:
       "title title title title title"
       "first second third fourth fifth";
    gap: rem(10);
    align-items: start;
    justify-content: start;
-
-   @include mobile {
-      justify-content: space-between;
-   }
+   margin-top: rem(20);
 
    &__title {
       grid-area: title;

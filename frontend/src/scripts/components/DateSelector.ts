@@ -18,7 +18,7 @@ class DateSelector {
    };
 
    state = {
-      activeOptionIndex: 2,
+      activeOptionIndex: 0,
    };
 
    constructor(rootElement: HTMLElement) {
@@ -27,7 +27,20 @@ class DateSelector {
          this.selectors.dateOption
       );
 
+      this.initDates();
       this.bindEvents();
+   }
+
+   initDates() {
+      const today = new Date();
+      let day = today.getDate();
+
+      this.datesListElement.forEach((dateButton, index) => {
+         day++;
+         const nextDate = new Date(today.getFullYear(), today.getMonth(), day);
+
+         dateButton.textContent = String(nextDate.getDate());
+      });
    }
 
    updateUI() {
@@ -65,20 +78,11 @@ class DateSelector {
    bindEvents() {
       this.rootElement.addEventListener("click", this.handleMouseClick);
    }
-}
 
-class DateSelectorCollection {
-   constructor() {
-      this.init();
-   }
-
-   init() {
-      document.querySelectorAll(rootSelector).forEach((element) => {
-         if (element instanceof HTMLElement) {
-            new DateSelector(element);
-         }
-      });
+   public getDate() {
+      const { activeOptionIndex } = this.state;
+      return this.datesListElement[activeOptionIndex].innerHTML;
    }
 }
 
-export default DateSelectorCollection;
+export default DateSelector;

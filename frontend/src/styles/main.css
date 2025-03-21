@@ -200,6 +200,7 @@ svg * {
   --color-accent-20: #264945;
   --transparent-10: rgba(0, 0, 0, 0.01);
   --box-shadow: 0 0 3.125rem 0 rgb(0, 0, 0, 0.05);
+  --box-shadow--invalid: 0 0 0.3125rem 0 #ff5733;
   --font-family-base: "Poppins", sans-serif;
   --font-family-accent: "Kanit", sans-serif;
   --transition-duration: 0.2s;
@@ -1875,6 +1876,11 @@ a[class] {
     width: 100%;
   }
 }
+@media (width <= 47.99875rem) {
+  .cart-section .confirm-subsection {
+    padding: 1.5625rem;
+  }
+}
 .cart-section .confirm-subsection__orders-to-confirm-list {
   display: grid;
   row-gap: 0.9375rem;
@@ -2071,7 +2077,7 @@ a[class] {
 
 .order-to-confirm-item {
   display: grid;
-  grid-template-areas: "product-info self-delivery" "product-info courier-delivery";
+  grid-template-areas: "product-info self-delivery" "product-info courier-delivery" "date-selector address-selector";
   grid-template-columns: 1fr auto;
   row-gap: 0.3125rem;
   column-gap: 0.625rem;
@@ -2079,8 +2085,13 @@ a[class] {
 }
 @media (width <= 63.99875rem) {
   .order-to-confirm-item {
-    grid-template-areas: "product-info product-info" "self-delivery courier-delivery";
-    grid-template-rows: 1fr auto;
+    grid-template-areas: "product-info product-info product-info" "self-delivery self-delivery courier-delivery" "date-selector address-selector address-selector";
+    grid-template-rows: 1fr auto auto;
+  }
+}
+@media (width <= 47.99875rem) {
+  .order-to-confirm-item {
+    grid-template-areas: "product-info product-info" "self-delivery self-delivery" "courier-delivery courier-delivery" "address-selector address-selector" "date-selector date-selector";
   }
 }
 .order-to-confirm-item:not(:last-child) {
@@ -2146,41 +2157,14 @@ a[class] {
   grid-area: courier-delivery;
 }
 
-.order-to-confirm-item.courier-delivery {
-  grid-template-areas: "product-info self-delivery" "product-info courier-delivery" "date-selector address-selector";
-}
-.order-to-confirm-item.courier-delivery .date-selector,
-.order-to-confirm-item.courier-delivery .address-selector {
-  display: grid;
-}
-@media (width <= 63.99875rem) {
-  .order-to-confirm-item.courier-delivery {
-    grid-template-areas: "product-info product-info" "self-delivery courier-delivery" "date-selector address-selector";
-    grid-template-rows: 1fr auto auto;
-  }
-  .order-to-confirm-item.courier-delivery .date-selector,
-  .order-to-confirm-item.courier-delivery .address-selector {
-    margin-top: 0.625rem;
-  }
-}
-@media (width <= 47.99875rem) {
-  .order-to-confirm-item.courier-delivery {
-    grid-template-areas: "product-info product-info" "self-delivery self-delivery" "courier-delivery courier-delivery" "address-selector address-selector" "date-selector date-selector";
-  }
-}
-
 .date-selector {
   grid-area: date-selector;
-  display: none;
+  display: grid;
   grid-template-areas: "title title title title title" "first second third fourth fifth";
   gap: 0.625rem;
   align-items: start;
   justify-content: start;
-}
-@media (width <= 47.99875rem) {
-  .date-selector {
-    justify-content: space-between;
-  }
+  margin-top: 1.25rem;
 }
 .date-selector__title {
   grid-area: title;
@@ -2235,6 +2219,7 @@ a[class] {
   grid-template-areas: "street street street" "empty house apartment";
   column-gap: 0.625rem;
   row-gap: 0.625rem;
+  margin-top: 1.25rem;
   grid-template-columns: auto 7.5rem 10.0625rem;
   align-items: end;
 }
@@ -2245,6 +2230,9 @@ a[class] {
   padding: 0.5rem 1.25rem;
   border-radius: 0.5rem;
   color: var(--color-dark);
+}
+.address-selector__street.is-invalid, .address-selector__house.is-invalid, .address-selector__apartment.is-invalid {
+  box-shadow: var(--box-shadow--invalid);
 }
 .address-selector__street {
   grid-area: street;
@@ -2260,6 +2248,10 @@ a[class] {
     grid-template-areas: "street" "house" "apartment";
     grid-template-columns: 1fr;
   }
+}
+
+.address-selector.is-active {
+  display: grid;
 }
 
 /*# sourceMappingURL=main.css.map */

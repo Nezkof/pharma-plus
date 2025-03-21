@@ -203,30 +203,26 @@ class LocationMenu {
       this.updateUI();
    };
 
-   onClick = (event: { target: any }) => {
-      const { target } = event;
-      const isButtonClick =
-         target.closest(this.selectors.button) === this.buttonElement;
-      const isOutsideDropdownClick =
-         target.closest(this.selectors.dropdown) !== this.dropdownElement;
-
-      if (!isButtonClick && isOutsideDropdownClick) {
-         this.collapse();
-         return;
-      }
-      const isOptionClick =
-         target.closest(this.selectors.option) &&
-         !target.closest(this.selectors.search);
-
-      if (isOptionClick) {
-         this.state.selectedOptionElement = target.closest(
-            this.selectors.option
-         );
-
-         this.collapse();
-      }
-
-      this.updateUI();
+   onClick = (event: any) => {
+      // const target = event.target;
+      // const isButtonClick =
+      //    target.closest(this.selectors.button) === this.buttonElement;
+      // const isOutsideDropdownClick =
+      //    target.closest(this.selectors.dropdown) !== this.dropdownElement;
+      // if (!isButtonClick && isOutsideDropdownClick) {
+      //    this.collapse();
+      //    return;
+      // }
+      // const isOptionClick =
+      //    target.closest(this.selectors.option) &&
+      //    !target.closest(this.selectors.search);
+      // if (isOptionClick) {
+      //    this.state.selectedOptionElement = target.closest(
+      //       this.selectors.option
+      //    );
+      //    this.collapse();
+      // }
+      // this.updateUI();
    };
 
    onArrowUpKeyDown = () => {

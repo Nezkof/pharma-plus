@@ -132,6 +132,10 @@
          width: 100%;
       }
 
+      @include mobile {
+         padding: rem(25);
+      }
+
       &__orders-to-confirm-list {
          display: grid;
          row-gap: rem(15);

@@ -18,6 +18,18 @@ const renderOrderItem = async (req, res) => {
    }
 };
 
+const renderItemsToConfirm = async (req, res) => {
+   try {
+      const data = req.body;
+
+      res.render("order-to-confirm-item", { data });
+   } catch (error) {
+      console.error(error);
+      res.status(500).send("Database error");
+   }
+};
+
 module.exports = {
    renderOrderItem,
+   renderItemsToConfirm,
 };

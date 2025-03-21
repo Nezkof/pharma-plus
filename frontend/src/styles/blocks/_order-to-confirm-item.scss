@@ -4,7 +4,9 @@
    display: grid;
    grid-template-areas:
       "product-info self-delivery"
-      "product-info courier-delivery";
+      "product-info courier-delivery"
+      "date-selector address-selector";
+
    grid-template-columns: 1fr auto;
    row-gap: rem(5);
    column-gap: rem(10);
@@ -12,9 +14,20 @@
 
    @include tablet {
       grid-template-areas:
+         "product-info product-info product-info"
+         "self-delivery self-delivery courier-delivery"
+         "date-selector address-selector address-selector";
+
+      grid-template-rows: 1fr auto auto;
+   }
+
+   @include mobile {
+      grid-template-areas:
          "product-info product-info"
-         "self-delivery courier-delivery";
-      grid-template-rows: 1fr auto;
+         "self-delivery self-delivery"
+         "courier-delivery courier-delivery"
+         "address-selector address-selector"
+         "date-selector date-selector";
    }
 
    &:not(:last-child) {
@@ -94,40 +107,5 @@
 
    &__courier-delivery-button {
       grid-area: courier-delivery;
-   }
-}
-
-.order-to-confirm-item.courier-delivery {
-   grid-template-areas:
-      "product-info self-delivery"
-      "product-info courier-delivery"
-      "date-selector address-selector";
-
-   .date-selector,
-   .address-selector {
-      display: grid;
-   }
-
-   @include tablet {
-      grid-template-areas:
-         "product-info product-info"
-         "self-delivery courier-delivery"
-         "date-selector address-selector";
-
-      grid-template-rows: 1fr auto auto;
-
-      .date-selector,
-      .address-selector {
-         margin-top: rem(10);
-      }
-   }
-
-   @include mobile {
-      grid-template-areas:
-         "product-info product-info"
-         "self-delivery self-delivery"
-         "courier-delivery courier-delivery"
-         "address-selector address-selector"
-         "date-selector date-selector";
    }
 }

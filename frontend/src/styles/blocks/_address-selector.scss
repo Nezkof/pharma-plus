@@ -8,6 +8,7 @@
       "empty house apartment";
    column-gap: rem(10);
    row-gap: rem(10);
+   margin-top: rem(20);
 
    grid-template-columns: auto rem(120) rem(161);
    align-items: end;
@@ -21,6 +22,12 @@
       padding: rem(8) rem(20);
       border-radius: rem(8);
       color: var(--color-dark);
+   }
+
+   &__street.is-invalid,
+   &__house.is-invalid,
+   &__apartment.is-invalid {
+      box-shadow: var(--box-shadow--invalid);
    }
 
    &__street {
@@ -43,4 +50,8 @@
 
       grid-template-columns: 1fr;
    }
+}
+
+.address-selector.is-active {
+   display: grid;
 }

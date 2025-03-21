@@ -16,8 +16,6 @@ html(lang='ua')
                      span(data-js-cart-total-price).cart-subsection__price $0
                   button(type="button" data-js-card-select-delivery-button).cart-subsection__delivery-button Select delivery method 
             div(data-js-cart-delivery-section).confirm-subsection
-               ul.confirm-subsection__orders-to-confirm-list
-                  include ../components/order-to-confirm-item
-                  include ../components/order-to-confirm-item
-               button(type="button").confirm-subsection__confirm-button Confirm order
+               ul(data-js-cart-orders-to-confirm-list).confirm-subsection__orders-to-confirm-list
+               button(type="button" data-js-cart-confirm-order).confirm-subsection__confirm-button Confirm order
                
