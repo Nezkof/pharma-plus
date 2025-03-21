@@ -1,3 +1,8 @@
+//citiesListController
+const citiesListQuery = `
+   select * from cities where cities.name ilike $1;
+`;
+
 //catalogController
 function getCategoryProductsQuery({
    categoryId,
@@ -112,4 +117,5 @@ module.exports = {
    productQuery,
    pharmacyQuery,
    pharmacyProductQuery,
+   citiesListQuery,
 };

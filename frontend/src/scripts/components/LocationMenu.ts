@@ -1,3 +1,7 @@
+import DOMParserService from "../../services/DOMParser.service";
+import FetchingService from "../../services/fetchingManager.service";
+import { debounce, safeFieldInit } from "../helpers";
+
 const rootSelector = "[data-js-header]";
 
 interface State {
@@ -9,19 +13,23 @@ interface State {
 
 class LocationMenu {
    private rootElement: HTMLElement;
-   private buttonElement: HTMLButtonElement;
-   private locationTitleElement: HTMLSpanElement;
-   private dropdownElement: HTMLElement;
-   private optionElements: NodeListOf<HTMLButtonElement>;
-   private searchElement: HTMLInputElement;
+   private buttonElement!: HTMLButtonElement;
+   private locationTitleElement!: HTMLSpanElement;
+   private dropdownElement!: HTMLElement;
+   private optionElements!: NodeListOf<HTMLButtonElement>;
+   private searchElement!: HTMLInputElement;
+   private citiesListElement!: HTMLElement;
 
    selectors = {
       root: rootSelector,
       button: "[data-js-header-location-menu-button]",
       locationTitle: "[data-js-location-name]",
+
       dropdown: "[data-js-location-dropdown]",
       search: "[data-js-location-search-input]",
       option: "[data-js-location-search-item]",
+
+      citiesList: "[data-js-location-dropdown-cities-list]",
    };
 
    stateClasses = {
@@ -45,36 +53,71 @@ class LocationMenu {
    constructor(rootElement: HTMLElement) {
       this.rootElement = rootElement;
 
-      this.buttonElement = this.safeFieldInit<HTMLButtonElement>(
-         this.selectors.button
-      );
-
-      this.locationTitleElement = this.safeFieldInit<HTMLSpanElement>(
-         this.selectors.locationTitle
-      );
-
-      this.dropdownElement = this.safeFieldInit<HTMLElement>(
-         this.selectors.dropdown
-      );
-
-      this.optionElements =
-         this.dropdownElement.querySelectorAll(this.selectors.option) || null;
-
-      this.searchElement = this.safeFieldInit<HTMLInputElement>(
-         this.selectors.search
-      );
+      this.init();
 
       this.bindEvents();
    }
 
-   safeFieldInit<T extends HTMLElement>(selector: string): T {
-      const fieldToCheck = this.rootElement.querySelector<T>(selector);
+   async init() {
+      this.dropdownElement = safeFieldInit<HTMLElement>(
+         this.rootElement,
+         this.selectors.dropdown
+      );
 
-      if (fieldToCheck) {
-         return fieldToCheck;
-      } else {
-         throw new TypeError(`Element not found for selector: ${selector}`);
-      }
+      this.buttonElement = safeFieldInit<HTMLButtonElement>(
+         this.rootElement,
+         this.selectors.button
+      );
+
+      this.locationTitleElement = safeFieldInit<HTMLSpanElement>(
+         this.rootElement,
+         this.selectors.locationTitle
+      );
+
+      this.searchElement = safeFieldInit<HTMLInputElement>(
+         this.rootElement,
+         this.selectors.search
+      );
+
+      await this.loadCities();
+   }
+
+   async loadCities() {
+      const inputValue = this.searchElement.value.trim();
+
+      return FetchingService.fetchFilteredData("citiesList", inputValue).then(
+         (data) => {
+            const citiesList = DOMParserService.toDOM(
+               data,
+               this.selectors.citiesList
+            );
+
+            if (!citiesList) return;
+
+            this.dropdownElement.appendChild(citiesList);
+
+            if (
+               this.citiesListElement &&
+               this.dropdownElement.contains(this.citiesListElement)
+            ) {
+               this.dropdownElement.replaceChild(
+                  citiesList,
+                  this.citiesListElement
+               );
+            } else {
+               this.dropdownElement.appendChild(citiesList);
+            }
+
+            this.citiesListElement = safeFieldInit(
+               this.rootElement,
+               this.selectors.citiesList
+            );
+
+            this.optionElements =
+               this.dropdownElement.querySelectorAll(this.selectors.option) ||
+               null;
+         }
+      );
    }
 
    updateUI() {
@@ -155,33 +198,9 @@ class LocationMenu {
       this.updateUI();
    }
 
-   debounce<T extends (...args: any[]) => void>(
-      func: T,
-      timeout: number = 300
-   ): (...args: Parameters<T>) => void {
-      let timer: ReturnType<typeof setTimeout>;
-      return (...args: Parameters<T>) => {
-         clearTimeout(timer);
-         timer = setTimeout(() => {
-            func.apply(this, args);
-         }, timeout);
-      };
-   }
-
-   getFilteredOptions = async (url: string, options: RequestInit = {}) => {
-      //TODO CONNECT DB
-      console.log("fetching");
-      try {
-         const response = await fetch(`http://localhost:8000${url}`, options);
-         if (!response.ok)
-            throw new Error(`Fetching error: ${response.statusText}`);
-         return await response.json();
-      } catch (error: any) {
-         console.error(error.message);
-      }
-   };
-
-   searchCity = this.debounce(() => this.getFilteredOptions("url"));
+   searchCity = debounce(() => {
+      this.loadCities();
+   });
 
    toggleExpandedState = () => {
       this.state.isExpanded = !this.state.isExpanded;
@@ -204,25 +223,25 @@ class LocationMenu {
    };
 
    onClick = (event: any) => {
-      // const target = event.target;
-      // const isButtonClick =
-      //    target.closest(this.selectors.button) === this.buttonElement;
-      // const isOutsideDropdownClick =
-      //    target.closest(this.selectors.dropdown) !== this.dropdownElement;
-      // if (!isButtonClick && isOutsideDropdownClick) {
-      //    this.collapse();
-      //    return;
-      // }
-      // const isOptionClick =
-      //    target.closest(this.selectors.option) &&
-      //    !target.closest(this.selectors.search);
-      // if (isOptionClick) {
-      //    this.state.selectedOptionElement = target.closest(
-      //       this.selectors.option
-      //    );
-      //    this.collapse();
-      // }
-      // this.updateUI();
+      const target = event.target;
+      const isButtonClick =
+         target.closest(this.selectors.button) === this.buttonElement;
+      const isOutsideDropdownClick =
+         target.closest(this.selectors.dropdown) !== this.dropdownElement;
+      if (!isButtonClick && isOutsideDropdownClick) {
+         this.collapse();
+         return;
+      }
+      const isOptionClick =
+         target.closest(this.selectors.option) &&
+         !target.closest(this.selectors.search);
+      if (isOptionClick) {
+         this.state.selectedOptionElement = target.closest(
+            this.selectors.option
+         );
+         this.collapse();
+      }
+      this.updateUI();
    };
 
    onArrowUpKeyDown = () => {
@@ -295,8 +314,8 @@ class LocationMenu {
    }
 
    bindEvents() {
-      this.buttonElement.addEventListener("click", this.onButtonClick);
       this.rootElement.addEventListener("keydown", this.onKeyDown);
+      this.buttonElement.addEventListener("click", this.onButtonClick);
       this.searchElement.addEventListener("input", this.searchCity);
       document.addEventListener("click", this.onClick);
    }

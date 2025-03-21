@@ -57,8 +57,6 @@ const getPharmacyProductData = async (req, res) => {
    const { productId, pharmacyId } = req.params;
 
    try {
-      console.log(pharmacyProductQuery);
-
       const { rows } = await pool.query(pharmacyProductQuery, [
          productId,
          pharmacyId,
