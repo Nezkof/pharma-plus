@@ -1,18 +1,18 @@
-nav.side-menu(aria-label="Popular categories")
+nav.side-menu(aria-label="Popular categories" data-js-side-menu)
    ul.side-menu__list
       li
-         a.side-menu__item(href="#")
+         a.side-menu__item(href=`/catalog` id='1' data-js-side-menu-link)
             img(src="/icons/drug-icons/icon-drugs.svg", alt="Painkillers category").side-menu__icon
             span Painkillers
       li
-         a.side-menu__item(href="#")
+         a.side-menu__item(href=`/catalog` id='2' data-js-side-menu-link)
             img(src="/icons/drug-icons/icon-thermometer.svg", alt="Cold and flu category").side-menu__icon
             span Cold & flu
       li
-         a.side-menu__item(href="#")
+         a.side-menu__item(href="/")
             img(src="/icons/drug-icons/icon-stomach.svg", alt="Stomach category").side-menu__icon
             span Stomach
       li
-         a.side-menu__item(href="#")
+         a.side-menu__item(href="/")
             img(src="/icons/drug-icons/icon-baby.svg", alt="Baby care category").side-menu__icon
             span Baby Care
