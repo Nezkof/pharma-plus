@@ -1,4 +1,13 @@
-//usuerAuth
+//userData
+const getUserDataQuery = `
+   select * from clients where clients.client_id = $1
+`;
+
+const updateUserAddress = `
+   UPDATE clients SET address = $1 WHERE client_id = $2 RETURNING *
+`;
+
+//userAuth
 const addUser = `
      INSERT INTO clients (name, surname, email)
       VALUES ($1, $2, $3)
@@ -130,4 +139,6 @@ module.exports = {
    pharmacyProductQuery,
    citiesListQuery,
    addUser,
+   getUserDataQuery,
+   updateUserAddress,
 };

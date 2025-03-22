@@ -1,3 +1,5 @@
+import FetchingService from "../../services/fetchingManager.service";
+import setLocationService from "../../services/setLocation.service";
 import { safeFieldInit } from "../helpers";
 
 class AddressSelector {
@@ -45,7 +47,40 @@ class AddressSelector {
          this.selectors.apartmentInput
       );
 
+      this.initUserAddress();
+
       this.bindEvents();
+   }
+
+   async initUserAddress() {
+      let userId = -1;
+
+      setLocationService.getUserId$.subscribe((clientId) => {
+         userId = clientId;
+      });
+
+      if (userId === -1) return;
+
+      await FetchingService.fetchJSON(`user/${userId}`).then((data) => {
+         const { address } = data.data;
+         this.setUserAddress(address);
+      });
+   }
+
+   setUserAddress(address: string) {
+      const splittedAddress: string[] = address
+         .split(",")
+         .map((part) => part.trim());
+
+      setLocationService.setLocation(splittedAddress[0]);
+
+      this.streetInputElement.value = splittedAddress[1];
+      this.houseInputElement.value = splittedAddress[2];
+      this.apartmentInputElement.value = splittedAddress[3];
+
+      this.state.street = splittedAddress[1];
+      this.state.apartment = splittedAddress[2];
+      this.state.house = splittedAddress[3];
    }
 
    handleInput = (event: any) => {

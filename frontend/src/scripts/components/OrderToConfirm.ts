@@ -35,8 +35,6 @@ class OrderItem {
    };
 
    constructor(orderItemData: any) {
-      console.log(orderItemData);
-
       this.state.itemId = orderItemData.pharmacy_product_id;
 
       this.rootElement = document.querySelector(
@@ -111,12 +109,10 @@ class OrderItem {
    }
 
    public isOrdersValid(): boolean {
-      if (
-         this.state.deliveryType !== 0 &&
-         this.addressSelector.validateFields()
-      )
-         return false;
-      else return true;
+      if (this.state.deliveryType === 1) {
+         if (!this.addressSelector.validateFields()) return false;
+         else return true;
+      } else return true;
    }
 
    public getData() {

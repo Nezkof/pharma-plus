@@ -56,6 +56,12 @@ class LocationMenu {
 
       this.init();
 
+      setLocationService.getCity$.subscribe((city) => {
+         if (this.locationTitleElement) {
+            this.locationTitleElement.textContent = city;
+         }
+      });
+
       this.bindEvents();
    }
 

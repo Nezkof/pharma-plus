@@ -69,8 +69,36 @@ export default class FetchingService {
          const data = await response.text();
          return data;
       } catch (error) {
-         console.error("Помилка при відправці даних:", error);
+         console.error("Post data error:", error);
          return "";
+      }
+   }
+
+   static async setUserData(url: string, data: any) {
+      try {
+         const response = await fetch(`${API_URL}/${url}`, {
+            method: "POST",
+            headers: {
+               "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+               address: data,
+            }),
+         });
+
+         if (!response.ok) {
+            console.error(
+               "Post data error:",
+               response.status,
+               response.statusText
+            );
+            return null;
+         }
+
+         return await response.json();
+      } catch (error) {
+         console.error("Post data error:", error);
+         return null;
       }
    }
 }

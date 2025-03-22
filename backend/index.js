@@ -18,6 +18,7 @@ const catalogRoutes = require("./routes/catalog");
 const productRoutes = require("./routes/product");
 const cartRoutes = require("./routes/cart");
 const authRouter = require("./routes/auth");
+const userRoutes = require("./routes/user");
 const cors = require("cors");
 
 const app = express();
@@ -61,6 +62,7 @@ passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((user, done) => done(null, user));
 
 app.use("/", authRouter);
+app.use("/user", userRoutes);
 app.use("/citiesList", citiesListRoutes);
 app.use("/categories", categoriesRoutes);
 app.use("/catalog", catalogRoutes);

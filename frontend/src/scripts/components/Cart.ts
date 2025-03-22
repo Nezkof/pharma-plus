@@ -5,8 +5,17 @@ import { cartService } from "../../services/cartManager.service.ts";
 import { DataPreparationService } from "../../services/dataPreparation.service.ts";
 import DOMParserService from "../../services/DOMParser.service.ts";
 import OrderToConfirm from "./OrderToConfirm.ts";
+import setLocationService from "../../services/setLocation.service.ts";
 
 const rootSelector = "[data-js-cart]";
+
+interface OrderData {
+   pharmacyProductId: number | null;
+   isSelfDelivery: boolean | null;
+   courierDeliveryAddress: string | null;
+   deliveryDate: string | null;
+   price: number | null;
+}
 
 class Cart {
    private rootElement: HTMLElement;
@@ -193,20 +202,42 @@ class Cart {
       });
    }
 
+   async setUserAddress(data: string) {
+      let userId = null;
+
+      setLocationService.getUserId$.subscribe((clientId) => {
+         userId = clientId;
+      });
+
+      setLocationService.getCity$.subscribe((userCity) => {
+         data = `${userCity},` + data;
+      });
+
+      const result = await FetchingService.setUserData(`user/${userId}`, data);
+
+      if (result) {
+         console.log("Data sending succesful:", result);
+      } else {
+         console.error("Data sending error");
+      }
+   }
+
    handleConfirmOrderButton = () => {
       let isOrderValid = true;
-      const orderData: any[] = [];
+      const orderData: OrderData[] = [];
 
       this.orderToConfirmObjects.forEach((orderItem) => {
          if (!orderItem.isOrdersValid()) isOrderValid = false;
          orderData.push({
             ...orderItem.getData(),
-            orderPrice: this.state.price,
+            price: this.state.price,
          });
       });
 
-      if (isOrderValid) console.log("Order confirmed:", orderData);
-      else console.log("Order invalid");
+      if (isOrderValid) {
+         console.log("Order confirmed:", orderData);
+         this.setUserAddress(orderData[0].courierDeliveryAddress);
+      } else console.log("Order invalid");
    };
 
    onMouseClick = (event: any) => {
