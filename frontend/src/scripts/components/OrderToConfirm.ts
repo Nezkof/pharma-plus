@@ -32,9 +32,13 @@ class OrderItem {
    state = {
       itemId: 0,
       deliveryType: 0,
+      quantity: 0,
+      itemPrice: 0,
    };
 
    constructor(orderItemData: any) {
+      this.state.quantity = orderItemData.quantity;
+      this.state.itemPrice = orderItemData.price;
       this.state.itemId = orderItemData.pharmacy_product_id;
 
       this.rootElement = document.querySelector(
@@ -123,6 +127,8 @@ class OrderItem {
          isSelfDelivery: Boolean(!this.state.deliveryType),
          courierDeliveryAddress: courierDeliveryAddress,
          deliveryDate: this.dateSelector.getDate(),
+         itemPrice: this.state.itemPrice,
+         quantity: this.state.quantity,
       };
    }
 }

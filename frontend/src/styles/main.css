@@ -286,6 +286,9 @@ svg * {
 button {
   border: none;
 }
+button:active {
+  transform: scale(0.99);
+}
 
 a {
   color: inherit;
@@ -1855,6 +1858,10 @@ a[class] {
   .cart-section .cart-subsection__delivery-button:active {
     background-color: var(--color-accent-10);
   }
+}
+.cart-section .cart-subsection__delivery-button.is-disabled {
+  opacity: 50%;
+  pointer-events: none;
 }
 .cart-section .confirm-subsection {
   position: relative;

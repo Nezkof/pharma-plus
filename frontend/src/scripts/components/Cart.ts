@@ -14,7 +14,8 @@ interface OrderData {
    isSelfDelivery: boolean | null;
    courierDeliveryAddress: string | null;
    deliveryDate: string | null;
-   price: number | null;
+   quantity: number | null;
+   itemPrice: number | null;
 }
 
 class Cart {
@@ -25,6 +26,7 @@ class Cart {
    private priceElement!: HTMLElement;
 
    private orderItemObjects!: OrderItem[];
+   private selectDeliveryButtonElement!: HTMLButtonElement;
 
    private deliverySectionElement!: HTMLElement;
 
@@ -49,6 +51,7 @@ class Cart {
 
    stateClasses = {
       isActive: "is-active",
+      isDisabled: "is-disabled",
    };
 
    state = {
@@ -95,6 +98,25 @@ class Cart {
          this.rootElement,
          this.selectors.confirmOrderButton
       );
+
+      this.selectDeliveryButtonElement = safeFieldInit(
+         this.rootElement,
+         this.selectors.selectDeliveryButton
+      );
+
+      cartService.cartItem$.subscribe((cartItems) => {
+         if (!cartItems || cartItems.length === 0) {
+            this.disableControlElements();
+         }
+      });
+   }
+
+   disableControlElements() {
+      this.selectDeliveryButtonElement.classList.add(
+         this.stateClasses.isDisabled
+      );
+
+      this.deliverySectionElement.classList.remove(this.stateClasses.isActive);
    }
 
    // RAW ORDERS SECTION
@@ -166,9 +188,14 @@ class Cart {
       const data = DataPreparationService.getPreparedData(cartItems);
       await this.renderOrdersToConfirm(data);
 
-      cartItems.forEach((orderItemData) => {
+      for (let i = 0; i < cartItems.length; ++i) {
+         const orderItemData = {
+            ...cartItems[i],
+            quantity: this.orderItemObjects[i].getQuantity(),
+         };
+
          this.orderToConfirmObjects.push(new OrderToConfirm(orderItemData));
-      });
+      }
    }
 
    async renderOrdersToConfirm(data: any) {
@@ -230,13 +257,13 @@ class Cart {
          if (!orderItem.isOrdersValid()) isOrderValid = false;
          orderData.push({
             ...orderItem.getData(),
-            price: this.state.price,
          });
       });
 
       if (isOrderValid) {
          console.log("Order confirmed:", orderData);
-         this.setUserAddress(orderData[0].courierDeliveryAddress);
+         if (orderData[0].courierDeliveryAddress)
+            this.setUserAddress(orderData[0].courierDeliveryAddress);
       } else console.log("Order invalid");
    };
 

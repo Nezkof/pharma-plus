@@ -15,6 +15,7 @@ class DateSelector {
 
    stateAttributes = {
       ariaPressed: "aria-pressed",
+      dateValue: "date-value",
    };
 
    state = {
@@ -39,6 +40,12 @@ class DateSelector {
          day++;
          const nextDate = new Date(today.getFullYear(), today.getMonth(), day);
 
+         dateButton.setAttribute(
+            this.stateAttributes.dateValue,
+            String(
+               `${nextDate.getDate()}, ${nextDate.getMonth()}, ${nextDate.getFullYear()}`
+            )
+         );
          dateButton.textContent = String(nextDate.getDate());
       });
    }
@@ -81,7 +88,9 @@ class DateSelector {
 
    public getDate() {
       const { activeOptionIndex } = this.state;
-      return this.datesListElement[activeOptionIndex].innerHTML;
+      return this.datesListElement[activeOptionIndex].getAttribute(
+         this.stateAttributes.dateValue
+      );
    }
 }
 

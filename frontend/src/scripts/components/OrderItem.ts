@@ -77,6 +77,10 @@ class OrderItem {
    public getId() {
       return this.state.pharmacy_product_id;
    }
+
+   public getQuantity() {
+      return this.packagesCounterElement.getCounterValue();
+   }
 }
 
 export default OrderItem;

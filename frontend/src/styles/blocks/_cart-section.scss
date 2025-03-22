@@ -110,6 +110,11 @@
             background-color: var(--color-accent-10);
          }
       }
+
+      &__delivery-button.is-disabled {
+         opacity: 50%;
+         pointer-events: none;
+      }
    }
 
    .confirm-subsection {
