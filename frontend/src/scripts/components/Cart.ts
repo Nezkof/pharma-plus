@@ -19,6 +19,9 @@ interface OrderData {
 }
 
 class Cart {
+   private userCity!: string;
+   private userId: number = -1;
+
    private rootElement: HTMLElement;
 
    private rawOrdersSectionElement!: HTMLElement;
@@ -64,6 +67,14 @@ class Cart {
 
       cartService.cartItem$.subscribe((cartItems) => {
          this.initRawOrdersSection(cartItems);
+      });
+
+      setLocationService.getCity$.subscribe((userCity) => {
+         this.userCity = userCity;
+      });
+
+      setLocationService.getUserId$.subscribe((clientId) => {
+         this.userId = clientId;
       });
 
       this.bindEvents();
@@ -230,22 +241,21 @@ class Cart {
    }
 
    async setUserAddress(data: string) {
-      let userId = null;
+      data = `${this.userCity},` + data;
 
-      setLocationService.getUserId$.subscribe((clientId) => {
-         userId = clientId;
-      });
+      if (this.userId !== -1) {
+         const result = await FetchingService.setUserData(
+            `user/${this.userId}`,
+            data
+         );
 
-      setLocationService.getCity$.subscribe((userCity) => {
-         data = `${userCity},` + data;
-      });
-
-      const result = await FetchingService.setUserData(`user/${userId}`, data);
-
-      if (result) {
-         console.log("Data sending succesful:", result);
+         if (result) {
+            console.log("Data sending succesful:", result);
+         } else {
+            console.error("Data sending error");
+         }
       } else {
-         console.error("Data sending error");
+         console.log("No user");
       }
    }
 

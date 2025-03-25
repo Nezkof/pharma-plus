@@ -21,6 +21,7 @@ const renderOrderItem = async (req, res) => {
 const renderItemsToConfirm = async (req, res) => {
    try {
       const data = req.body;
+      console.log(data);
 
       res.render("order-to-confirm-item", { data });
    } catch (error) {

@@ -17,6 +17,9 @@ const setUserAddress = async (req, res) => {
       const { id } = req.params;
       const { address } = req.body;
 
+      console.log(req.params);
+      console.log(req.body);
+
       if (!id || !address) {
          return res.status(400).json({ error: "Missing id or address" });
       }

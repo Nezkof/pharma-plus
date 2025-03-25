@@ -5,7 +5,7 @@ ul(data-js-cart-orders-to-confirm-list).confirm-subsection__orders-to-confirm-li
             img.order-to-confirm-item__image(src=orderItem.image, alt="")
             h4.order-to-confirm-item__title= orderItem.title
             span.order-to-confirm-item__attributes= orderItem.description
-            span.order-to-confirm-item__availability-message Will be available from: 25 February  
+            //- span.order-to-confirm-item__availability-message Will be available from: 25 February  
          button(type="button" data-js-order-to-confirm-self-delivery-button).order-to-confirm-item__self-delivery-button.is-active Self-delivery
          button(type="button" data-js-order-to-confirm-courier-delivery-button).order-to-confirm-item__courier-delivery-button Courier delivery
          include ./date-selector 
