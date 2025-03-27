@@ -19,6 +19,7 @@ const productRoutes = require("./routes/product");
 const cartRoutes = require("./routes/cart");
 const authRouter = require("./routes/auth");
 const userRoutes = require("./routes/user");
+const adminRoutes = require("./routes/admin");
 const cors = require("cors");
 
 const app = express();
@@ -44,6 +45,7 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.static("public"));
 
 passport.use(
    new GoogleStrategy(
@@ -68,6 +70,8 @@ app.use("/categories", categoriesRoutes);
 app.use("/catalog", catalogRoutes);
 app.use("/product", productRoutes);
 app.use("/cart", cartRoutes);
+
+app.use("/admin", adminRoutes);
 
 app.listen(process.env.BACKEND_PORT, () => {
    console.log(
