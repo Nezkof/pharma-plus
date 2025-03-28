@@ -17,37 +17,33 @@
             <button>Форми випуску</button>
          </div>
       </header>
-      <% if (categories.length === 0) { %>
-      <p>No categories available.</p>
+      <% if (methods.length === 0) { %>
+      <p>No methods available.</p>
       <% } else { %>
       <table class="table">
          <thead>
             <tr>
                <th>ID</th>
                <th>Назва</th>
-               <th>Зображення</th>
                <th>Дії</th>
             </tr>
          </thead>
          <tbody>
-            <% for (let i = 0; i < categories.length; ++i) { %>
-            <tr id="row-<%= categories[i].category_id %>">
-               <td><%= categories[i].category_id %></td>
-               <td id="label-<%= categories[i].category_id %>">
-                  <%= categories[i].category_label %>
-               </td>
-               <td id="image-<%= categories[i].category_id %>">
-                  <%= categories[i].category_image %>
+            <% for (let i = 0; i < methods.length; ++i) { %>
+            <tr id="row-<%= methods[i].application_methods_id %>">
+               <td><%= methods[i].application_methods_id %></td>
+               <td id="label-<%= methods[i].application_methods_id %>">
+                  <%= methods[i].application_methods_label %>
                </td>
                <td>
                   <button
-                     id="edit-btn-<%= categories[i].category_id %>"
-                     onclick="editCategory(<%= categories[i].category_id %>)"
+                     id="edit-btn-<%= methods[i].application_methods_id %>"
+                     onclick="editMethod(<%= methods[i].application_methods_id %>)"
                   >
                      Редагувати
                   </button>
                   <button
-                     onclick="deleteCategory(<%= categories[i].category_id %>)"
+                     onclick="deleteMethod(<%= methods[i].application_methods_id %>)"
                   >
                      Видалити
                   </button>
@@ -63,18 +59,11 @@
                      placeholder="Назва категорії"
                   />
                </td>
-               <td>
-                  <input
-                     type="text"
-                     data-js-image-input
-                     placeholder="Посилання на зображення"
-                  />
-               </td>
-               <td><button onclick="addCategory()">Додати</button></td>
+               <td><button onclick="addMethod()">Додати</button></td>
             </tr>
             <script
                type="module"
-               src="./../../scripts/adminCategories.js"
+               src="./../../scripts/adminMethods.js"
             ></script>
          </tbody>
       </table>

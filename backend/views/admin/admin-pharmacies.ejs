@@ -17,37 +17,37 @@
             <button>Форми випуску</button>
          </div>
       </header>
-      <% if (categories.length === 0) { %>
-      <p>No categories available.</p>
+      <% if (pharmacies.length === 0) { %>
+      <p>No pharmacies available.</p>
       <% } else { %>
       <table class="table">
          <thead>
             <tr>
                <th>ID</th>
                <th>Назва</th>
-               <th>Зображення</th>
+               <th>Адреса</th>
                <th>Дії</th>
             </tr>
          </thead>
          <tbody>
-            <% for (let i = 0; i < categories.length; ++i) { %>
-            <tr id="row-<%= categories[i].category_id %>">
-               <td><%= categories[i].category_id %></td>
-               <td id="label-<%= categories[i].category_id %>">
-                  <%= categories[i].category_label %>
+            <% for (let i = 0; i < pharmacies.length; ++i) { %>
+            <tr id="row-<%= pharmacies[i].pharmacy_id %>">
+               <td><%= pharmacies[i].pharmacy_id %></td>
+               <td id="label-<%= pharmacies[i].pharmacy_id %>">
+                  <%= pharmacies[i].title %>
                </td>
-               <td id="image-<%= categories[i].category_id %>">
-                  <%= categories[i].category_image %>
+               <td id="address-<%= pharmacies[i].pharmacy_id %>">
+                  <%= pharmacies[i].address %>
                </td>
                <td>
                   <button
-                     id="edit-btn-<%= categories[i].category_id %>"
-                     onclick="editCategory(<%= categories[i].category_id %>)"
+                     id="edit-btn-<%= pharmacies[i].pharmacy_id %>"
+                     onclick="editPharmacy(<%= pharmacies[i].pharmacy_id %>)"
                   >
                      Редагувати
                   </button>
                   <button
-                     onclick="deleteCategory(<%= categories[i].category_id %>)"
+                     onclick="deletePharmacy(<%= pharmacies[i].pharmacy_id %>)"
                   >
                      Видалити
                   </button>
@@ -66,15 +66,15 @@
                <td>
                   <input
                      type="text"
-                     data-js-image-input
+                     data-js-address-input
                      placeholder="Посилання на зображення"
                   />
                </td>
-               <td><button onclick="addCategory()">Додати</button></td>
+               <td><button onclick="addPharmacy()">Додати</button></td>
             </tr>
             <script
                type="module"
-               src="./../../scripts/adminCategories.js"
+               src="./../../scripts/adminPharmacies.js"
             ></script>
          </tbody>
       </table>

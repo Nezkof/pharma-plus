@@ -2,10 +2,7 @@ export function fetchPost(url, data) {
    fetch(`http://localhost:8000/${url}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-         category_label: data.label,
-         category_image: data.image,
-      }),
+      body: JSON.stringify(data),
    })
       .then((response) => response.json())
       .then((data) => {
@@ -27,7 +24,7 @@ export function fetchPut(url, id, data) {
    fetch(`http://localhost:8000/${url}/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ label: data.newLabel, image: data.newImage }),
+      body: JSON.stringify(data),
    })
       .then((response) => response.json())
       .then((data) => {

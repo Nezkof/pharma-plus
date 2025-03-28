@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="/styles/header.css" />
+      <link rel="stylesheet" href="/styles/admin-categories.css" />
+
+      <title>Pharma+ | Admin</title>
+   </head>
+   <body>
+      <header class="header">
+         <span>Категорії</span>
+         <div class="buttons">
+            <button>Категорії</button>
+            <button>Способи застосування</button>
+            <button>Форми випуску</button>
+         </div>
+      </header>
+      <% if (products.length === 0) { %>
+      <p>No products available.</p>
+      <% } else { %>
+      <table class="table">
+         <thead>
+            <tr>
+               <th>ID</th>
+               <th>Назва</th>
+               <th>Опис</th>
+               <th>Спосіб застосування</th>
+               <th>Форма</th>
+               <th>Категорія</th>
+               <th>Виробник</th>
+               <th>Зображення</th>
+               <th>Дії</th>
+            </tr>
+         </thead>
+         <tbody>
+            <% for (let i = 0; i < products.length; ++i) { %>
+            <tr id="row-<%= products[i].product_id %>">
+               <td><%= products[i].product_id %></td>
+               <td id="label-<%= products[i].product_id %>">
+                  <%= products[i].title %>
+               </td>
+               <td id="description-<%= products[i].product_id %>">
+                  <%= products[i].description %>
+               </td>
+               <td id="application-<%= products[i].product_id %>">
+                  <%= products[i].application_methods_label %>
+               </td>
+               <td id="form-<%= products[i].product_id %>">
+                  <%= products[i].form_label %>
+               </td>
+               <td id="category-<%= products[i].product_id %>">
+                  <%= products[i].category_label %>
+               </td>
+               <td id="brand-<%= products[i].product_id %>">
+                  <%= products[i].brand %>
+               </td>
+               <td id="image-<%= products[i].product_id %>">
+                  <%= products[i].image %>
+               </td>
+               <td>
+                  <button
+                     id="edit-btn-<%= products[i].product_id %>"
+                     onclick="editProduct(<%= products[i].product_id %>)"
+                  >
+                     Редагувати
+                  </button>
+                  <button
+                     onclick="deleteProduct(<%= products[i].product_id %>)"
+                  >
+                     Видалити
+                  </button>
+               </td>
+            </tr>
+            <% } %>
+            <tr>
+               <td>#</td>
+               <td>
+                  <input type="text" data-js-label-input placeholder="Назва" />
+               </td>
+               <td>
+                  <input
+                     type="text"
+                     data-js-description-input
+                     placeholder="Опис"
+                  />
+               </td>
+               <td>
+                  <select data-js-application-input>
+                     <option value="" disabled selected>
+                        Спосіб застосування
+                     </option>
+                     <% applicationMethods.forEach(applicationMethod => { %>
+                     <option
+                        value="<%= applicationMethod.application_methods_id %>"
+                     >
+                        <%= applicationMethod.application_methods_label %>
+                     </option>
+                     <% }); %>
+                  </select>
+               </td>
+               <td>
+                  <select data-js-form-input>
+                     <option value="" disabled selected>Форма</option>
+                     <% forms.forEach(form => { %>
+                     <option value="<%= form.form_id %>">
+                        <%= form.form_label %>
+                     </option>
+                     <% }); %>
+                  </select>
+               </td>
+
+               <td>
+                  <select data-js-category-input>
+                     <option value="" disabled selected>
+                        Оберіть категорію
+                     </option>
+                     <% categories.forEach(category => { %>
+                     <option value="<%= category.category_id %>">
+                        <%= category.category_label %>
+                     </option>
+                     <% }); %>
+                  </select>
+               </td>
+               <td>
+                  <input
+                     type="text"
+                     data-js-brand-input
+                     placeholder="Виробник"
+                  />
+               </td>
+               <td>
+                  <input
+                     type="text"
+                     data-js-image-input
+                     placeholder="Посилання на зображення"
+                  />
+               </td>
+               <td><button onclick="addProduct()">Додати</button></td>
+            </tr>
+            <script>
+               const applicationMethods = <%- JSON.stringify(applicationMethods) %>;
+               const forms = <%- JSON.stringify(forms) %>;
+               const categories = <%- JSON.stringify(categories) %>;
+            </script>
+
+            <script
+               type="module"
+               src="./../../scripts/adminProducts.js"
+            ></script>
+         </tbody>
+      </table>
+      <% } %>
+   </body>
+</html>

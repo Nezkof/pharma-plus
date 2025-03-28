@@ -17,38 +17,32 @@
             <button>Форми випуску</button>
          </div>
       </header>
-      <% if (categories.length === 0) { %>
-      <p>No categories available.</p>
+      <% if (forms.length === 0) { %>
+      <p>No forms available.</p>
       <% } else { %>
       <table class="table">
          <thead>
             <tr>
                <th>ID</th>
                <th>Назва</th>
-               <th>Зображення</th>
                <th>Дії</th>
             </tr>
          </thead>
          <tbody>
-            <% for (let i = 0; i < categories.length; ++i) { %>
-            <tr id="row-<%= categories[i].category_id %>">
-               <td><%= categories[i].category_id %></td>
-               <td id="label-<%= categories[i].category_id %>">
-                  <%= categories[i].category_label %>
-               </td>
-               <td id="image-<%= categories[i].category_id %>">
-                  <%= categories[i].category_image %>
+            <% for (let i = 0; i < forms.length; ++i) { %>
+            <tr id="row-<%= forms[i].form_id %>">
+               <td><%= forms[i].form_id %></td>
+               <td id="label-<%= forms[i].form_id %>">
+                  <%= forms[i].form_label %>
                </td>
                <td>
                   <button
-                     id="edit-btn-<%= categories[i].category_id %>"
-                     onclick="editCategory(<%= categories[i].category_id %>)"
+                     id="edit-btn-<%= forms[i].form_id %>"
+                     onclick="editForm(<%= forms[i].form_id %>)"
                   >
                      Редагувати
                   </button>
-                  <button
-                     onclick="deleteCategory(<%= categories[i].category_id %>)"
-                  >
+                  <button onclick="deleteForm(<%= forms[i].form_id %>)">
                      Видалити
                   </button>
                </td>
@@ -63,19 +57,9 @@
                      placeholder="Назва категорії"
                   />
                </td>
-               <td>
-                  <input
-                     type="text"
-                     data-js-image-input
-                     placeholder="Посилання на зображення"
-                  />
-               </td>
-               <td><button onclick="addCategory()">Додати</button></td>
+               <td><button onclick="addForm()">Додати</button></td>
             </tr>
-            <script
-               type="module"
-               src="./../../scripts/adminCategories.js"
-            ></script>
+            <script type="module" src="./../../scripts/adminForms.js"></script>
          </tbody>
       </table>
       <% } %>
