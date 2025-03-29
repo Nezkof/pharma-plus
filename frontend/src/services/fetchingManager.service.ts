@@ -101,4 +101,22 @@ export default class FetchingService {
          return null;
       }
    }
+
+   static async postOrder(url: string, orderData: any) {
+      try {
+         const response = await fetch(`${API_URL}/${url}`, {
+            method: "POST",
+            headers: {
+               "Content-Type": "application/json",
+            },
+            body: JSON.stringify(orderData),
+         });
+
+         const data = await response.json();
+         return data;
+      } catch (error) {
+         console.error("Post data error:", error);
+         return "";
+      }
+   }
 }

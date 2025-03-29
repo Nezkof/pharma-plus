@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="/styles/header.css" />
+      <link rel="stylesheet" href="/styles/admin.css" />
+
+      <title>Pharma+ | Admin</title>
+   </head>
+   <body>
+      <header class="header">
+         <span>Замовлення</span>
+         <div class="buttons">
+            <a href="/admin" class="link-button">Головна</a>
+         </div>
+      </header>
+      <% if (orders.length === 0) { %>
+      <p>No orders available.</p>
+      <% } else { %>
+      <table class="table">
+         <thead>
+            <tr>
+               <th>ID</th>
+               <th>ID замовлення</th>
+               <th>Продукт</th>
+               <th>Загальна ціна</th>
+               <th>Кількість</th>
+               <th>Статус</th>
+               <th>Дії</th>
+            </tr>
+         </thead>
+         <tbody>
+            <% for (let i = 0; i < orders.length; ++i) { %>
+            <tr id="row-<%= orders[i].order_item_id %>">
+               <td><%= orders[i].order_item_id %></td>
+               <td id="order-<%= orders[i].order_item_id %>">
+                  <%= orders[i].order_id %>
+               </td>
+               <td id="product-<%= orders[i].order_item_id %>">
+                  <%= orders[i].title %>
+               </td>
+               <td id="price-<%= orders[i].order_item_id %>">
+                  <%= orders[i].price %>
+               </td>
+               <td id="quantity-<%= orders[i].order_item_id %>">
+                  <%= orders[i].amount %>
+               </td>
+               <td id="status-<%= orders[i].order_item_id %>">
+                  <%= orders[i].status %>
+               </td>
+               <td>
+                  <button
+                     id="edit-btn-<%= orders[i].order_item_id %>"
+                     onclick="editOrderItem(<%= orders[i].order_id %>, <%= orders[i].order_item_id %>)"
+                  >
+                     Редагувати
+                  </button>
+                  <button
+                     onclick="deleteOrderItem(<%= orders[i].order_item_id %>)"
+                  >
+                     Видалити
+                  </button>
+               </td>
+            </tr>
+            <% } %>
+
+            <script type="module" src="./../../scripts/adminOrders.js"></script>
+         </tbody>
+      </table>
+      <% } %>
+   </body>
+</html>

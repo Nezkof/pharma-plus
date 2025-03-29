@@ -37,25 +37,25 @@
             <tr id="row-<%= products[i].product_id %>">
                <td><%= products[i].product_id %></td>
                <td id="label-<%= products[i].product_id %>">
-                  <%= products[i].title %>
+                  <%= products[i].title || "empty"%>
                </td>
                <td id="description-<%= products[i].product_id %>">
-                  <%= products[i].description %>
+                  <%= products[i].description || "empty"%>
                </td>
                <td id="application-<%= products[i].product_id %>">
-                  <%= products[i].application_methods_label %>
+                  <%= products[i].application_methods_label || "empty"%>
                </td>
                <td id="form-<%= products[i].product_id %>">
-                  <%= products[i].form_label %>
+                  <%= products[i].form_label || "empty"%>
                </td>
                <td id="category-<%= products[i].product_id %>">
-                  <%= products[i].category_label %>
+                  <%= products[i].category_label || "empty"%>
                </td>
                <td id="brand-<%= products[i].product_id %>">
-                  <%= products[i].brand %>
+                  <%= products[i].brand || "empty"%>
                </td>
                <td id="image-<%= products[i].product_id %>">
-                  <%= products[i].image %>
+                  <%= products[i].image || "empty"%>
                </td>
                <td>
                   <button

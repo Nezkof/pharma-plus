@@ -10,22 +10,29 @@ const pool = new Pool({
 const getProducts = async (req, res) => {
    try {
       const productsResult = await pool.query(`
-         SELECT products.product_id, products.title, products.description, 
-                application_methods.application_methods_label, products.brand, products.image, 
-                forms.form_label, categories.category_label, categories.category_id
+         SELECT 
+            products.product_id, 
+            products.title, 
+            products.description, 
+            application_methods.application_methods_label, 
+            products.brand, 
+            products.image, 
+            forms.form_label, 
+            categories.category_label, 
+            categories.category_id
          FROM products
-         INNER JOIN products_application_methods 
+         LEFT JOIN products_application_methods 
             ON products_application_methods.product_id = products.product_id
-         INNER JOIN application_methods 
+         LEFT JOIN application_methods 
             ON products_application_methods.application_methods_id = application_methods.application_methods_id
-         INNER JOIN products_forms 
+         LEFT JOIN products_forms 
             ON products_forms.product_id = products.product_id
-         INNER JOIN forms 
+         LEFT JOIN forms 
             ON products_forms.form_id = forms.form_id
-         INNER JOIN products_categories 
+         LEFT JOIN products_categories 
             ON products_categories.product_id = products.product_id
-         INNER JOIN categories 
-            ON categories.category_id = products_categories.category_id
+         LEFT JOIN categories 
+            ON categories.category_id = products_categories.category_id;
       `);
 
       const categoriesResult = await pool.query(`SELECT * FROM categories`);
@@ -181,30 +188,42 @@ const updateProduct = async (req, res) => {
 
       await pool.query(
          `UPDATE public.products 
-            SET title = $1, description = $2, brand = $3, image = $4
-            WHERE product_id = $5`,
-         [newLabel, newDescription, newBrand, newImage, id]
+            SET title = $1, description = $2, brand = $3, image = $4, application_id = $5, form_id = $6, category_id = $7
+            WHERE product_id = $8`,
+         [
+            newLabel,
+            newDescription,
+            newBrand,
+            newImage,
+            newApplicationMethod,
+            newForm,
+            newCategory,
+            id,
+         ]
       );
 
       await pool.query(
-         `UPDATE public.products_forms 
-            SET form_id = $1
-            WHERE product_id = $2`,
-         [newForm, id]
+         `INSERT INTO public.products_forms (product_id, form_id)
+          VALUES ($1, $2)
+          ON CONFLICT (product_id) 
+          DO UPDATE SET form_id = EXCLUDED.form_id`,
+         [id, newForm]
       );
 
       await pool.query(
-         `UPDATE public.products_application_methods 
-            SET application_methods_id = $1
-            WHERE product_id = $2`,
-         [newApplicationMethod, id]
+         `INSERT INTO public.products_application_methods (product_id, application_methods_id)
+          VALUES ($1, $2)
+          ON CONFLICT (product_id) 
+          DO UPDATE SET application_methods_id = EXCLUDED.application_methods_id`,
+         [id, newApplicationMethod]
       );
 
       await pool.query(
-         `UPDATE public.products_categories 
-            SET category_id = $1
-            WHERE product_id = $2`,
-         [newCategory, id]
+         `INSERT INTO public.products_categories (product_id, category_id)
+          VALUES ($1, $2)
+          ON CONFLICT (product_id) 
+          DO UPDATE SET category_id = EXCLUDED.category_id`,
+         [id, newCategory]
       );
 
       await pool.query("COMMIT");

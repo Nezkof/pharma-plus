@@ -1,32 +1,45 @@
 const express = require("express");
 const router = express.Router();
 const adminController = require("../controllers/adminController");
+const adminCategoriesController = require("../controllers/admin/adminCategoriesController");
+const adminMethodsController = require("../controllers/admin/adminMethodsController");
+const adminFormsController = require("../controllers/admin/adminFormsController");
 const adminPharmaciesController = require("../controllers/admin/adminPharmaciesController");
 const adminProductsController = require("../controllers/admin/adminProductsController");
 const adminPharmacyProductsController = require("./../controllers/admin/adminPharmacyProductsController");
+const adminOrdersController = require("./../controllers/admin/adminOrdersController");
 
 router.get("/", adminController.getAdminPage);
 
-router.get("/categories", adminController.getCategories);
-router.post("/add-category", adminController.addCategory);
-router.delete("/delete-category/:id", adminController.deleteCategory);
-router.put("/update-category/:category_id", adminController.updateCategory);
+router.get("/categories", adminCategoriesController.getCategories);
+router.post("/add-category", adminCategoriesController.addCategory);
+router.delete("/delete-category/:id", adminCategoriesController.deleteCategory);
+router.put(
+   "/update-category/:category_id",
+   adminCategoriesController.updateCategory
+);
 
-router.get("/application-methods", adminController.getApplicationMethods);
-router.post("/add-application-method", adminController.addApplicationMethod);
+router.get(
+   "/application-methods",
+   adminMethodsController.getApplicationMethods
+);
+router.post(
+   "/add-application-method",
+   adminMethodsController.addApplicationMethod
+);
 router.delete(
    "/delete-application-method/:id",
-   adminController.deleteApplicationMethod
+   adminMethodsController.deleteApplicationMethod
 );
 router.put(
    "/update-application-method/:id",
-   adminController.updateApplicationMethod
+   adminMethodsController.updateApplicationMethod
 );
 
-router.get("/forms", adminController.getForms);
-router.post("/add-form", adminController.addForm);
-router.delete("/delete-form/:id", adminController.deleteForm);
-router.put("/update-form/:id", adminController.updateForm);
+router.get("/forms", adminFormsController.getForms);
+router.post("/add-form", adminFormsController.addForm);
+router.delete("/delete-form/:id", adminFormsController.deleteForm);
+router.put("/update-form/:id", adminFormsController.updateForm);
 
 router.get("/pharmacies", adminPharmaciesController.getPharmacies);
 router.post("/add-pharmacy", adminPharmaciesController.addPharmacy);
@@ -54,5 +67,9 @@ router.put(
    "/update-pharmacy-product/:id",
    adminPharmacyProductsController.updatePharmacyProduct
 );
+
+router.get("/orders", adminOrdersController.getOrders);
+router.delete("/delete-order-item/:id", adminOrdersController.deleteOrder);
+router.put("/update-order-item/:id", adminOrdersController.updateOrder);
 
 module.exports = router;

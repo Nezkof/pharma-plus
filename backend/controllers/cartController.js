@@ -30,7 +30,53 @@ const renderItemsToConfirm = async (req, res) => {
    }
 };
 
+const postOrder = async (req, res) => {
+   const client = await pool.connect();
+   try {
+      const data = req.body;
+      const status = "Pending";
+      let totalPrice = 0;
+      const { userId } = data[0];
+      if (userId < 0) userId = null;
+
+      data.forEach((item) => {
+         totalPrice += item.itemPrice * item.quantity;
+      });
+
+      const result = await client.query(
+         `INSERT INTO orders (client_id, status, price)
+         VALUES ($1, $2, $3)
+         RETURNING order_id`,
+         [userId, status, totalPrice]
+      );
+
+      const orderId = result.rows[0].order_id;
+
+      data.forEach(async (item) => {
+         console.log(item);
+         const { pharmacyProductId, itemPrice, quantity } = item;
+         const price = itemPrice * quantity;
+
+         await client.query(
+            `INSERT INTO order_items (order_id, amount, price, pharmacy_product_id)
+                      VALUES ($1, $2, $3, $4)`,
+            [orderId, quantity, price, pharmacyProductId]
+         );
+      });
+
+      res.status(200).json({ message: "Order received successfully", data });
+      await client.query("COMMIT");
+   } catch (error) {
+      console.error(error);
+      await client.query("ROLLBACK");
+      res.status(500).send("Database error");
+   } finally {
+      client.release();
+   }
+};
+
 module.exports = {
    renderOrderItem,
    renderItemsToConfirm,
+   postOrder,
 };

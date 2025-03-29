@@ -16,6 +16,7 @@ interface OrderData {
    deliveryDate: string | null;
    quantity: number | null;
    itemPrice: number | null;
+   userId: number;
 }
 
 class Cart {
@@ -267,6 +268,7 @@ class Cart {
          if (!orderItem.isOrdersValid()) isOrderValid = false;
          orderData.push({
             ...orderItem.getData(),
+            userId: this.userId,
          });
       });
 
@@ -274,6 +276,7 @@ class Cart {
          console.log("Order confirmed:", orderData);
          if (orderData[0].courierDeliveryAddress)
             this.setUserAddress(orderData[0].courierDeliveryAddress);
+         FetchingService.postOrder("cart/post-order", orderData);
       } else console.log("Order invalid");
    };
 
