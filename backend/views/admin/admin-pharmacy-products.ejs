@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="/styles/header.css" />
+      <link rel="stylesheet" href="/styles/admin.css" />
+
+      <title>Pharma+ | Admin</title>
+   </head>
+   <body>
+      <header class="header">
+         <span>Наявність в аптеках</span>
+         <div class="buttons">
+            <a href="/admin" class="link-button">Головна</a>
+         </div>
+      </header>
+      <% if (products.length === 0) { %>
+      <p>No products available.</p>
+      <% } else { %>
+      <table class="table">
+         <thead>
+            <tr>
+               <th>ID</th>
+               <th>Назва</th>
+               <th>Ціна</th>
+               <th>Аптека</th>
+               <th>Дії</th>
+            </tr>
+         </thead>
+         <tbody>
+            <% for (let i = 0; i < pharmacyProduct.length; ++i) { %>
+            <tr id="row-<%= pharmacyProduct[i].product_id %>">
+               <td><%= pharmacyProduct[i].pharmacy_product_id %></td>
+               <td id="label-<%= pharmacyProduct[i].pharmacy_product_id %>">
+                  <%= pharmacyProduct[i].title %>
+               </td>
+               <td id="price-<%= pharmacyProduct[i].pharmacy_product_id %>">
+                  <%= pharmacyProduct[i].price %>
+               </td>
+               <td id="pharmacy-<%= pharmacyProduct[i].pharmacy_product_id %>">
+                  <%= pharmacyProduct[i].pharma_title %>
+               </td>
+
+               <td>
+                  <button
+                     id="edit-btn-<%= pharmacyProduct[i].pharmacy_product_id %>"
+                     onclick="editPharmacyProduct(<%= pharmacyProduct[i].pharmacy_product_id %>)"
+                  >
+                     Редагувати
+                  </button>
+                  <button
+                     onclick="deletePharmacyProduct(<%= pharmacyProduct[i].pharmacy_product_id %>)"
+                  >
+                     Видалити
+                  </button>
+               </td>
+            </tr>
+            <% } %>
+            <tr>
+               <td>#</td>
+               <td>
+                  <select data-js-label-input>
+                     <option value="" disabled selected>Назва</option>
+                     <% products.forEach(product => { %>
+                     <option value="<%= product.product_id %>">
+                        <%= product.title %>
+                     </option>
+                     <% }); %>
+                  </select>
+               </td>
+               <td>
+                  <input type="text" data-js-price-input placeholder="Ціна" />
+               </td>
+               <td>
+                  <select data-js-pharmacy-input>
+                     <option value="" disabled selected>Аптека</option>
+                     <% pharmacies.forEach(pharmacy => { %>
+                     <option value="<%= pharmacy.pharmacy_id %>">
+                        <%= pharmacy.title %>
+                     </option>
+                     <% }); %>
+                  </select>
+               </td>
+
+               <td><button onclick="addPharmacyProduct()">Додати</button></td>
+            </tr>
+
+            <script>
+               const pharmacies = <%- JSON.stringify(pharmacies) %>;
+               const products = <%- JSON.stringify(products) %>;
+            </script>
+
+            <script
+               type="module"
+               src="./../../scripts/adminPharmacyProducts.js"
+            ></script>
+         </tbody>
+      </table>
+      <% } %>
+   </body>
+</html>

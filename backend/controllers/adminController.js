@@ -7,6 +7,15 @@ const pool = new Pool({
    port: process.env.PORT,
 });
 
+const getAdminPage = async (req, res) => {
+   try {
+      res.render("admin/admin-page.ejs");
+   } catch (error) {
+      console.error(error);
+      res.status(500).send("Database error");
+   }
+};
+
 const getCategories = async (req, res) => {
    try {
       const { rows } = await pool.query("select * from categories");
@@ -240,6 +249,7 @@ const updateForm = async (req, res) => {
 //////////////////////////////////////////////////
 
 module.exports = {
+   getAdminPage,
    getCategories,
    addCategory,
    deleteCategory,

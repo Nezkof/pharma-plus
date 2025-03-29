@@ -14,14 +14,23 @@
       gap: 10px;
    }
 
+   .link-button,
    button {
       border: 0;
       padding: 10px 10px;
       background-color: black;
       color: white;
       border-radius: 5px;
+      text-decoration: none;
    }
    button:hover {
       cursor: pointer;
    }
+}
+
+.header--flex-center {
+   display: flex;
+   justify-content: center;
+   gap: 30px;
+   flex-wrap: wrap;
 }

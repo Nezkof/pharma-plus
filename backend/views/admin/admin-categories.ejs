@@ -4,17 +4,15 @@
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="stylesheet" href="/styles/header.css" />
-      <link rel="stylesheet" href="/styles/admin-categories.css" />
+      <link rel="stylesheet" href="/styles/admin.css" />
 
       <title>Pharma+ | Admin</title>
    </head>
    <body>
       <header class="header">
-         <span>Категорії</span>
+         <span>категорії</span>
          <div class="buttons">
-            <button>Категорії</button>
-            <button>Способи застосування</button>
-            <button>Форми випуску</button>
+            <a href="/admin" class="link-button">Головна</a>
          </div>
       </header>
       <% if (categories.length === 0) { %>

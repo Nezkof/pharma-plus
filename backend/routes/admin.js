@@ -3,6 +3,9 @@ const router = express.Router();
 const adminController = require("../controllers/adminController");
 const adminPharmaciesController = require("../controllers/admin/adminPharmaciesController");
 const adminProductsController = require("../controllers/admin/adminProductsController");
+const adminPharmacyProductsController = require("./../controllers/admin/adminPharmacyProductsController");
+
+router.get("/", adminController.getAdminPage);
 
 router.get("/categories", adminController.getCategories);
 router.post("/add-category", adminController.addCategory);
@@ -34,5 +37,22 @@ router.get("/products", adminProductsController.getProducts);
 router.post("/add-product", adminProductsController.addProduct);
 router.delete("/delete-product/:id", adminProductsController.deleteProduct);
 router.put("/update-product/:id", adminProductsController.updateProduct);
+
+router.get(
+   "/pharmacies-products",
+   adminPharmacyProductsController.getPharmacyProducts
+);
+router.post(
+   "/add-pharmacy-product",
+   adminPharmacyProductsController.addPharmacyProduct
+);
+router.delete(
+   "/delete-pharmacy-product/:id",
+   adminPharmacyProductsController.deletePharmacyProduct
+);
+router.put(
+   "/update-pharmacy-product/:id",
+   adminPharmacyProductsController.updatePharmacyProduct
+);
 
 module.exports = router;
