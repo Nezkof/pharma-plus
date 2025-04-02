@@ -17,6 +17,16 @@ const getForms = async (req, res) => {
    }
 };
 
+const getFormsJSON = async (req, res) => {
+   try {
+      const { rows } = await pool.query("select * from forms");
+      res.json(rows);
+   } catch (error) {
+      console.error(error);
+      res.status(500).send("Database error");
+   }
+};
+
 const addForm = async (req, res) => {
    try {
       const { label } = req.body;
@@ -81,6 +91,7 @@ const updateForm = async (req, res) => {
 };
 
 module.exports = {
+   getFormsJSON,
    getForms,
    addForm,
    deleteForm,

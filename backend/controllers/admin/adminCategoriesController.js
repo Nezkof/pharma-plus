@@ -17,6 +17,16 @@ const getCategories = async (req, res) => {
    }
 };
 
+const getCategoriesJSON = async (req, res) => {
+   try {
+      const { rows } = await pool.query("select * from categories");
+      res.json(rows);
+   } catch (error) {
+      console.error(error);
+      res.status(500).send("Database error");
+   }
+};
+
 const addCategory = async (req, res) => {
    try {
       const { label, image } = req.body;
@@ -84,6 +94,7 @@ const updateCategory = async (req, res) => {
 };
 
 module.exports = {
+   getCategoriesJSON,
    getCategories,
    addCategory,
    deleteCategory,

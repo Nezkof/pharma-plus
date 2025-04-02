@@ -10,7 +10,18 @@ const pool = new Pool({
 const getApplicationMethods = async (req, res) => {
    try {
       const { rows } = await pool.query("select * from application_methods");
+
       res.render("admin/admin-methods.ejs", { methods: rows });
+   } catch (error) {
+      console.error(error);
+      res.status(500).send("Database error");
+   }
+};
+
+const getApplicationMethodsJSON = async (req, res) => {
+   try {
+      const { rows } = await pool.query("select * from application_methods");
+      res.json(rows);
    } catch (error) {
       console.error(error);
       res.status(500).send("Database error");
@@ -86,6 +97,7 @@ const updateApplicationMethod = async (req, res) => {
 
 module.exports = {
    getApplicationMethods,
+   getApplicationMethodsJSON,
    addApplicationMethod,
    deleteApplicationMethod,
    updateApplicationMethod,

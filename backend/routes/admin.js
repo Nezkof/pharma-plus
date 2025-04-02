@@ -12,6 +12,7 @@ const adminOrdersController = require("./../controllers/admin/adminOrdersControl
 router.get("/", adminController.getAdminPage);
 
 router.get("/categories", adminCategoriesController.getCategories);
+router.get("/categories-json", adminCategoriesController.getCategoriesJSON);
 router.post("/add-category", adminCategoriesController.addCategory);
 router.delete("/delete-category/:id", adminCategoriesController.deleteCategory);
 router.put(
@@ -22,6 +23,10 @@ router.put(
 router.get(
    "/application-methods",
    adminMethodsController.getApplicationMethods
+);
+router.get(
+   "/application-methods-json",
+   adminMethodsController.getApplicationMethodsJSON
 );
 router.post(
    "/add-application-method",
@@ -37,6 +42,7 @@ router.put(
 );
 
 router.get("/forms", adminFormsController.getForms);
+router.get("/forms-json", adminFormsController.getFormsJSON);
 router.post("/add-form", adminFormsController.addForm);
 router.delete("/delete-form/:id", adminFormsController.deleteForm);
 router.put("/update-form/:id", adminFormsController.updateForm);

@@ -10,12 +10,12 @@ const pool = new Pool({
 const getOrders = async (req, res) => {
    try {
       const { rows } = await pool.query(`
-            select order_items.order_item_id, orders.order_id, products.title, order_items.price, order_items.amount, clients.address, orders.status
+            select order_items.order_item_id, orders.order_id, products.title, order_items.price, order_items.amount, orders.status
             from order_items
             inner join orders on orders.order_id = order_items.order_id
             inner join pharmacies_products on pharmacies_products.pharmacy_product_id = order_items.pharmacy_product_id 
-            inner join products on products.product_id = order_items.pharmacy_product_id 
-            left join clients on clients.client_id = orders.client_id
+            inner join products on pharmacies_products.product_id = products.product_id 
+      
       `);
       res.render("admin/admin-orders.ejs", { orders: rows });
    } catch (error) {

@@ -36,7 +36,7 @@ const postOrder = async (req, res) => {
       const data = req.body;
       const status = "Pending";
       let totalPrice = 0;
-      const { userId } = data[0];
+      let { userId } = data[0];
       if (userId < 0) userId = null;
 
       data.forEach((item) => {

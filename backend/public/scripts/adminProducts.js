@@ -55,7 +55,16 @@ function deleteProduct(id) {
    }
 }
 
-function editProduct(id) {
+async function editProduct(id) {
+   let response = await fetch("/admin/application-methods-json");
+   const applicationMethods = await response.json();
+
+   response = await fetch("/admin/forms-json");
+   const forms = await response.json();
+
+   response = await fetch("/admin/categories-json");
+   const categories = await response.json();
+
    const labelTd = document.getElementById(`label-${id}`);
    const descriptionTd = document.getElementById(`description-${id}`);
    const applicationTd = document.getElementById(`application-${id}`);
@@ -84,6 +93,7 @@ function editProduct(id) {
       applicationMethods,
       currentApplication
    );
+
    formTd.innerHTML = getDropdown("form", id, forms, currentForm);
    categoryTd.innerHTML = getDropdown(
       "category",
